@@ -6,9 +6,6 @@ import com.zrcoding.shared.core.Constants.BASE_URL
 import com.zrcoding.shared.core.Constants.DATABASE_NAME
 import com.zrcoding.shared.data.local.HackertabDatabase
 import com.zrcoding.shared.data.remote.HackertabApi
-import com.zrcoding.shared.data.repositories.PostRepository
-import com.zrcoding.shared.data.repositories.PostRepositoryImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,11 +56,4 @@ class AppModule {
             HackertabDatabase::class.java,
             DATABASE_NAME
         ).build()
-
-    @Provides
-    @Singleton
-    fun provideRepository(
-        hackertabApi: HackertabApi,
-        hackertabDatabase: HackertabDatabase
-    ): PostRepository = PostRepositoryImpl(hackertabApi, hackertabDatabase)
 }

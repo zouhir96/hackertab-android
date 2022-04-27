@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
         fetchPosts()
     }
 
-    fun fetchPosts() {
+    private fun fetchPosts() {
         viewModelScope.launch {
             when(val posts = postRepository.getHackerNews()) {
                 is Resource.Loading -> return@launch
