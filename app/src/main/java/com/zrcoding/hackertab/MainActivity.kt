@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
 import com.zrcoding.hackertab.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
@@ -23,6 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
+            return@KeepOnScreenCondition viewModel.hackerNews.isEmpty()
+        })
         super.onCreate(savedInstanceState)
         setContent {
             HackertabTheme {
