@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zrcoding.hackertab.core.UiText
 import com.zrcoding.hackertab.core.toHackerNews
-import com.zrcoding.hackertab.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.hackernews.HackerNews
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.repositories.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

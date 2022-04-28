@@ -5,17 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
-import com.zrcoding.hackertab.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,10 +26,20 @@ class MainActivity : ComponentActivity() {
             HackertabTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HackerNews(viewModel.hackerNews)
+                    Scaffold(
+                        topBar = {
+                            TopAppBar(backgroundColor = Color.White) {
+                                Toolbar()
+                            }
+                        },
+                        content = {
+                            HackerNews(viewModel.hackerNews)
+                        }
+                    )
                 }
             }
         }
@@ -39,21 +47,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HackerNews(news: List<HackerNews>) {
-    LazyColumn{
-        items(news) {item ->
-            HackerNewsItem(new = item)
-        }
-    }
-}
-
-@Composable
-fun HackerNewsItem(new: HackerNews) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
+fun Toolbar() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = new.title, maxLines = 2)
-        Spacer(modifier = Modifier.height(4.dp))
+        Icon(painter = painterResource(id = R.drawable.ic_hackertab), contentDescription = "")
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_settings),
+                contentDescription = "",
+            )
+        }
     }
 }
 
