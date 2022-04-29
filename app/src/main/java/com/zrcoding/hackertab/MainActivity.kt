@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
-import com.zrcoding.hackertab.ui.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.hackernews.HackerNewsCard
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                         content = {
-                            HackerNews(viewModel.hackerNews)
+                            HackerNewsCard(viewModel.hackerNews)
                         }
                     )
                 }
@@ -72,7 +72,7 @@ fun Toolbar() {
 @Composable
 fun DefaultPreview() {
     HackertabTheme {
-        HackerNews(
+        HackerNewsCard(
             FAKE_HACKER_NEWS
         )
     }

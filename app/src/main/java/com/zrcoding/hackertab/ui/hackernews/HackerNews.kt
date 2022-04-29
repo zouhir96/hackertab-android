@@ -41,14 +41,14 @@ data class HackerNews(
 @Composable
 fun DefaultPreview() {
     HackertabTheme {
-        HackerNews(
+        HackerNewsCard(
             Constants.FAKE_HACKER_NEWS
         )
     }
 }
 
 @Composable
-fun HackerNews(news: List<HackerNews>) {
+fun HackerNewsCard(news: List<HackerNews>) {
     Column(
         modifier = Modifier
             .border(
