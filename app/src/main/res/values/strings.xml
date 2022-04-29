@@ -2,4 +2,5 @@
     <string name="app_name">hackertab</string>
     <string name="score">%d points</string>
     <string name="comments">%d comments</string>
+    <string name="subreddit">r/ %s</string>
 </resources>
