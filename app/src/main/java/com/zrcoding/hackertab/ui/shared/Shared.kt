@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
@@ -73,6 +74,41 @@ fun Loading(title: String = "") {
             modifier = Modifier
                 .size(60.dp)
 
+        )
+    }
+}
+
+@Composable
+fun PostTitle(title: String) {
+    Text(
+        text = title,
+        style = Typography.body1,
+        maxLines = 2
+    )
+}
+
+@Composable
+fun TextWithStartIcon(
+    text: String,
+    color: Color = Color.Gray,
+    textStyle: TextStyle = Typography.caption,
+    icon: Int,
+    tint: Color = Color.Gray
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = "",
+            tint = tint,
+            modifier = Modifier.size(14.dp)
+        )
+        Text(
+            text = text,
+            color = color,
+            style = textStyle,
         )
     }
 }

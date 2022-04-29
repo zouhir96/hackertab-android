@@ -1,6 +1,7 @@
 package com.zrcoding.hackertab.core
 
 import com.zrcoding.hackertab.ui.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.reddit.Reddit
 
 object Constants {
     val FAKE_HACKER_NEWS = listOf(
@@ -31,6 +32,41 @@ object Constants {
             1234,
             1234,
             1234
+        ),
+    )
+
+    val FAKE_REDDITS = listOf<Reddit>(
+        Reddit(
+            "React is the best web framework ever React is the best web framework ever",
+            "reactDevs",
+            "Url",
+            118,
+            30,
+            1123711
+        ),
+        Reddit(
+            "React is the best web framework ever React is the best web framework ever",
+            "reactDevs",
+            "Url",
+            118,
+            30,
+            1123711
+        ),
+        Reddit(
+            "React is the best web framework ever React is the best web framework ever",
+            "reactDevs",
+            "Url",
+            118,
+            30,
+            1123711
+        ),
+        Reddit(
+            "React is the best web framework ever React is the best web framework ever",
+            "reactDevs",
+            "Url",
+            118,
+            30,
+            1123711
         ),
     )
 }

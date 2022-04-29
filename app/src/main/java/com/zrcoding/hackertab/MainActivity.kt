@@ -16,6 +16,7 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
 import com.zrcoding.hackertab.ui.hackernews.HackerNewsCard
+import com.zrcoding.hackertab.ui.reddit.RedditCard
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,31 +25,38 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
-        splashScreen.setKeepOnScreenCondition(SplashScreen.KeepOnScreenCondition {
-            return@KeepOnScreenCondition viewModel.hackerNews.isEmpty()
-        })
+        splashScreen.setKeepOnScreenCondition(
+            SplashScreen.KeepOnScreenCondition {
+                return@KeepOnScreenCondition viewModel.hackerNews.isEmpty()
+            }
+        )
         super.onCreate(savedInstanceState)
         setContent {
             HackertabTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Scaffold(
-                        topBar = {
-                            TopAppBar(backgroundColor = Color.White) {
-                                Toolbar()
-                            }
-                        },
-                        content = {
-                            HackerNewsCard(viewModel.hackerNews)
-                        }
-                    )
-                }
+                Content(viewModel)
             }
         }
+    }
+}
+
+@Composable
+fun Content(viewModel: MainViewModel) {
+    // A surface container using the 'background' color from the theme
+    Surface(
+        modifier = Modifier
+            .fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(backgroundColor = Color.White) {
+                    Toolbar()
+                }
+            },
+            content = {
+                RedditCard(viewModel.redditUiState)
+            }
+        )
     }
 }
 
