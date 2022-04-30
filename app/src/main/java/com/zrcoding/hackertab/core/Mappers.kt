@@ -1,8 +1,8 @@
 package com.zrcoding.hackertab.core
 
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.source.reddit.Reddit
-import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity

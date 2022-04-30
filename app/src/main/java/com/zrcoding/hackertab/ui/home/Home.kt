@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.MainViewModel
-import com.zrcoding.hackertab.ui.hackernews.HackerNewsItem
-import com.zrcoding.hackertab.ui.reddit.RedditItem
-import com.zrcoding.hackertab.ui.shared.CardTemplate
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsItem
+import com.zrcoding.hackertab.ui.source.reddit.RedditItem
+import com.zrcoding.hackertab.ui.template.CardTemplate
 
 @Composable
 fun HomeScreen(viewModel: MainViewModel) {

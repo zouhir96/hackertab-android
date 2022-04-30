@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
 import com.zrcoding.hackertab.core.openUrlInBrowser
-import com.zrcoding.hackertab.ui.shared.PostTitle
-import com.zrcoding.hackertab.ui.shared.TextWithStartIcon
+import com.zrcoding.hackertab.ui.template.PostTitle
+import com.zrcoding.hackertab.ui.template.TextWithStartIcon
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import java.text.DateFormat
 

@@ -9,8 +9,8 @@ import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.core.UiText
 import com.zrcoding.hackertab.core.toHackerNews
 import com.zrcoding.hackertab.core.toReddits
-import com.zrcoding.hackertab.ui.hackernews.HackerNews
-import com.zrcoding.hackertab.ui.reddit.Reddit
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.source.reddit.Reddit
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.repositories.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

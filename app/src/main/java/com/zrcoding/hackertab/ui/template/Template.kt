@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.ui.shared
+package com.zrcoding.hackertab.ui.template
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
