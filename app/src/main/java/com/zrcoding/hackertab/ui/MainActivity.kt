@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +20,9 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.home.HomeScreen
+import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsCard
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampCard
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -130,12 +130,13 @@ fun PostTitle(title: String) {
 @Composable
 fun TextWithStartIcon(
     text: String,
-    color: Color = Color.Gray,
+    textColor: Color = Color.Gray,
     textStyle: TextStyle = Typography.caption,
     icon: Int,
     tint: Color = Color.Gray
 ) {
     Row(
+        modifier = Modifier.padding(end = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -147,7 +148,7 @@ fun TextWithStartIcon(
         )
         Text(
             text = text,
-            color = color,
+            color = textColor,
             style = textStyle,
         )
     }

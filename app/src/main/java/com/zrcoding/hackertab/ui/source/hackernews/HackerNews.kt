@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.ui.hackernews
+package com.zrcoding.hackertab.ui.source.hackernews
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
