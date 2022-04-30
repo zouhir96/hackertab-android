@@ -32,6 +32,14 @@ class MainViewModel @Inject constructor(
         )
     )
 
+    var freeCodeCampUiState: CardUiState<List<FreeCodeCamp>> by mutableStateOf(
+        CardUiState(
+            true,
+            emptyList(),
+            null
+        )
+    )
+
     private val _showError: MutableLiveData<UiText> = MutableLiveData()
     val showError: LiveData<UiText> = _showError
 
@@ -52,6 +60,14 @@ class MainViewModel @Inject constructor(
                 is Resource.Loading -> redditUiState.copy(loading = true)
                 is Resource.Success -> redditUiState.copy(loading = false, dataToDisplay = posts.data?.toReddits()?: emptyList())
                 is Resource.Error -> redditUiState.copy(loading = false, emptyList(), UiText.Message(
+                    posts.exception.message!!
+                ))
+            }
+
+            freeCodeCampUiState = when(val posts = postRepository.getFreeCodeCampPosts()) {
+                is Resource.Loading -> freeCodeCampUiState.copy(loading = true)
+                is Resource.Success -> freeCodeCampUiState.copy(loading = false, dataToDisplay = posts.data?.toFreeCodeCamp()?: emptyList())
+                is Resource.Error -> freeCodeCampUiState.copy(loading = false, emptyList(), UiText.Message(
                     posts.exception.message!!
                 ))
             }

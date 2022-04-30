@@ -31,3 +31,17 @@ fun List<RedditEntity>.toReddits(): List<Reddit> {
         )
     }
 }
+
+
+fun List<FreeCodeCampEntity>.toFreeCodeCamp(): List<FreeCodeCamp> {
+    return this.map {
+        FreeCodeCamp(
+            title = it.title,
+            creator = it.creator,
+            link = it.link,
+            //categories = it.categories,
+            guid = it.guid,
+            isoDate = it.isoDate
+        )
+    }
+}
