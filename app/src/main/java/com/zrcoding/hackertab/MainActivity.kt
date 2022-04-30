@@ -15,8 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
-import com.zrcoding.hackertab.ui.hackernews.HackerNewsCard
-import com.zrcoding.hackertab.ui.reddit.RedditCard
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsCard
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampCard
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 

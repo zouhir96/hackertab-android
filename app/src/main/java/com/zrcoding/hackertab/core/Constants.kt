@@ -1,7 +1,8 @@
 package com.zrcoding.hackertab.core
 
-import com.zrcoding.hackertab.ui.hackernews.HackerNews
-import com.zrcoding.hackertab.ui.reddit.Reddit
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.source.reddit.Reddit
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 
 object Constants {
     val FAKE_HACKER_NEWS = listOf(
