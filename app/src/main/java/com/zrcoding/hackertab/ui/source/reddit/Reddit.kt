@@ -99,7 +99,7 @@ fun RedditItem(reddit: Reddit) {
         ) {
             TextWithStartIcon(
                 text = stringResource(id = R.string.score, reddit.score),
-                color = Color.Red,
+                textColor = Color.Red,
                 icon = R.drawable.ic_score
             )
             TextWithStartIcon(
