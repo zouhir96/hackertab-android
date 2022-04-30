@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.ui.reddit
+package com.zrcoding.hackertab.ui.source.reddit
 
 import android.content.Context
 import androidx.compose.foundation.border
@@ -20,8 +20,6 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.core.Constants.FAKE_REDDITS
 import com.zrcoding.hackertab.core.openUrlInBrowser
-import com.zrcoding.hackertab.ui.hackernews.HackerNews
-import com.zrcoding.hackertab.ui.hackernews.HackerNewsItem
 import com.zrcoding.hackertab.ui.shared.CardHeader
 import com.zrcoding.hackertab.ui.shared.Loading
 import com.zrcoding.hackertab.ui.shared.PostTitle
@@ -101,7 +99,7 @@ fun RedditItem(reddit: Reddit) {
         ) {
             TextWithStartIcon(
                 text = stringResource(id = R.string.score, reddit.score),
-                color = Color.Red,
+                textColor = Color.Red,
                 icon = R.drawable.ic_score
             )
             TextWithStartIcon(

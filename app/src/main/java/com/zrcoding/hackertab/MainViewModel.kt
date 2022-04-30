@@ -7,12 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zrcoding.hackertab.core.CardUiState
-import com.zrcoding.hackertab.core.UiText
-import com.zrcoding.hackertab.core.toHackerNews
-import com.zrcoding.hackertab.core.toReddits
-import com.zrcoding.hackertab.ui.hackernews.HackerNews
-import com.zrcoding.hackertab.ui.reddit.Reddit
+import com.zrcoding.hackertab.core.*
+import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
+import com.zrcoding.hackertab.ui.source.reddit.Reddit
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.repositories.PostRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,6 +25,14 @@ class MainViewModel @Inject constructor(
         private set
 
     var redditUiState: CardUiState<List<Reddit>> by mutableStateOf(
+        CardUiState(
+            true,
+            emptyList(),
+            null
+        )
+    )
+
+    var freeCodeCampUiState: CardUiState<List<FreeCodeCamp>> by mutableStateOf(
         CardUiState(
             true,
             emptyList(),
@@ -54,6 +60,14 @@ class MainViewModel @Inject constructor(
                 is Resource.Loading -> redditUiState.copy(loading = true)
                 is Resource.Success -> redditUiState.copy(loading = false, dataToDisplay = posts.data?.toReddits()?: emptyList())
                 is Resource.Error -> redditUiState.copy(loading = false, emptyList(), UiText.Message(
+                    posts.exception.message!!
+                ))
+            }
+
+            freeCodeCampUiState = when(val posts = postRepository.getFreeCodeCampPosts("rust")) {
+                is Resource.Loading -> freeCodeCampUiState.copy(loading = true)
+                is Resource.Success -> freeCodeCampUiState.copy(loading = false, dataToDisplay = posts.data?.toFreeCodeCamp()?: emptyList())
+                is Resource.Error -> freeCodeCampUiState.copy(loading = false, emptyList(), UiText.Message(
                     posts.exception.message!!
                 ))
             }
