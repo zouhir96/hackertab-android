@@ -1,6 +1,7 @@
 package com.zrcoding.shared.data.repositories
 
 import com.zrcoding.shared.core.Resource
+import com.zrcoding.shared.core.addTagToApiUrl
 import com.zrcoding.shared.core.toEntities
 import com.zrcoding.shared.data.local.HackertabDatabase
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
@@ -34,9 +35,10 @@ class PostRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getFreeCodeCampPosts(): Resource<List<FreeCodeCampEntity>> {
+    override suspend fun getFreeCodeCampPosts(tag: String): Resource<List<FreeCodeCampEntity>> {
+        val freeCodeCampUrl = tag.addTagToApiUrl("freecodecamp")
         return getPosts(
-            fetchRemote = { hackertabApi.fetchFreeCodeCampPosts() },
+            fetchRemote = { hackertabApi.fetchFreeCodeCampPosts(freeCodeCampUrl) },
             fetchLocal = { hackertabDatabase.getFreeCodeCamp().getAll() },
             map = { it.toEntities() },
             save = { hackertabDatabase.getFreeCodeCamp().insert(it) },

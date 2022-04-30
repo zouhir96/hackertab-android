@@ -10,5 +10,5 @@ interface PostRepository {
 
     suspend fun getRedditPosts(): Resource<List<RedditEntity>>
 
-    suspend fun getFreeCodeCampPosts(): Resource<List<FreeCodeCampEntity>>
+    suspend fun getFreeCodeCampPosts(tag: String): Resource<List<FreeCodeCampEntity>>
 }

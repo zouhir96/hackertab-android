@@ -64,7 +64,7 @@ class MainViewModel @Inject constructor(
                 ))
             }
 
-            freeCodeCampUiState = when(val posts = postRepository.getFreeCodeCampPosts()) {
+            freeCodeCampUiState = when(val posts = postRepository.getFreeCodeCampPosts("rust")) {
                 is Resource.Loading -> freeCodeCampUiState.copy(loading = true)
                 is Resource.Success -> freeCodeCampUiState.copy(loading = false, dataToDisplay = posts.data?.toFreeCodeCamp()?: emptyList())
                 is Resource.Error -> freeCodeCampUiState.copy(loading = false, emptyList(), UiText.Message(
