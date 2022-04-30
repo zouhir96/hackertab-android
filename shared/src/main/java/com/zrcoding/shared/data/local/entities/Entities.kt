@@ -37,6 +37,6 @@ data class FreeCodeCampEntity(
     val title: String,
     val creator: String,
     val link: String,
-    //val categories: List<String>,
+    val categories: List<String>,
     val isoDate: String,
 )

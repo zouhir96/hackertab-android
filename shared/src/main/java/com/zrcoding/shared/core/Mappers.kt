@@ -53,7 +53,7 @@ fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
             title = it.title,
             creator = it.creator,
             link = it.link,
-            //categories = it.categories,
+            categories = it.categories,
             isoDate = it.isoDate
         )
     }

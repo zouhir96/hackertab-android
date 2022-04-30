@@ -24,6 +24,7 @@ data class FreeCodeCamp(
     val link: String,
     val guid: String,
     val isoDate: String,
+    val categories: List<String>,
 )
 
 @Composable

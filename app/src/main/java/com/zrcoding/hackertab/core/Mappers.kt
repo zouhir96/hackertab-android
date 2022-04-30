@@ -39,7 +39,7 @@ fun List<FreeCodeCampEntity>.toFreeCodeCamp(): List<FreeCodeCamp> {
             title = it.title,
             creator = it.creator,
             link = it.link,
-            //categories = it.categories,
+            categories = it.categories,
             guid = it.guid,
             isoDate = it.isoDate
         )
