@@ -3,7 +3,6 @@ package com.zrcoding.shared.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "hacker_news")
 data class HackerNewsEntity(
@@ -30,4 +29,15 @@ data class RedditEntity(
     @ColumnInfo(name = "num_comments") val commentsCount: Long,
     @ColumnInfo(name = "permalink") val url: String,
     @ColumnInfo(name = "created_utc") val createdAt: Long
+)
+
+@Entity(tableName = "freecodecamp")
+data class FreeCodeCampEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long,
+    val title: String,
+    val creator: String,
+    val link: String,
+    //val categories: List<String>,
+    val guid: String,
+    val isoDate: String,
 )

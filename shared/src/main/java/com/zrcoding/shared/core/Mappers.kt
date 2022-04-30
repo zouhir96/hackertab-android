@@ -1,8 +1,10 @@
 package com.zrcoding.shared.core
 
+import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 import com.zrcoding.shared.data.remote.dtos.ChildrenData
+import com.zrcoding.shared.data.remote.dtos.FreeCodeCampDto
 import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
 import com.zrcoding.shared.data.remote.dtos.RedditDto
 import java.util.*
@@ -32,13 +34,28 @@ fun RedditDto.toEntities(): List<RedditEntity> {
             id = post.id,
             title = post.title,
             subreddit = post.subreddit,
-            linkFlairText = post.linkFlairText?:"",
-            linkFlairTextColor = post.linkFlairTextColor?:"",
-            linkFlairBackgroundColor = post.linkFlairBackgroundColor?:"",
+            linkFlairText = post.linkFlairText ?: "",
+            linkFlairTextColor = post.linkFlairTextColor ?: "",
+            linkFlairBackgroundColor = post.linkFlairBackgroundColor ?: "",
             score = post.score,
             commentsCount = post.commentsCount,
             url = post.url,
             createdAt = post.createdAt
+        )
+    }
+}
+
+@JvmName("toFreeCodeCampEntities")
+fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
+    return this.map {
+        FreeCodeCampEntity(
+            id = it.id,
+            title = it.title,
+            creator = it.creator,
+            link = it.link,
+            //categories = it.categories,
+            guid = it.guid,
+            isoDate = it.isoDate
         )
     }
 }

@@ -3,12 +3,11 @@ package com.zrcoding.shared.data.repositories
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.core.toEntities
 import com.zrcoding.shared.data.local.HackertabDatabase
+import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 import com.zrcoding.shared.data.remote.HackertabApi
-import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
 import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
 
 class PostRepositoryImpl @Inject constructor(
@@ -29,19 +28,29 @@ class PostRepositoryImpl @Inject constructor(
         return getPosts(
             fetchRemote = { hackertabApi.fetchRedditPosts() },
             fetchLocal = { hackertabDatabase.getRedditDao().getAll() },
-            map = {it.toEntities()},
-            save = {hackertabDatabase.getRedditDao().insert(it)},
+            map = { it.toEntities() },
+            save = { hackertabDatabase.getRedditDao().insert(it) },
             clearTable = { hackertabDatabase.getRedditDao().clear() }
         )
     }
 
-    private suspend fun <Dto,Entity> getPosts(
+    override suspend fun getFreeCodeCampPosts(): Resource<List<FreeCodeCampEntity>> {
+        return getPosts(
+            fetchRemote = { hackertabApi.fetchFreeCodeCampPosts() },
+            fetchLocal = { hackertabDatabase.getFreeCodeCamp().getAll() },
+            map = { it.toEntities() },
+            save = { hackertabDatabase.getFreeCodeCamp().insert(it) },
+            clearTable = { hackertabDatabase.getRedditDao().clear() }
+        )
+    }
+
+    private suspend fun <Dto, Entity> getPosts(
         fetchRemote: suspend () -> Response<Dto>,
         fetchLocal: suspend () -> List<Entity>,
         map: (Dto) -> List<Entity>,
         save: suspend (List<Entity>) -> Unit,
         clearTable: suspend () -> Unit,
-    ) : Resource<List<Entity>> {
+    ): Resource<List<Entity>> {
         try {
             val remotePosts = fetchRemote.invoke()
             if (remotePosts.isSuccessful) {
