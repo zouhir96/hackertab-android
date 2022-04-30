@@ -49,12 +49,11 @@ fun RedditDto.toEntities(): List<RedditEntity> {
 fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
     return this.map {
         FreeCodeCampEntity(
-            id = it.id,
+            guid = it.guid,
             title = it.title,
             creator = it.creator,
             link = it.link,
             //categories = it.categories,
-            guid = it.guid,
             isoDate = it.isoDate
         )
     }

@@ -33,11 +33,10 @@ data class RedditEntity(
 
 @Entity(tableName = "freecodecamp")
 data class FreeCodeCampEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey @ColumnInfo(name = "id") val guid: String,
     val title: String,
     val creator: String,
     val link: String,
     //val categories: List<String>,
-    val guid: String,
     val isoDate: String,
 )
