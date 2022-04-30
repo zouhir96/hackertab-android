@@ -15,10 +15,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.CardUiState
-import com.zrcoding.hackertab.ui.shared.CardHeader
-import com.zrcoding.hackertab.ui.shared.Loading
-import com.zrcoding.hackertab.ui.shared.PostTitle
-import com.zrcoding.hackertab.ui.shared.TextWithStartIcon
+import com.zrcoding.hackertab.ui.template.CardHeader
+import com.zrcoding.hackertab.ui.template.Loading
+import com.zrcoding.hackertab.ui.template.PostTitle
+import com.zrcoding.hackertab.ui.template.TextWithStartIcon
 
 data class FreeCodeCamp(
     val title: String,

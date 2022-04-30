@@ -1,11 +1,11 @@
-package com.zrcoding.hackertab.ui.shared
+package com.zrcoding.hackertab.ui.template
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,8 +15,48 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import com.zrcoding.hackertab.ui.theme.Typography
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun <T> CardTemplate(
+    headerIcon: Int,
+    headerTitle: String,
+    cardUiState: CardUiState<List<T>>,
+    cardItem: @Composable (T) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Card(
+        elevation = 3.dp,
+        modifier = modifier.fillMaxHeight(),
+    ) {
+        Column {
+            CardHeader(title = headerTitle, icon = headerIcon)
+            when {
+                cardUiState.loading -> {
+                    Loading("Loading ...")
+                }
+                cardUiState.uiText != null -> {
+
+                }
+                cardUiState.dataToDisplay.isEmpty() -> {
+
+                }
+                else -> {
+                    LazyColumn {
+                        items(cardUiState.dataToDisplay) { item ->
+                            cardItem(item)
+                            Divider(modifier = Modifier.padding(horizontal = 10.dp))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable

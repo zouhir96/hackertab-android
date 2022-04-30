@@ -1,24 +1,22 @@
-package com.zrcoding.hackertab
+package com.zrcoding.hackertab.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.zrcoding.hackertab.core.Constants.FAKE_HACKER_NEWS
-import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsCard
-import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampCard
+import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.ui.home.HomeScreen
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +27,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(
             SplashScreen.KeepOnScreenCondition {
-                return@KeepOnScreenCondition viewModel.hackerNews.isEmpty()
+                return@KeepOnScreenCondition viewModel.hackerNewsUiState.dataToDisplay.isEmpty()
             }
         )
         super.onCreate(savedInstanceState)
@@ -51,12 +49,12 @@ fun Content(viewModel: MainViewModel) {
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(backgroundColor = Color.White) {
+                TopAppBar(backgroundColor = MaterialTheme.colors.background) {
                     Toolbar()
                 }
             },
             content = {
-                FreeCodeCampCard(viewModel.freeCodeCampUiState)
+                HomeScreen(viewModel)
             }
         )
     }
@@ -68,22 +66,27 @@ fun Toolbar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Icon(painter = painterResource(id = R.drawable.ic_hackertab), contentDescription = "")
-        IconButton(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_hackertab),
+            contentDescription = ""
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        IconButton(
+            onClick = { /*TODO*/ },
+            modifier = Modifier
+                .background(
+                    MaterialTheme.colors.background,
+                    RoundedCornerShape(50)
+                )
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
                 contentDescription = "",
+                modifier = Modifier
+                    .size(38.dp)
             )
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    HackertabTheme {
-        HackerNewsCard(
-            FAKE_HACKER_NEWS
-        )
-    }
-}
+
