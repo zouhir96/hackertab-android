@@ -5,10 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zrcoding.hackertab.core.CardUiState
-import com.zrcoding.hackertab.core.UiText
-import com.zrcoding.hackertab.core.toHackerNews
-import com.zrcoding.hackertab.core.toReddits
+import com.zrcoding.hackertab.core.*
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.source.reddit.Reddit
 import com.zrcoding.shared.core.Resource
@@ -27,6 +25,11 @@ class MainViewModel @Inject constructor(
         private set
 
     var hackerNewsUiState: CardUiState<List<HackerNews>> by mutableStateOf(
+        generateUiState()
+    )
+        private set
+
+    var freeCodeCampUiState: CardUiState<List<FreeCodeCamp>> by mutableStateOf(
         generateUiState()
     )
         private set
@@ -57,6 +60,19 @@ class MainViewModel @Inject constructor(
                     dataToDisplay = posts.data?.toHackerNews() ?: emptyList()
                 )
                 is Resource.Error -> hackerNewsUiState.copy(
+                    loading = false, emptyList(), UiText.Message(
+                        posts.exception.message!!
+                    )
+                )
+            }
+
+            freeCodeCampUiState = when (val posts = postRepository.getFreeCodeCampPosts("java")) {
+                is Resource.Loading -> freeCodeCampUiState.copy(loading = true)
+                is Resource.Success -> freeCodeCampUiState.copy(
+                    loading = false,
+                    dataToDisplay = posts.data?.toFreeCodeCamp() ?: emptyList()
+                )
+                is Resource.Error -> freeCodeCampUiState.copy(
                     loading = false, emptyList(), UiText.Message(
                         posts.exception.message!!
                     )
