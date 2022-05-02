@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.MainViewModel
+import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampItem
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsItem
 import com.zrcoding.hackertab.ui.source.reddit.RedditItem
 import com.zrcoding.hackertab.ui.template.CardTemplate
@@ -24,7 +25,7 @@ fun HomeScreen(viewModel: MainViewModel) {
         val numGrids = 20
         val spaceBetweenItems = maxWidth.div(numGrids)
         val itemWidth = (maxWidth - 50.dp)
-        LazyRow{
+        LazyRow {
             item {
                 CardTemplate(
                     headerIcon = R.drawable.ic_score,
@@ -43,6 +44,19 @@ fun HomeScreen(viewModel: MainViewModel) {
                     headerTitle = "Reddit",
                     cardUiState = viewModel.redditUiState,
                     cardItem = { RedditItem(reddit = it) },
+                    modifier = Modifier.width(itemWidth)
+                )
+            }
+
+            item {
+                Spacer(Modifier.width(spaceBetweenItems))
+            }
+            item {
+                CardTemplate(
+                    headerIcon = R.drawable.ic_score,
+                    headerTitle = "FreeCodeCamp",
+                    cardUiState = viewModel.freeCodeCampUiState,
+                    cardItem = { FreeCodeCampItem(post = it) },
                     modifier = Modifier.width(itemWidth)
                 )
             }
