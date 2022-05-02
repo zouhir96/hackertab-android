@@ -15,6 +15,15 @@ This is the Android version of the extension brought to your phone now so you st
 - Jetpack compose
 - Room Database
 
+
+## 🚧 Todo  
+### Features
+- [x] Start with 4 sources: Github, Reddit, FreeCodeCamp, and Hackernews
+- [ ] Add a settings screen
+- [ ] Bookmarks  
+### Developement
+- [ ] Test coverage
+
 ## 📱 Requirements
 Android Studio 4.2 or newer.
 
