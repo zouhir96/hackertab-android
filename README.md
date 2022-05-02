@@ -5,15 +5,16 @@
 ## 📝 About 
 Hackertab brings the latest news, libraries, tech events, jobs... related to your profile (back-end, mobile, full stack, data scientist...) and visualize them in a proper way so you don't have to waste time jumping between different data sources.
 
-This is the Android version of the extension brought to your phone now so you stay always posted even if you’re not on your pc.
+This is the Android version of [hackertab.dev](https://hackertab.dev) extension brought to your phone now so you stay always posted even if you’re not on your pc.
 
 ## 🔨 Stack
+- Kotlin
 - Clean architecture / MVVM
-- Multimodule
+- Multi-Module architecture
 - Dependency injection - Hilt
 - Kotlin coroutines
 - Jetpack compose
-- Room Database
+- REST API with local caching using Room Database
 
 
 ## 🚧 Todo  
@@ -28,5 +29,5 @@ This is the Android version of the extension brought to your phone now so you st
 Android Studio 4.2 or newer.
 
 ## 🔗 Authors
-@Zouhir Rajdaoui (contact)  
+[@Zouhir](https://rajdaoui-zouhir.vercel.app)
 [@Amine](https://twitter.com/aminekarimii)
