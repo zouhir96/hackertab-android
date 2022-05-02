@@ -1,5 +1,7 @@
 # hackertab-android
-<img src="./imgs/splash-home-screen.jpg" width="270" /> <img src="./imgs/home-screen.jpg" width="270"/> <img src="./imgs/settings-screen.jpg" width="270"/>
+<p align="center">
+<img src="./imgs/splash-home-screen.jpg" width="270" /> <img src="./imgs/home-screen.jpg" width="270"/> <img src="./imgs/settings-home-screen.jpg" width="270"/></p>  
+
 ## 📝 About 
 Hackertab brings the latest news, libraries, tech events, jobs... related to your profile (back-end, mobile, full stack, data scientist...) and visualize them in a proper way so you don't have to waste time jumping between different data sources.
 
@@ -16,6 +18,6 @@ This is the Android version of the extension brought to your phone now so you st
 ## 📱 Requirements
 Android Studio 4.2 or newer.
 
-## Authors
+## 🔗 Authors
 @Zouhir Rajdaoui (contact)  
 [@Amine](https://twitter.com/aminekarimii)
