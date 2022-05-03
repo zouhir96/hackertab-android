@@ -19,6 +19,27 @@ fun FreeCodeCampItem(post: FreeCodeCamp) {
         description = null,
         date = post.isoDate,
         tags = post.categories,
-        {}
+        informationSection = {}
+    )
+}
+
+data class Github(
+    val name: String,
+    val description: String,
+    val owner: String,
+    val url: String,
+    val originalUrl: String,
+    val programmingLanguage: String,
+    val stars: String,
+    val starsInDateRange: String,
+    val forks: String
+)
+
+@Composable
+fun GithubItem(post: Github) {
+    SourceItemTemplate(
+        title = post.name,
+        description = post.description,
+        informationSection = {}
     )
 }
