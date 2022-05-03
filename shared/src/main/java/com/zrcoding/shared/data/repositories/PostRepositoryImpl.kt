@@ -5,6 +5,7 @@ import com.zrcoding.shared.core.addTagToApiUrl
 import com.zrcoding.shared.core.toEntities
 import com.zrcoding.shared.data.local.HackertabDatabase
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
+import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 import com.zrcoding.shared.data.remote.HackertabApi
@@ -43,6 +44,17 @@ class PostRepositoryImpl @Inject constructor(
             map = { it.toEntities() },
             save = { hackertabDatabase.getFreeCodeCamp().insert(it) },
             clearTable = { hackertabDatabase.getRedditDao().clear() }
+        )
+    }
+
+    override suspend fun getGithubPosts(tag: String, time:String): Resource<List<GithubEntity>> {
+        val freeCodeCampUrl = tag.addTagToApiUrl("github", time)
+        return getPosts(
+            fetchRemote = { hackertabApi.fetchGithubPosts(freeCodeCampUrl) },
+            fetchLocal = { hackertabDatabase.getGithubDao().getAll() },
+            map = { it.toEntities() },
+            save = { hackertabDatabase.getGithubDao().insert(it) },
+            clearTable = { hackertabDatabase.getGithubDao().clear() }
         )
     }
 

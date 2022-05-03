@@ -1,9 +1,11 @@
 package com.zrcoding.hackertab.core
 
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
+import com.zrcoding.hackertab.ui.source.freecodecamp.Github
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.source.reddit.Reddit
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
+import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 
@@ -42,6 +44,22 @@ fun List<FreeCodeCampEntity>.toFreeCodeCamp(): List<FreeCodeCamp> {
             categories = it.categories,
             guid = it.guid,
             isoDate = it.isoDate
+        )
+    }
+}
+
+fun List<GithubEntity>.toGithub(): List<Github> {
+    return this.map {
+        Github(
+            name = it.name,
+            description = it.description,
+            owner = it.owner,
+            url = it.url,
+            originalUrl = it.originalUrl,
+            programmingLanguage = it.programmingLanguage,
+            stars = it.stars,
+            starsInDateRange = it.starsInDateRange,
+            forks = it.forks
         )
     }
 }

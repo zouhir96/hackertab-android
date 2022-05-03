@@ -5,14 +5,16 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.zrcoding.shared.data.local.converters.StringToListConverter
 import com.zrcoding.shared.data.local.daos.FreeCodeCampDao
+import com.zrcoding.shared.data.local.daos.GithubDao
 import com.zrcoding.shared.data.local.daos.HackerNewsDao
 import com.zrcoding.shared.data.local.daos.RedditDao
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
+import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 
 @Database(
-    entities = [HackerNewsEntity::class, RedditEntity::class, FreeCodeCampEntity::class],
+    entities = [HackerNewsEntity::class, RedditEntity::class, FreeCodeCampEntity::class, GithubEntity::class],
     exportSchema = false,
     version = 1
 )
@@ -23,4 +25,5 @@ abstract class HackertabDatabase : RoomDatabase() {
     abstract fun getHackerNewsDao(): HackerNewsDao
     abstract fun getRedditDao(): RedditDao
     abstract fun getFreeCodeCamp(): FreeCodeCampDao
+    abstract fun getGithubDao(): GithubDao
 }

@@ -1,12 +1,10 @@
 package com.zrcoding.shared.core
 
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
+import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
-import com.zrcoding.shared.data.remote.dtos.ChildrenData
-import com.zrcoding.shared.data.remote.dtos.FreeCodeCampDto
-import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
-import com.zrcoding.shared.data.remote.dtos.RedditDto
+import com.zrcoding.shared.data.remote.dtos.*
 import java.util.*
 
 @JvmName("toHackerNewsEntities")
@@ -55,6 +53,24 @@ fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
             link = it.link,
             categories = it.categories,
             isoDate = it.isoDate
+        )
+    }
+}
+
+
+@JvmName("toGithubEntities")
+fun List<GithubDto>.toEntities(): List<GithubEntity> {
+    return this.map {
+        GithubEntity(
+            name = it.name,
+            description = it.description,
+            owner = it.owner,
+            url = it.url,
+            originalUrl = it.originalUrl ?: "",
+            programmingLanguage = it.programmingLanguage,
+            stars = it.stars,
+            starsInDateRange = it.starsInDateRange,
+            forks = it.forks
         )
     }
 }

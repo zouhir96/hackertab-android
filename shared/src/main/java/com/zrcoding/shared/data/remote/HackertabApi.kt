@@ -1,6 +1,7 @@
 package com.zrcoding.shared.data.remote
 
 import com.zrcoding.shared.data.remote.dtos.FreeCodeCampDto
+import com.zrcoding.shared.data.remote.dtos.GithubDto
 import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
 import com.zrcoding.shared.data.remote.dtos.RedditDto
 import retrofit2.Response
@@ -16,4 +17,7 @@ interface HackertabApi {
 
     @GET
     suspend fun fetchFreeCodeCampPosts(@Url url: String): Response<List<FreeCodeCampDto>>
+
+    @GET
+    suspend fun fetchGithubPosts(@Url url: String): Response<List<GithubDto>>
 }

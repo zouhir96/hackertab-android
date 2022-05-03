@@ -40,3 +40,16 @@ data class FreeCodeCampEntity(
     val categories: List<String>,
     val isoDate: String,
 )
+
+@Entity(tableName = "github")
+data class GithubEntity(
+    @PrimaryKey val url: String,
+    val name: String,
+    val description: String,
+    val owner: String,
+    val originalUrl: String,
+    val programmingLanguage: String,
+    val stars: String,
+    val starsInDateRange: String,
+    val forks: String
+)
