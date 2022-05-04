@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.MainViewModel
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampItem
+import com.zrcoding.hackertab.ui.source.freecodecamp.GithubItem
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsItem
 import com.zrcoding.hackertab.ui.source.reddit.RedditItem
 import com.zrcoding.hackertab.ui.template.CardTemplate
@@ -57,6 +58,19 @@ fun HomeScreen(viewModel: MainViewModel) {
                     headerTitle = "FreeCodeCamp",
                     cardUiState = viewModel.freeCodeCampUiState,
                     cardItem = { FreeCodeCampItem(post = it) },
+                    modifier = Modifier.width(itemWidth)
+                )
+            }
+
+            item {
+                Spacer(Modifier.width(spaceBetweenItems))
+            }
+            item {
+                CardTemplate(
+                    headerIcon = R.drawable.ic_score,
+                    headerTitle = "Github",
+                    cardUiState = viewModel.githubUiState,
+                    cardItem = { GithubItem(post = it) },
                     modifier = Modifier.width(itemWidth)
                 )
             }

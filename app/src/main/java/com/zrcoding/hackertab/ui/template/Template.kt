@@ -70,7 +70,7 @@ fun SourceItemTemplatePreview() {
             date = "il y a 1h",
             modifier = Modifier,
             tags = listOf("Java", "Kotelin"),
-            cardItem = {
+            informationSection = {
                 TextWithStartIcon(
                     icon = R.drawable.ic_time_24,
                     text = "this is a custom view"
@@ -79,15 +79,14 @@ fun SourceItemTemplatePreview() {
         )
     }
 }
-
 @Composable
 fun SourceItemTemplate(
+    modifier: Modifier = Modifier,
+    date: String? = null,
+    tags: List<String>? = null,
     title: String,
     description: String?,
-    date: String,
-    tags: List<String>?,
-    cardItem: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
+    informationSection: @Composable () -> Unit,
 ) {
     Column(
         modifier = modifier.fillMaxHeight(),
@@ -110,12 +109,14 @@ fun SourceItemTemplate(
             )
         }
 
-        TextWithStartIcon(
-            icon = R.drawable.ic_time_24,
-            text = date
-        )
+        date?.let {
+            TextWithStartIcon(
+                icon = R.drawable.ic_time_24,
+                text = date
+            )
+        }
 
-        cardItem()
+        informationSection()
 
         tags?.let {
             Row(

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zrcoding.hackertab.core.*
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
+import com.zrcoding.hackertab.ui.source.freecodecamp.Github
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.source.reddit.Reddit
 import com.zrcoding.shared.core.Resource
@@ -30,6 +31,11 @@ class MainViewModel @Inject constructor(
         private set
 
     var freeCodeCampUiState: CardUiState<List<FreeCodeCamp>> by mutableStateOf(
+        generateUiState()
+    )
+        private set
+
+    var githubUiState: CardUiState<List<Github>> by mutableStateOf(
         generateUiState()
     )
         private set
@@ -73,6 +79,19 @@ class MainViewModel @Inject constructor(
                     dataToDisplay = posts.data?.toFreeCodeCamp() ?: emptyList()
                 )
                 is Resource.Error -> freeCodeCampUiState.copy(
+                    loading = false, emptyList(), UiText.Message(
+                        posts.exception.message!!
+                    )
+                )
+            }
+
+            githubUiState = when (val posts = postRepository.getGithubPosts("java")) {
+                is Resource.Loading -> githubUiState.copy(loading = true)
+                is Resource.Success -> githubUiState.copy(
+                    loading = false,
+                    dataToDisplay = posts.data?.toGithub() ?: emptyList()
+                )
+                is Resource.Error -> githubUiState.copy(
                     loading = false, emptyList(), UiText.Message(
                         posts.exception.message!!
                     )
