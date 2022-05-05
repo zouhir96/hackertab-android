@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.assets.getTagColor
 import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import com.zrcoding.hackertab.ui.theme.Typography
@@ -69,7 +70,7 @@ fun SourceItemTemplatePreview() {
             description = "this is a lorem ipsum test",
             date = "il y a 1h",
             modifier = Modifier,
-            tags = listOf("Java", "Kotelin"),
+            tags = listOf("Java", "Kotlin", "JavaScript", "android development"),
             informationSection = {
                 TextWithStartIcon(
                     icon = R.drawable.ic_time_24,
@@ -79,6 +80,7 @@ fun SourceItemTemplatePreview() {
         )
     }
 }
+
 @Composable
 fun SourceItemTemplate(
     modifier: Modifier = Modifier,
@@ -89,17 +91,17 @@ fun SourceItemTemplate(
     informationSection: @Composable () -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier.fillMaxHeight().padding(horizontal = 16.dp),
     ) {
 
         Text(
             modifier = modifier.fillMaxWidth(),
             text = title,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp
         )
-
         Spacer(modifier = modifier.height(4.dp))
+
         description?.let {
             Text(
                 modifier = modifier.fillMaxWidth(),
@@ -107,6 +109,7 @@ fun SourceItemTemplate(
                 color = Color.LightGray,
                 fontSize = 14.sp
             )
+            Spacer(modifier = modifier.height(4.dp))
         }
 
         date?.let {
@@ -114,6 +117,7 @@ fun SourceItemTemplate(
                 icon = R.drawable.ic_time_24,
                 text = date
             )
+            Spacer(modifier = modifier.height(4.dp))
         }
 
         informationSection()
@@ -123,9 +127,11 @@ fun SourceItemTemplate(
                 modifier = modifier.fillMaxWidth()
             ) {
                 it.onEach {
-                    TextWithStartIcon(text = it, icon = R.drawable.ic_comment)
+                    val color = it.getTagColor()
+                    TextWithStartIcon(text = it, icon = R.drawable.ic_comment, tint = color)
                 }
             }
+            Spacer(modifier = modifier.height(4.dp))
         }
     }
 }
