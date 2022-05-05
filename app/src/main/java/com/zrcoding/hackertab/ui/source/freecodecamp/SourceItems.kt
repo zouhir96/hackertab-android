@@ -15,7 +15,7 @@ data class FreeCodeCamp(
 @Composable
 fun FreeCodeCampItem(post: FreeCodeCamp) {
     SourceItemTemplate(
-        title = post.title,
+        title = post.title.trim(),
         description = null,
         date = post.isoDate,
         tags = post.categories,
@@ -38,8 +38,8 @@ data class Github(
 @Composable
 fun GithubItem(post: Github) {
     SourceItemTemplate(
-        title = post.name,
-        description = post.description,
+        title = post.name.trim(),
+        description = post.description.trim(),
         informationSection = {}
     )
 }
