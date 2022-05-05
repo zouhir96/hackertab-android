@@ -16,5 +16,5 @@ val tags = mapOf(
     "node" to Color(0xFF5B9853),
     "javascript" to Color.Yellow,
     "scala" to Color.Blue,
-    "kotlin" to Color(0xFF7f52ff),
+    "kotlin" to Color(0xFF7f52ff)
 )
