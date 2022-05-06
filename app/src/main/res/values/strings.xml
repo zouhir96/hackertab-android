@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">hackertab</string>
+    <!--    sources names-->
+    <string name="hacker_news">hackernews</string>
+    <string name="reddit">reddit</string>
+    <string name="free_code_camp">freecodecamp</string>
+    <string name="github">github</string>
+
+
     <string name="score">%d points</string>
     <string name="comments">%d comments</string>
     <string name="subreddit">r/ %s</string>

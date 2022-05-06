@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.MainViewModel
@@ -29,8 +30,8 @@ fun HomeScreen(viewModel: MainViewModel) {
         LazyRow {
             item {
                 CardTemplate(
-                    headerIcon = R.drawable.ic_score,
-                    headerTitle = "hackernews",
+                    headerIcon = R.drawable.ic_hackernews,
+                    headerTitle = stringResource(id = R.string.hacker_news),
                     cardUiState = viewModel.hackerNewsUiState,
                     cardItem = { HackerNewsItem(new = it) },
                     modifier = Modifier.width(itemWidth)
@@ -41,8 +42,8 @@ fun HomeScreen(viewModel: MainViewModel) {
             }
             item {
                 CardTemplate(
-                    headerIcon = R.drawable.ic_score,
-                    headerTitle = "Reddit",
+                    headerIcon = R.drawable.ic_reddit,
+                    headerTitle = stringResource(id = R.string.reddit),
                     cardUiState = viewModel.redditUiState,
                     cardItem = { RedditItem(reddit = it) },
                     modifier = Modifier.width(itemWidth)
@@ -54,8 +55,8 @@ fun HomeScreen(viewModel: MainViewModel) {
             }
             item {
                 CardTemplate(
-                    headerIcon = R.drawable.ic_score,
-                    headerTitle = "FreeCodeCamp",
+                    headerIcon = R.drawable.ic_freecodecamp,
+                    headerTitle = stringResource(id = R.string.free_code_camp),
                     cardUiState = viewModel.freeCodeCampUiState,
                     cardItem = { FreeCodeCampItem(post = it) },
                     modifier = Modifier.width(itemWidth)
@@ -67,8 +68,8 @@ fun HomeScreen(viewModel: MainViewModel) {
             }
             item {
                 CardTemplate(
-                    headerIcon = R.drawable.ic_score,
-                    headerTitle = "Github",
+                    headerIcon = R.drawable.ic_github,
+                    headerTitle = stringResource(id = R.string.github),
                     cardUiState = viewModel.githubUiState,
                     cardItem = { GithubItem(post = it) },
                     modifier = Modifier.width(itemWidth)
