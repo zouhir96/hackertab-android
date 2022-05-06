@@ -51,7 +51,7 @@ fun RedditItem(reddit: Reddit) {
         PostTitle(title = reddit.title)
         Spacer(modifier = Modifier.height(8.dp))
         Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             TextWithStartIcon(

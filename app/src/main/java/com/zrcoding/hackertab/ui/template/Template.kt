@@ -1,6 +1,5 @@
 package com.zrcoding.hackertab.ui.template
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +33,7 @@ fun <T> CardTemplate(
     Card(
         elevation = 3.dp,
         modifier = modifier.fillMaxHeight(),
+        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp)
     ) {
         Column {
             CardHeader(title = headerTitle, icon = headerIcon)
@@ -79,6 +79,7 @@ fun SourceItemTemplatePreview() {
         )
     }
 }
+
 @Composable
 fun SourceItemTemplate(
     modifier: Modifier = Modifier,
@@ -92,11 +93,8 @@ fun SourceItemTemplate(
         modifier = modifier.fillMaxHeight(),
     ) {
 
-        Text(
-            modifier = modifier.fillMaxWidth(),
-            text = title,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
+        PostTitle(
+            title = title
         )
 
         Spacer(modifier = modifier.height(4.dp))
@@ -145,21 +143,16 @@ fun CardHeader(title: String, icon: Int) {
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
-            .background(
-                color = Color.DarkGray,
-                shape = RoundedCornerShape(topEnd = 14.dp, topStart = 14.dp)
-            )
     ) {
         Icon(
             painter = painterResource(id = icon),
             contentDescription = "card header icon",
             modifier = Modifier.padding(start = 24.dp)
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(18.dp))
         Text(
             text = title,
             style = Typography.subtitle1,
-            color = Color.Gray
         )
     }
 }
@@ -173,7 +166,7 @@ fun LoadingPreview() {
 }
 
 @Composable
-fun Loading(title: String = "") {
+fun Loading(title: String = "Loading...") {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
@@ -182,10 +175,8 @@ fun Loading(title: String = "") {
     ) {
         Text(text = title, color = Color.Black)
         CircularProgressIndicator(
-            color = Color.Black,
             modifier = Modifier
                 .size(60.dp)
-
         )
     }
 }
@@ -194,7 +185,7 @@ fun Loading(title: String = "") {
 fun PostTitle(title: String) {
     Text(
         text = title,
-        style = Typography.body1,
+        style = Typography.subtitle1,
         maxLines = 2
     )
 }
@@ -222,6 +213,8 @@ fun TextWithStartIcon(
             text = text,
             color = textColor,
             style = textStyle,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 }
