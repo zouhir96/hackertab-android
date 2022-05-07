@@ -19,7 +19,6 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.assets.getTagColor
 import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
-import com.zrcoding.hackertab.ui.theme.Typography
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -91,7 +90,9 @@ fun SourceItemTemplate(
     informationSection: @Composable () -> Unit,
 ) {
     Column(
-        modifier = modifier.fillMaxHeight().padding(horizontal = 16.dp),
+        modifier = modifier
+            .fillMaxHeight()
+            .padding(horizontal = 16.dp),
     ) {
 
         PostTitle(
@@ -157,7 +158,7 @@ fun CardHeader(title: String, icon: Int) {
         Spacer(modifier = Modifier.width(18.dp))
         Text(
             text = title,
-            style = Typography.subtitle1,
+            style = MaterialTheme.typography.h5,
         )
     }
 }
@@ -190,7 +191,7 @@ fun Loading(title: String = "Loading...") {
 fun PostTitle(title: String) {
     Text(
         text = title,
-        style = Typography.subtitle1,
+        style = MaterialTheme.typography.subtitle1,
         maxLines = 2
     )
 }
@@ -199,7 +200,7 @@ fun PostTitle(title: String) {
 fun TextWithStartIcon(
     text: String,
     textColor: Color = Color.Gray,
-    textStyle: TextStyle = Typography.caption,
+    textStyle: TextStyle = MaterialTheme.typography.caption,
     icon: Int,
     tint: Color = Color.Gray
 ) {
