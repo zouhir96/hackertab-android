@@ -109,7 +109,7 @@ fun SourceItemTemplate(
         description?.let {
             Text(
                 modifier = modifier.fillMaxWidth(),
-                text = title,
+                text = it,
                 color = Color.LightGray,
                 fontSize = 14.sp
             )
@@ -121,21 +121,27 @@ fun SourceItemTemplate(
                 icon = R.drawable.ic_time_24,
                 text = date
             )
-            Spacer(modifier = modifier.height(4.dp))
+            Spacer(modifier = modifier.height(8.dp))
         }
 
         informationSection()
 
         tags?.let {
+
+            val isTagsBlank = tags.size == 1 && tags.first().isEmpty()
+            if (isTagsBlank) return@Column
+
             Row(
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 it.onEach {
                     val color = it.getTagColor()
                     TextWithStartIcon(text = it, icon = R.drawable.ic_comment, tint = color)
                 }
             }
-            Spacer(modifier = modifier.height(4.dp))
+
+            Spacer(modifier = modifier.height(8.dp))
         }
     }
 }
