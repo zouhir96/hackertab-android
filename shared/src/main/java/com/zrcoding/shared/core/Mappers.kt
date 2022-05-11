@@ -15,7 +15,7 @@ fun List<HackerNewsDto>.toEntities(): List<HackerNewsEntity> {
             savedAt = Calendar.getInstance().timeInMillis,
             type = it.type,
             title = it.title,
-            time = it.time,
+            time = it.time * 1000,
             score = it.score,
             descendants = it.descendants,
             url = it.url,
@@ -38,7 +38,7 @@ fun RedditDto.toEntities(): List<RedditEntity> {
             score = post.score,
             commentsCount = post.commentsCount,
             url = post.url,
-            createdAt = post.createdAt
+            createdAt = post.createdAt * 1000
         )
     }
 }
@@ -47,7 +47,7 @@ fun RedditDto.toEntities(): List<RedditEntity> {
 fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
     return this.map {
         FreeCodeCampEntity(
-            guid = it.guid,
+            guid = UUID.randomUUID().toString(),
             title = it.title,
             creator = it.creator,
             link = it.link,

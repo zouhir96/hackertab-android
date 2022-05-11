@@ -5,6 +5,7 @@ import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
 import com.zrcoding.hackertab.ui.source.reddit.Reddit
 
 object Constants {
+
     val FAKE_FREECODECAMP_DATA = listOf(
         FreeCodeCamp(
             "hello",
@@ -47,7 +48,7 @@ object Constants {
         ),
     )
 
-    val FAKE_REDDITS = listOf<Reddit>(
+    val FAKE_REDDITS = listOf(
         Reddit(
             "React is the best web framework ever React is the best web framework ever",
             "reactDevs",

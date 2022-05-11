@@ -4,9 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +28,14 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(
             SplashScreen.KeepOnScreenCondition {
-                return@KeepOnScreenCondition viewModel.hackerNewsUiState.dataToDisplay.isEmpty()
+                return@KeepOnScreenCondition listOf(
+                    viewModel.hackerNewsUiState,
+                    viewModel.redditUiState,
+                    viewModel.freeCodeCampUiState,
+                    viewModel.githubUiState,
+                ).any {
+                    it.value.loading
+                }
             }
         )
         super.onCreate(savedInstanceState)
@@ -42,15 +50,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Content(viewModel: MainViewModel) {
     // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier
-            .fillMaxSize(),
-        color = MaterialTheme.colors.background
-    ) {
+    Surface {
         Scaffold(
             topBar = {
-                TopAppBar(backgroundColor = MaterialTheme.colors.background) {
-                    Toolbar()
+                TopAppBar {
+                    Toolbar(
+                        onRefreshBtnClick = { viewModel.fetchPosts() },
+                        onSettingBtnClick = {}
+                    )
                 }
             },
             content = {
@@ -61,7 +68,10 @@ fun Content(viewModel: MainViewModel) {
 }
 
 @Composable
-fun Toolbar() {
+fun Toolbar(
+    onRefreshBtnClick: () -> Unit,
+    onSettingBtnClick: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -72,20 +82,23 @@ fun Toolbar() {
         )
         Spacer(modifier = Modifier.weight(1f))
         IconButton(
-            onClick = { /*TODO*/ },
-            modifier = Modifier
-                .background(
-                    MaterialTheme.colors.background,
-                    RoundedCornerShape(50)
-                )
+            onClick = { onRefreshBtnClick()}
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_refresh),
+                contentDescription = "",
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        /*IconButton(
+            onClick = { onSettingBtnClick()}
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
                 contentDescription = "",
-                modifier = Modifier
-                    .size(38.dp)
+                modifier = Modifier.size(30.dp)
             )
-        }
+        }*/
     }
 }
 
