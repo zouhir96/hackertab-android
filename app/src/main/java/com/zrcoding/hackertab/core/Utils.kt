@@ -6,6 +6,10 @@ import android.net.Uri
 import android.text.format.DateUtils
 import androidx.core.content.ContextCompat
 import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+
+private const val ZERO_TIMEZONE_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 fun openUrlInBrowser(context: Context, url: String) {
     val intent = Intent()
@@ -19,7 +23,7 @@ fun openUrlInBrowser(context: Context, url: String) {
 }
 
 fun Long.toDate(): String {
-    return if(DateUtils.isToday(this)) {
+    return if (DateUtils.isToday(this)) {
         DateUtils.getRelativeTimeSpanString(
             this,
             System.currentTimeMillis(),
@@ -27,5 +31,17 @@ fun Long.toDate(): String {
         ).toString()
     } else {
         return DateFormat.getDateInstance().format(this)
+    }
+}
+
+fun String.toDate(
+    pattern: String = ZERO_TIMEZONE_DATE_PATTERN
+): String {
+    return try {
+        val parser = SimpleDateFormat(pattern, Locale.getDefault())
+        val date = parser.parse(this)!!
+        date.time.toDate()
+    } catch (ex: Exception) {
+        this
     }
 }
