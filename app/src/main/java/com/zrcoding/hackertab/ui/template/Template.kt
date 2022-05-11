@@ -1,5 +1,6 @@
 package com.zrcoding.hackertab.ui.template
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,7 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.assets.getTagColor
 import com.zrcoding.hackertab.core.CardUiState
+import com.zrcoding.hackertab.core.UiText
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 
 
@@ -42,10 +46,12 @@ fun <T> CardTemplate(
                     Loading("Loading ...")
                 }
                 cardUiState.uiText != null -> {
-
-                }
-                cardUiState.dataToDisplay.isEmpty() -> {
-
+                    EmptySource(
+                        when (cardUiState.uiText) {
+                            is UiText.Message -> cardUiState.uiText.message
+                            is UiText.Code -> stringResource(id = cardUiState.uiText.code)
+                        }
+                    )
                 }
                 else -> {
                     LazyColumn {
@@ -179,10 +185,37 @@ fun Loading(title: String = "Loading...") {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Text(text = title, color = Color.Black)
+        Text(
+            text = title,
+            color = Color.Black,
+            style = MaterialTheme.typography.body1
+        )
         CircularProgressIndicator(
             modifier = Modifier
                 .size(60.dp)
+        )
+    }
+}
+
+@Composable
+fun EmptySource(title: String = "Empty !!!") {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.undraw_connection),
+            "",
+            modifier = Modifier
+                .width(150.dp)
+                .height(200.dp)
+        )
+        Text(
+            text = title,
+            style = MaterialTheme.typography.body1,
+            textAlign = TextAlign.Center
         )
     }
 }

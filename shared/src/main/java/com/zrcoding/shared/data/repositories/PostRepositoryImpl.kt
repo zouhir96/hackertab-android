@@ -1,5 +1,6 @@
 package com.zrcoding.shared.data.repositories
 
+import com.zrcoding.shared.core.EmptySourceException
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.core.addTagToApiUrl
 import com.zrcoding.shared.core.toEntities
@@ -9,6 +10,9 @@ import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 import com.zrcoding.shared.data.remote.HackertabApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -16,7 +20,7 @@ class PostRepositoryImpl @Inject constructor(
     private val hackertabApi: HackertabApi,
     private val hackertabDatabase: HackertabDatabase
 ) : PostRepository {
-    override suspend fun getHackerNewsPosts(): Resource<List<HackerNewsEntity>> {
+    override fun getHackerNewsPosts(): Flow<Resource<List<HackerNewsEntity>>> {
         return getPosts(
             fetchRemote = { hackertabApi.fetchHackerNewsPosts() },
             fetchLocal = { hackertabDatabase.getHackerNewsDao().getAll() },
@@ -26,7 +30,7 @@ class PostRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getRedditPosts(): Resource<List<RedditEntity>> {
+    override fun getRedditPosts(): Flow<Resource<List<RedditEntity>>> {
         return getPosts(
             fetchRemote = { hackertabApi.fetchRedditPosts() },
             fetchLocal = { hackertabDatabase.getRedditDao().getAll() },
@@ -36,18 +40,18 @@ class PostRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getFreeCodeCampPosts(tag: String): Resource<List<FreeCodeCampEntity>> {
+    override fun getFreeCodeCampPosts(tag: String): Flow<Resource<List<FreeCodeCampEntity>>> {
         val freeCodeCampUrl = tag.addTagToApiUrl("freecodecamp")
         return getPosts(
             fetchRemote = { hackertabApi.fetchFreeCodeCampPosts(freeCodeCampUrl) },
             fetchLocal = { hackertabDatabase.getFreeCodeCamp().getAll() },
             map = { it.toEntities() },
             save = { hackertabDatabase.getFreeCodeCamp().insert(it) },
-            clearTable = { hackertabDatabase.getRedditDao().clear() }
+            clearTable = { hackertabDatabase.getFreeCodeCamp().clear() }
         )
     }
 
-    override suspend fun getGithubPosts(tag: String, time:String): Resource<List<GithubEntity>> {
+    override fun getGithubPosts(tag: String, time:String): Flow<Resource<List<GithubEntity>>> {
         val freeCodeCampUrl = tag.addTagToApiUrl("github", time)
         return getPosts(
             fetchRemote = { hackertabApi.fetchGithubPosts(freeCodeCampUrl) },
@@ -58,13 +62,14 @@ class PostRepositoryImpl @Inject constructor(
         )
     }
 
-    private suspend fun <Dto, Entity> getPosts(
+    private fun <Dto, Entity> getPosts(
         fetchRemote: suspend () -> Response<Dto>,
-        fetchLocal: suspend () -> List<Entity>,
+        fetchLocal: suspend () -> Flow<List<Entity>>,
         map: (Dto) -> List<Entity>,
         save: suspend (List<Entity>) -> Unit,
         clearTable: suspend () -> Unit,
-    ): Resource<List<Entity>> {
+    ): Flow<Resource<List<Entity>>> = flow {
+        emit(Resource.Loading())
         try {
             val remotePosts = fetchRemote.invoke()
             if (remotePosts.isSuccessful) {
@@ -73,10 +78,12 @@ class PostRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            if (fetchLocal.invoke().isEmpty()) {
-                return Resource.Error(Exception("please check your connexion !!"))
-            }
         }
-        return Resource.Success(fetchLocal.invoke())
+        fetchLocal.invoke().collect {
+            if (it.isEmpty()) {
+                emit(Resource.Error(EmptySourceException("please check your connexion !!")))
+            }
+            emit(Resource.Success(it))
+        }
     }
 }

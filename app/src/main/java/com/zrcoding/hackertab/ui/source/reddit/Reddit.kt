@@ -14,10 +14,10 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.Constants.FAKE_REDDITS
 import com.zrcoding.hackertab.core.openUrlInBrowser
+import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.ui.template.PostTitle
 import com.zrcoding.hackertab.ui.template.TextWithStartIcon
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
-import java.text.DateFormat
 
 data class Reddit(
     val title: String,
@@ -60,7 +60,7 @@ fun RedditItem(reddit: Reddit) {
                 icon = R.drawable.ic_score
             )
             TextWithStartIcon(
-                text = DateFormat.getDateInstance().format(reddit.date),
+                text = reddit.date.toDate(),
                 icon = R.drawable.ic_time
             )
             TextWithStartIcon(

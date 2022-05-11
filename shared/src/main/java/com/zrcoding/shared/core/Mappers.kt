@@ -47,7 +47,7 @@ fun RedditDto.toEntities(): List<RedditEntity> {
 fun List<FreeCodeCampDto>.toEntities(): List<FreeCodeCampEntity> {
     return this.map {
         FreeCodeCampEntity(
-            guid = it.guid,
+            guid = UUID.randomUUID().toString(),
             title = it.title,
             creator = it.creator,
             link = it.link,

@@ -5,17 +5,18 @@ import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
 import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
+import kotlinx.coroutines.flow.Flow
 
 interface PostRepository {
-    suspend fun getHackerNewsPosts(): Resource<List<HackerNewsEntity>>
+    fun getHackerNewsPosts(): Flow<Resource<List<HackerNewsEntity>>>
 
-    suspend fun getRedditPosts(): Resource<List<RedditEntity>>
+    fun getRedditPosts(): Flow<Resource<List<RedditEntity>>>
 
-    suspend fun getFreeCodeCampPosts(tag: String): Resource<List<FreeCodeCampEntity>>
+    fun getFreeCodeCampPosts(tag: String): Flow<Resource<List<FreeCodeCampEntity>>>
 
-    suspend fun getGithubPosts(
+    fun getGithubPosts(
         tag: String,
         //TODO remove this static assignment
         time: String = "daily"
-    ): Resource<List<GithubEntity>>
+    ): Flow<Resource<List<GithubEntity>>>
 }

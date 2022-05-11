@@ -25,7 +25,7 @@ class AppModule {
     fun provideInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor(
         HttpLoggingInterceptor.Logger.DEFAULT
     ).apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+        level = HttpLoggingInterceptor.Level.BODY
     }
 
     @Provides

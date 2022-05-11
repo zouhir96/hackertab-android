@@ -6,6 +6,5 @@ data class FreeCodeCampDto(
     val creator: String,
     val link: String,
     val categories: List<String>,
-    val guid: String,
     val isoDate: String,
 )

@@ -28,7 +28,14 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(
             SplashScreen.KeepOnScreenCondition {
-                return@KeepOnScreenCondition viewModel.hackerNewsUiState.dataToDisplay.isEmpty()
+                return@KeepOnScreenCondition listOf(
+                    viewModel.hackerNewsUiState,
+                    viewModel.redditUiState,
+                    viewModel.freeCodeCampUiState,
+                    viewModel.githubUiState,
+                ).any {
+                    it.value.loading
+                }
             }
         )
         super.onCreate(savedInstanceState)
@@ -47,7 +54,10 @@ fun Content(viewModel: MainViewModel) {
         Scaffold(
             topBar = {
                 TopAppBar {
-                    Toolbar()
+                    Toolbar(
+                        onRefreshBtnClick = { viewModel.fetchPosts() },
+                        onSettingBtnClick = {}
+                    )
                 }
             },
             content = {
@@ -58,7 +68,10 @@ fun Content(viewModel: MainViewModel) {
 }
 
 @Composable
-fun Toolbar() {
+fun Toolbar(
+    onRefreshBtnClick: () -> Unit,
+    onSettingBtnClick: () -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -69,15 +82,23 @@ fun Toolbar() {
         )
         Spacer(modifier = Modifier.weight(1f))
         IconButton(
-            onClick = { /*TODO*/ }
+            onClick = { onRefreshBtnClick()}
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_refresh),
+                contentDescription = "",
+                modifier = Modifier.size(30.dp)
+            )
+        }
+        /*IconButton(
+            onClick = { onSettingBtnClick()}
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_settings),
                 contentDescription = "",
-                modifier = Modifier
-                    .size(30.dp)
+                modifier = Modifier.size(30.dp)
             )
-        }
+        }*/
     }
 }
 
