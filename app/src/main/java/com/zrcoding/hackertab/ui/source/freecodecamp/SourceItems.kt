@@ -27,6 +27,7 @@ fun FreeCodeCampItem(post: FreeCodeCamp) {
         title = post.title.trim(),
         description = null,
         date = post.isoDate.toDate(),
+        url = post.link,
         tags = post.categories,
         informationSection = {}
     )
@@ -50,6 +51,7 @@ fun GithubItem(post: Github) {
     SourceItemTemplate(
         title = "${post.owner}/${post.name}",
         description = post.description.trim(),
+        url = post.url,
         tags = listOf(post.programmingLanguage),
         informationSection = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
