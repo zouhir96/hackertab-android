@@ -1,6 +1,7 @@
 package com.zrcoding.hackertab.ui.template
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -22,6 +24,7 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.assets.getTagColor
 import com.zrcoding.hackertab.core.CardUiState
 import com.zrcoding.hackertab.core.UiText
+import com.zrcoding.hackertab.core.openUrlInBrowser
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 
 
@@ -89,14 +92,21 @@ fun SourceItemTemplatePreview() {
 @Composable
 fun SourceItemTemplate(
     modifier: Modifier = Modifier,
-    date: String? = null,
-    tags: List<String>? = null,
     title: String,
-    description: String?,
+    description: String? = null,
+    date: String? = null,
+    url: String? = null,
+    tags: List<String>? = null,
     informationSection: @Composable () -> Unit,
 ) {
+    val context = LocalContext.current
     Column(
         modifier = modifier
+            .clickable {
+                url?.let {
+                    openUrlInBrowser(context = context, url = it)
+                }
+            }
             .fillMaxHeight()
             .padding(horizontal = 16.dp),
     ) {
@@ -132,7 +142,11 @@ fun SourceItemTemplate(
             ) {
                 it.onEach {
                     val color = it.getTagColor()
-                    TextWithStartIcon(text = it, icon = R.drawable.ic_comment, tint = color)
+                    TextWithStartIcon(
+                        text = it,
+                        icon = R.drawable.ic_subdirectory_arrow_right,
+                        tint = color
+                    )
                 }
             }
             Spacer(modifier = modifier.height(4.dp))
@@ -190,9 +204,10 @@ fun Loading(title: String = "Loading...") {
             color = Color.Black,
             style = MaterialTheme.typography.body1
         )
+        Spacer(modifier = Modifier.width(8.dp))
         CircularProgressIndicator(
-            modifier = Modifier
-                .size(60.dp)
+            modifier = Modifier.size(40.dp),
+            color = MaterialTheme.colors.onPrimary
         )
     }
 }
