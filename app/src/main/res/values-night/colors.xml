@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="status_bar_color">@color/black</color>
+    <color name="cart_header_background">#1C2026</color>
     <color name="splash_screen_background">@color/black</color>
     <color name="icons_background">@color/white</color>
 </resources>

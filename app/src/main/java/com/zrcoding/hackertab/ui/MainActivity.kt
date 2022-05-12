@@ -1,10 +1,11 @@
 package com.zrcoding.hackertab.ui
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -23,6 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            window.statusBarColor = Color.BLACK
+        }
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(
             SplashScreen.KeepOnScreenCondition {
@@ -48,21 +52,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Content(viewModel: MainViewModel) {
     // A surface container using the 'background' color from the theme
-    Surface {
-        Scaffold(
-            topBar = {
-                TopAppBar {
-                    Toolbar(
-                        onRefreshBtnClick = { viewModel.fetchPosts() },
-                        onSettingBtnClick = {}
-                    )
-                }
-            },
-            content = {
-                HomeScreen(viewModel)
+    Scaffold(
+        topBar = {
+            TopAppBar {
+                Toolbar(
+                    onRefreshBtnClick = { viewModel.fetchPosts() },
+                    onSettingBtnClick = {}
+                )
             }
-        )
-    }
+        },
+        content = {
+            HomeScreen(viewModel)
+        }
+    )
 }
 
 @Composable
@@ -74,10 +76,11 @@ fun Toolbar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Image(
+        Icon(
             painter = painterResource(id = R.drawable.ic_hackertab),
             contentDescription = "",
-            modifier = Modifier.width(140.dp)
+            modifier = Modifier.width(200.dp),
+            tint = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.weight(1f))
         IconButton(

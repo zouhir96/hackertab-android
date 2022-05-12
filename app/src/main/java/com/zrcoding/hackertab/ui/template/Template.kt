@@ -1,6 +1,7 @@
 package com.zrcoding.hackertab.ui.template
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -27,7 +29,6 @@ import com.zrcoding.hackertab.core.openUrlInBrowser
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun <T> CardTemplate(
     headerIcon: Int,
@@ -107,19 +108,22 @@ fun SourceItemTemplate(
                 }
             }
             .fillMaxHeight()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
     ) {
 
-        PostTitle(
-            title = title
+        Text(
+            text = title,
+            style = MaterialTheme.typography.subtitle1,
+            maxLines = 2
         )
-        Spacer(modifier = modifier.height(4.dp))
+        Spacer(modifier = modifier.height(8.dp))
 
         description?.let {
             Text(
                 modifier = modifier.fillMaxWidth(),
                 text = it,
                 style = MaterialTheme.typography.body2,
+                maxLines = 2
             )
             Spacer(modifier = modifier.height(4.dp))
         }
@@ -152,8 +156,6 @@ fun SourceItemTemplate(
                     )
                 }
             }
-
-            Spacer(modifier = modifier.height(8.dp))
         }
     }
 }
@@ -173,6 +175,9 @@ fun CardHeader(title: String, icon: Int) {
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
+            .background(
+                color = colorResource(id = R.color.cart_header_background)
+            )
     ) {
         Icon(
             painter = painterResource(id = icon),
@@ -237,15 +242,6 @@ fun EmptySource(title: String = "Empty !!!") {
             textAlign = TextAlign.Center
         )
     }
-}
-
-@Composable
-fun PostTitle(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.subtitle1,
-        maxLines = 2
-    )
 }
 
 @Composable
