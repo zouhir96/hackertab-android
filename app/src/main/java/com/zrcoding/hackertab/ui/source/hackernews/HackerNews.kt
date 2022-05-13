@@ -36,6 +36,7 @@ fun HackerNewsItem(new: HackerNews) {
     SourceItemTemplate(
         title = new.title,
         date = new.time.toDate(),
+        url = new.url,
         informationSection = {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),

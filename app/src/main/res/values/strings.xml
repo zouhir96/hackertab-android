@@ -10,5 +10,7 @@
     <string name="score">%d points</string>
     <string name="comments">%d comments</string>
     <string name="subreddit">r/ %s</string>
-    <string name="empty_state_msg">"Please turn on your connection to see new updates "</string>
+    <string name="empty_state_msg">Please turn on your connection to see new updates</string>
+    <string name="loading">Loading …</string>
+    <string name="empty">Empty !!!</string>
 </resources>

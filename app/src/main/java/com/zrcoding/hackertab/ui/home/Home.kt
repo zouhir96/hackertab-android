@@ -20,17 +20,17 @@ fun HomeScreen(viewModel: MainViewModel) {
     BoxWithConstraints(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .padding(top = 8.dp)
-            .fillMaxSize()
+            .padding(
+                start = 12.dp,
+                top = 8.dp,
+                end = 12.dp
+            ).fillMaxSize()
     ) {
         // Arbitrarily chosen 20 as number of "units" to divide the available width
         val numGrids = 20
         val spaceBetweenItems = maxWidth.div(numGrids)
         val itemWidth = (maxWidth - 50.dp)
-        LazyRow {
-            item {
-                Spacer(Modifier.width(spaceBetweenItems/2))
-            }
+        LazyRow(horizontalArrangement = Arrangement.spacedBy(spaceBetweenItems/2)) {
             item {
                 CardTemplate(
                     headerIcon = R.drawable.ic_hackernews,
@@ -41,9 +41,6 @@ fun HomeScreen(viewModel: MainViewModel) {
                 )
             }
             item {
-                Spacer(Modifier.width(spaceBetweenItems))
-            }
-            item {
                 CardTemplate(
                     headerIcon = R.drawable.ic_reddit,
                     headerTitle = stringResource(id = R.string.reddit),
@@ -51,10 +48,6 @@ fun HomeScreen(viewModel: MainViewModel) {
                     cardItem = { RedditItem(reddit = it) },
                     modifier = Modifier.width(itemWidth)
                 )
-            }
-
-            item {
-                Spacer(Modifier.width(spaceBetweenItems))
             }
             item {
                 CardTemplate(
@@ -65,10 +58,6 @@ fun HomeScreen(viewModel: MainViewModel) {
                     modifier = Modifier.width(itemWidth)
                 )
             }
-
-            item {
-                Spacer(Modifier.width(spaceBetweenItems))
-            }
             item {
                 CardTemplate(
                     headerIcon = R.drawable.ic_github,
@@ -77,9 +66,6 @@ fun HomeScreen(viewModel: MainViewModel) {
                     cardItem = { GithubItem(post = it) },
                     modifier = Modifier.width(itemWidth)
                 )
-            }
-            item {
-                Spacer(Modifier.width(spaceBetweenItems/2))
             }
         }
     }

@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -46,7 +46,7 @@ fun <T> CardTemplate(
             CardHeader(title = headerTitle, icon = headerIcon)
             when {
                 cardUiState.loading -> {
-                    Loading("Loading ...")
+                    Loading(stringResource(R.string.loading))
                 }
                 cardUiState.uiText != null -> {
                     EmptySource(
@@ -57,10 +57,14 @@ fun <T> CardTemplate(
                     )
                 }
                 else -> {
-                    LazyColumn {
-                        items(cardUiState.dataToDisplay) { item ->
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        itemsIndexed(cardUiState.dataToDisplay) { index, item ->
                             cardItem(item)
-                            Divider(modifier = Modifier.padding(horizontal = 10.dp))
+                            if (index < cardUiState.dataToDisplay.lastIndex) {
+                                Divider(modifier = Modifier.padding(horizontal = 10.dp))
+                            }
                         }
                     }
                 }
@@ -107,7 +111,7 @@ fun SourceItemTemplate(
                     openUrlInBrowser(context = context, url = it)
                 }
             }
-            .fillMaxHeight()
+            .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
     ) {
 
@@ -196,12 +200,12 @@ fun CardHeader(title: String, icon: Int) {
 @Composable
 fun LoadingPreview() {
     HackertabTheme {
-        Loading("Loading")
+        Loading(stringResource(R.string.loading))
     }
 }
 
 @Composable
-fun Loading(title: String = "Loading...") {
+fun Loading(title: String = stringResource(R.string.loading)) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
@@ -210,7 +214,6 @@ fun Loading(title: String = "Loading...") {
     ) {
         Text(
             text = title,
-            color = Color.Black,
             style = MaterialTheme.typography.body1
         )
         Spacer(modifier = Modifier.width(8.dp))
@@ -222,7 +225,7 @@ fun Loading(title: String = "Loading...") {
 }
 
 @Composable
-fun EmptySource(title: String = "Empty !!!") {
+fun EmptySource(title: String = stringResource(R.string.empty)) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
