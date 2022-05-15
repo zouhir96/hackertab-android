@@ -51,7 +51,7 @@ data class Github(
 fun GithubItem(post: Github) {
     SourceItemTemplate(
         title = "${post.owner}/${post.name}",
-        description = post.description.trim(),
+        description = post.description.trim().ifEmpty { null },
         url = post.url,
         titleColor = TextLink,
         tags = listOf(post.programmingLanguage),
