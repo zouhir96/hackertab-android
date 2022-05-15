@@ -74,12 +74,13 @@ fun Toolbar(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.padding(start = 12.dp),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_hackertab),
             contentDescription = "",
-            modifier = Modifier.width(200.dp),
+            modifier = Modifier.width(170.dp),
             tint = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.weight(1f))

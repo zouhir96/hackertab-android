@@ -168,7 +168,7 @@ fun SourceItemTemplate(
 @Composable
 fun CardHeaderPreview() {
     HackertabTheme {
-        CardHeader(title = "HackerNews", icon = R.drawable.ic_score)
+        CardHeader(title = "HackerNews", icon = R.drawable.ic_github)
     }
 }
 
@@ -176,6 +176,7 @@ fun CardHeaderPreview() {
 fun CardHeader(title: String, icon: Int) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
@@ -183,12 +184,14 @@ fun CardHeader(title: String, icon: Int) {
                 color = colorResource(id = R.color.cart_header_background)
             )
     ) {
-        Icon(
+        Image(
             painter = painterResource(id = icon),
             contentDescription = "card header icon",
-            modifier = Modifier.padding(start = 24.dp)
+            modifier = Modifier.size(22.dp)
         )
-        Spacer(modifier = Modifier.width(18.dp))
+        Spacer(
+            modifier = Modifier.width(12.dp)
+        )
         Text(
             text = title,
             style = MaterialTheme.typography.h5,
