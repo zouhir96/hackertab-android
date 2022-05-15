@@ -97,6 +97,7 @@ fun SourceItemTemplatePreview() {
 fun SourceItemTemplate(
     modifier: Modifier = Modifier,
     title: String,
+    titleColor: Color = MaterialTheme.colors.onBackground,
     description: String? = null,
     date: String? = null,
     url: String? = null,
@@ -117,6 +118,7 @@ fun SourceItemTemplate(
 
         Text(
             text = title,
+            color = titleColor,
             style = MaterialTheme.typography.subtitle1,
             maxLines = 2
         )

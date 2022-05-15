@@ -11,6 +11,7 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.ui.template.SourceItemTemplate
 import com.zrcoding.hackertab.ui.template.TextWithStartIcon
+import com.zrcoding.hackertab.ui.theme.TextLink
 
 data class FreeCodeCamp(
     val title: String,
@@ -52,6 +53,7 @@ fun GithubItem(post: Github) {
         title = "${post.owner}/${post.name}",
         description = post.description.trim(),
         url = post.url,
+        titleColor = TextLink,
         tags = listOf(post.programmingLanguage),
         informationSection = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
