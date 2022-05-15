@@ -155,7 +155,7 @@ fun SourceItemTemplate(
                     val color = it.getTagColor()
                     TextWithStartIcon(
                         text = it,
-                        icon = R.drawable.ic_subdirectory_arrow_right,
+                        icon = R.drawable.ic_ellipse,
                         tint = color
                     )
                 }
@@ -260,11 +260,12 @@ fun TextWithStartIcon(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        val iconSize = if (icon == R.drawable.ic_ellipse) 8.dp else 14.dp
         Icon(
             painter = painterResource(id = icon),
             contentDescription = "",
             tint = tint,
-            modifier = Modifier.size(14.dp)
+            modifier = Modifier.size(iconSize)
         )
         Text(
             text = text,
