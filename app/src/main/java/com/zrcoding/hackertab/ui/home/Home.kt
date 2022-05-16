@@ -20,17 +20,17 @@ fun HomeScreen(viewModel: MainViewModel) {
     BoxWithConstraints(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .padding(
-                start = 12.dp,
-                top = 8.dp,
-                end = 12.dp
-            ).fillMaxSize()
+            .padding(vertical = 8.dp)
+            .fillMaxSize()
     ) {
         // Arbitrarily chosen 20 as number of "units" to divide the available width
         val numGrids = 20
         val spaceBetweenItems = maxWidth.div(numGrids)
         val itemWidth = (maxWidth - 50.dp)
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(spaceBetweenItems/2)) {
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(spaceBetweenItems / 2),
+            contentPadding = PaddingValues(horizontal = 12.dp),
+        ) {
             item {
                 CardTemplate(
                     headerIcon = R.drawable.ic_hackernews,
