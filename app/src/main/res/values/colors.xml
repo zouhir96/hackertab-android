@@ -8,4 +8,5 @@
     <color name="ic_launcher_background">#FFFFFF</color>
     <color name="splash_screen_background">@color/white</color>
     <color name="icons_background">@color/black</color>
+    <color name="icons_tint">#3C5065</color>
 </resources>

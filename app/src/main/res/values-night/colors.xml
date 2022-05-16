@@ -4,4 +4,5 @@
     <color name="cart_header_background">#1C2026</color>
     <color name="splash_screen_background">@color/black</color>
     <color name="icons_background">@color/white</color>
+    <color name="icons_tint">#FFFFFF</color>
 </resources>

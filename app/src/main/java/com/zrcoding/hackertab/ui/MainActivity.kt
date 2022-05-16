@@ -7,10 +7,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen
@@ -54,7 +56,9 @@ fun Content(viewModel: MainViewModel) {
     // A surface container using the 'background' color from the theme
     Scaffold(
         topBar = {
-            TopAppBar {
+            TopAppBar(
+                elevation = 0.dp
+            ) {
                 Toolbar(
                     onRefreshBtnClick = { viewModel.fetchPosts() },
                     onSettingBtnClick = {}
@@ -84,24 +88,21 @@ fun Toolbar(
             tint = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(
-            onClick = { onRefreshBtnClick()}
+        Button(
+            onClick = { onRefreshBtnClick() },
+            modifier = Modifier.size(50.dp),
+            shape = CircleShape,
+            contentPadding = PaddingValues(0.dp),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colors.primaryVariant
+            )
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_refresh),
-                contentDescription = "",
-                modifier = Modifier.size(30.dp)
+                contentDescription = "refresh button",
+                tint = colorResource(R.color.icons_tint)
             )
         }
-        /*IconButton(
-            onClick = { onSettingBtnClick()}
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_settings),
-                contentDescription = "",
-                modifier = Modifier.size(30.dp)
-            )
-        }*/
     }
 }
 
