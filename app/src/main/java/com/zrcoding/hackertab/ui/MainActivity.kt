@@ -74,7 +74,7 @@ fun Content(viewModel: MainViewModel) {
 @Composable
 fun Toolbar(
     onRefreshBtnClick: () -> Unit,
-    onSettingBtnClick: () -> Unit,
+    onSettingBtnClick: () -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,

@@ -217,14 +217,14 @@ fun Loading(title: String = stringResource(R.string.loading)) {
         modifier = Modifier
             .fillMaxSize()
     ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(25.dp),
+            color = MaterialTheme.colors.onPrimary
+        )
+        Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = title,
             style = MaterialTheme.typography.body1
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        CircularProgressIndicator(
-            modifier = Modifier.size(40.dp),
-            color = MaterialTheme.colors.onPrimary
         )
     }
 }
