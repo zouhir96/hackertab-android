@@ -44,8 +44,9 @@ fun HackerNewsItem(new: HackerNews) {
             ) {
                 TextWithStartIcon(
                     text = stringResource(id = R.string.score, new.score),
-                    icon = R.drawable.ic_score,
-                    tint = Color.Red
+                    textColor = Color(0xFFf6682f),
+                    icon = R.drawable.ic_ellipse,
+                    tint = Color(0xFFf6682f)
                 )
                 TextWithStartIcon(
                     text = stringResource(id = R.string.comments, new.descendants),

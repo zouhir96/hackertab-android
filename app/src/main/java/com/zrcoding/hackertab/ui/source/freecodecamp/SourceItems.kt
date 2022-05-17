@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.assets.getTagColor
 import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.ui.template.SourceItemTemplate
 import com.zrcoding.hackertab.ui.template.TextWithStartIcon
@@ -54,17 +56,21 @@ fun GithubItem(post: Github) {
         description = post.description.trim().ifEmpty { null },
         url = post.url,
         titleColor = TextLink,
-        tags = listOf(post.programmingLanguage),
         informationSection = {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                TextWithStartIcon(
+                    icon = R.drawable.ic_ellipse,
+                    tint = post.programmingLanguage.getTagColor(),
+                    text = post.programmingLanguage
+                )
                 TextWithStartIcon(
                     icon = R.drawable.ic_baseline_star,
-                    text = post.stars
+                    text = stringResource(id = R.string.stars, post.stars)
                 )
 
                 TextWithStartIcon(
                     icon = R.drawable.ic_baseline_fork,
-                    text = post.forks
+                    text = stringResource(id = R.string.forks, post.forks)
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
