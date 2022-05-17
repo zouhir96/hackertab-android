@@ -84,7 +84,7 @@ fun Toolbar(
         Icon(
             painter = painterResource(id = R.drawable.ic_hackertab),
             contentDescription = "",
-            modifier = Modifier.width(170.dp),
+            modifier = Modifier.width(180.dp),
             tint = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.weight(1f))

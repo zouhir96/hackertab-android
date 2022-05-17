@@ -24,7 +24,7 @@ val Typography = Typography(
     h5 = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.W600,
-        fontSize = 24.sp
+        fontSize = 24.sp,
     ),
     h6 = TextStyle(
         fontFamily = Nunito,
@@ -34,21 +34,25 @@ val Typography = Typography(
     subtitle1 = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.W600,
-        fontSize = 16.sp
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp
     ),
     subtitle2 = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.W500,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        letterSpacing = 0.1.sp
     ),
     body2 = TextStyle(
         fontFamily = Nunito,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        letterSpacing = 0.25.sp
     ),
     button = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.W500,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+        letterSpacing = 1.25.sp
     ),
     caption = TextStyle(
         fontFamily = Nunito,
