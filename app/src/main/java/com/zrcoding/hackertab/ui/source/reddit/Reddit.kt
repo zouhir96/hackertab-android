@@ -41,13 +41,14 @@ fun RedditItem(reddit: Reddit) {
         url = reddit.url,
         informationSection = {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextWithStartIcon(
                     text = stringResource(id = R.string.score, reddit.score),
-                    textColor = Color.Red,
-                    icon = R.drawable.ic_score
+                    textColor = Color(0xFFf6682f),
+                    icon = R.drawable.ic_ellipse,
+                    tint = Color(0xFFf6682f)
                 )
                 TextWithStartIcon(
                     text = stringResource(id = R.string.comments, reddit.commentsCount),
