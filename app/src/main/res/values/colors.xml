@@ -5,7 +5,7 @@
 
     <color name="status_bar_color">#eff6fe</color>
     <color name="cart_header_background">#F9FAFE</color>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="splash_screen_text_color">@color/black</color>
     <color name="splash_screen_background">@color/white</color>
     <color name="icons_background">@color/black</color>
 </resources>
