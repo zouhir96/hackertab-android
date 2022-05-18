@@ -14,7 +14,7 @@ private val DarkColorPalette = darkColors(
     secondaryVariant = Color.Black,
     background = Color.Black,
     surface = Color.Black,
-    error = Color(0xFFCF6679),
+    error = ChestnutRose,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onBackground = Color.White,
@@ -23,13 +23,13 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = Color(0xFFeff6fe),
-    primaryVariant = Color(0xFFeff6fe),
+    primary = HawkesBlue,
+    primaryVariant = HawkesBlue,
     secondary = Color.White,
     secondaryVariant = Color.White,
-    background = Color(0xFFeff6fe),
+    background = HawkesBlue,
     surface = Color.White,
-    error = Color(0xFFCF6679),
+    error = ChestnutRose,
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onBackground = Color.Black,
