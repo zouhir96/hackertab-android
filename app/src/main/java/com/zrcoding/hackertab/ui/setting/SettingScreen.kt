@@ -1,31 +1,47 @@
 package com.zrcoding.hackertab.ui.setting
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.ChipData
 import com.zrcoding.hackertab.core.ChipGroup
-import com.zrcoding.hackertab.ui.theme.HackertabTheme
+import com.zrcoding.hackertab.domain.Languages
+import com.zrcoding.hackertab.domain.ListOfLanguages.listOfLanguages
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
-fun SettingScreen() {
+fun SettingScreen(
+    modifier: Modifier,
+    viewModel: SettingViewModel
+) {
+    val uiState: SettingUiState by viewModel.uiState.collectAsState()
+    SettingContent(
+        modifier = modifier,
+        settingState = uiState,
+        toggleLanguage = viewModel::toggleLanguage,
+        clearDataStore = viewModel::clear
+    )
+}
+
+@Composable
+fun SettingContent(
+    modifier: Modifier,
+    settingState: SettingUiState,
+    toggleLanguage: (Languages) -> Unit,
+    clearDataStore: () -> Unit
+) {
     val selectedChipData: MutableState<ChipData?> = remember {
         mutableStateOf(null)
     }
 
-    Column(modifier = Modifier) {
+    Column(modifier = modifier) {
         Text(
             text = "hello there",
             style = MaterialTheme.typography.subtitle1
@@ -38,29 +54,37 @@ fun SettingScreen() {
             style = MaterialTheme.typography.subtitle1
         )
 
-        val chipsList = listOf(
-            ChipData("Github", R.drawable.ic_github),
-            ChipData("FreeCodeCamp"),
-            ChipData("HackerNews"),
-            ChipData("DevTo"),
-            ChipData("Reddit"),
-            ChipData("Product Hunt")
-        )
-
-        ChipGroup(
-            chips = chipsList,
-            selectedChip = selectedChipData.value,
-            onSelectedChanged = { selectedChip ->
-                selectedChipData.value = selectedChip
+        LazyRow {
+            items(listOfLanguages) {
+                Button(onClick = { toggleLanguage(it) }) {
+                    Text(color = it.color, text = it.name)
+                }
             }
-        )
-    }
-}
+        }
 
-@Preview(name = "phone", device = "spec:shape=Normal,width=360,height=640,unit=dp,dpi=480")
-@Composable
-fun SettingScreenPreview() {
-    HackertabTheme {
-        SettingScreen()
+        when (settingState) {
+            is SettingUiState.Success -> {
+                ChipGroup(
+                    chips = settingState.languages,
+                    selectedChip = selectedChipData.value,
+                    onSelectedChanged = { selectedChip ->
+                        selectedChipData.value = selectedChip
+                    }
+                )
+            }
+
+            is SettingUiState.Loading -> {
+
+            }
+
+            is SettingUiState.Error -> {
+
+            }
+        }
+
+        Button(onClick = { clearDataStore.invoke() }) {
+            Text(text = "clear prefs")
+        }
+
     }
 }
