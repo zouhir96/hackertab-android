@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.zrcoding.shared.data.datastore";
+option java_multiple_files = true;
+
+message UserSettingsPreferences {
+  repeated string subscribed_languages = 1;
+  repeated string subscribed_topics = 2;
+}
