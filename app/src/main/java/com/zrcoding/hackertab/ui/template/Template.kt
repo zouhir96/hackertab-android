@@ -39,7 +39,9 @@ fun <T> CardTemplate(
 ) {
     Card(
         elevation = 3.dp,
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier
+            .padding(end = 8.dp, top = 16.dp)
+            .fillMaxHeight(),
         shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp)
     ) {
         Column {
