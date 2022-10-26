@@ -1,6 +1,6 @@
 # hackertab-android
 <p align="center">
-<img src="./imgs/splash-home-screen.jpg" width="270" /> <img src="./imgs/home-screen.jpg" width="270"/> <img src="./imgs/settings-home-screen.jpg" width="270"/></p>  
+<img src="./imgs/splash-home-screen.jpg" width="270" /> <img src="./imgs/home-screen.jpg" width="270"/> <img src="./imgs/settings-home-screen.jpg" width="270"/></p>
 
 ## 📝 About 
 Hackertab brings the latest news, libraries, tech events, jobs... related to your profile (back-end, mobile, full stack, data scientist...) and visualize them in a proper way so you don't have to waste time jumping between different data sources.
@@ -26,12 +26,15 @@ Very soon in Playstore
 ### Features
 - [x] Start with 4 sources: Github, Reddit, FreeCodeCamp, and Hackernews
 - [ ] Add a settings screen
-- [ ] Bookmarks  
+- [ ] Bookmarks
 ### Developement
 - [ ] Test coverage
 
 ## 🧩 Requirements
 Android Studio 4.2 or newer.
+
+## ⬆️ Contributing
+See [the contributing guide](CONTRIBUTING.md) for detailed instructions on how to get started with our project. 
 
 ## 🔗 Authors
 [@Zouhir](https://rajdaoui-zouhir.vercel.app)
