@@ -33,11 +33,11 @@ android {
 
 dependencies {
     // kotlin
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
 
     // Coroutines
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // room
     api("androidx.room:room-runtime:$room_version")

@@ -5,7 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.core.*
+import com.zrcoding.hackertab.core.CardUiState
+import com.zrcoding.hackertab.core.UiText
+import com.zrcoding.hackertab.core.toFreeCodeCamp
+import com.zrcoding.hackertab.core.toGithub
+import com.zrcoding.hackertab.core.toHackerNews
+import com.zrcoding.hackertab.core.toReddits
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.hackertab.ui.source.freecodecamp.Github
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
@@ -51,28 +56,28 @@ class MainViewModel @Inject constructor(
     fun fetchPosts() {
         viewModelScope.launch {
             getSourcePostsAndHandleUiState(
-                { postRepository.getRedditPosts() },
-                redditUiState,
-                {it.toReddits()},
-                emptyList()
+                sourcePosts = { postRepository.getRedditPosts() },
+                uiState = redditUiState,
+                placeholder = emptyList(),
+                map = { it.toReddits() }
             )
             getSourcePostsAndHandleUiState(
-                {postRepository.getHackerNewsPosts()},
-                hackerNewsUiState,
-                {it.toHackerNews()},
-                emptyList()
+                sourcePosts = { postRepository.getHackerNewsPosts() },
+                uiState = hackerNewsUiState,
+                placeholder = emptyList(),
+                map = { it.toHackerNews() }
             )
             getSourcePostsAndHandleUiState(
-                {postRepository.getFreeCodeCampPosts("kotlin")},
-                freeCodeCampUiState,
-                {it.toFreeCodeCamp()},
-                emptyList()
+                sourcePosts = { postRepository.getFreeCodeCampPosts("kotlin") },
+                uiState = freeCodeCampUiState,
+                placeholder = emptyList(),
+                map = { it.toFreeCodeCamp() }
             )
             getSourcePostsAndHandleUiState(
-                {postRepository.getGithubPosts("kotlin")},
-                githubUiState,
-                {it.toGithub()},
-                emptyList()
+                sourcePosts = { postRepository.getGithubPosts("kotlin") },
+                uiState = githubUiState,
+                placeholder = emptyList(),
+                map = { it.toGithub() }
             )
         }
     }
@@ -80,11 +85,11 @@ class MainViewModel @Inject constructor(
     private fun <Entity, UiModel> getSourcePostsAndHandleUiState(
         sourcePosts: suspend () -> Flow<Resource<Entity>>,
         uiState: MutableState<CardUiState<UiModel>>,
-        map: (Entity) -> UiModel,
-        placeholder: Entity
+        placeholder: Entity,
+        map: (Entity) -> UiModel
     ) {
         viewModelScope.launch {
-            sourcePosts.invoke().collectLatest {posts->
+            sourcePosts.invoke().collectLatest { posts ->
                 uiState.value = when (posts) {
                     is Resource.Loading -> uiState.value.copy(
                         loading = true,
@@ -99,7 +104,7 @@ class MainViewModel @Inject constructor(
                         loading = false,
                         uiText = if (posts.exception is EmptySourceException) {
                             UiText.Code(R.string.empty_state_msg)
-                        } else{
+                        } else {
                             UiText.Message(posts.exception.message!!)
                         }
                     )
