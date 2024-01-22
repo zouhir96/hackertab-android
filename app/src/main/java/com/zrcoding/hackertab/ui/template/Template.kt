@@ -39,7 +39,9 @@ fun <T> CardTemplate(
 ) {
     Card(
         elevation = 3.dp,
-        modifier = modifier.fillMaxHeight(),
+        modifier = modifier
+            .padding(end = 8.dp, top = 16.dp)
+            .fillMaxHeight(),
         shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp)
     ) {
         Column {
@@ -217,14 +219,14 @@ fun Loading(title: String = stringResource(R.string.loading)) {
         modifier = Modifier
             .fillMaxSize()
     ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(25.dp),
+            color = MaterialTheme.colors.onPrimary
+        )
+        Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = title,
             style = MaterialTheme.typography.body1
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        CircularProgressIndicator(
-            modifier = Modifier.size(40.dp),
-            color = MaterialTheme.colors.onPrimary
         )
     }
 }

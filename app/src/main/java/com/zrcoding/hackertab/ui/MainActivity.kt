@@ -6,11 +6,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen
@@ -54,11 +67,10 @@ fun Content(viewModel: MainViewModel) {
     // A surface container using the 'background' color from the theme
     Scaffold(
         topBar = {
-            TopAppBar {
-                Toolbar(
-                    onRefreshBtnClick = { viewModel.fetchPosts() },
-                    onSettingBtnClick = {}
-                )
+            TopAppBar(
+                elevation = 0.dp
+            ) {
+                Toolbar(onRefreshBtnClick = { viewModel.fetchPosts() })
             }
         },
         content = {
@@ -68,10 +80,7 @@ fun Content(viewModel: MainViewModel) {
 }
 
 @Composable
-fun Toolbar(
-    onRefreshBtnClick: () -> Unit,
-    onSettingBtnClick: () -> Unit,
-) {
+fun Toolbar(onRefreshBtnClick: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -84,24 +93,21 @@ fun Toolbar(
             tint = MaterialTheme.colors.onPrimary
         )
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(
-            onClick = { onRefreshBtnClick()}
+        Button(
+            onClick = { onRefreshBtnClick() },
+            modifier = Modifier.size(50.dp),
+            shape = CircleShape,
+            contentPadding = PaddingValues(0.dp),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colors.primaryVariant
+            )
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_refresh),
-                contentDescription = "",
-                modifier = Modifier.size(30.dp)
+                contentDescription = "refresh button",
+                tint = colorResource(R.color.icons_tint)
             )
         }
-        /*IconButton(
-            onClick = { onSettingBtnClick()}
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_settings),
-                contentDescription = "",
-                modifier = Modifier.size(30.dp)
-            )
-        }*/
     }
 }
 

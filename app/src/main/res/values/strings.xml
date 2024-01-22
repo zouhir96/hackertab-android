@@ -16,4 +16,6 @@
     <string name="loading">Loading …</string>
     <string name="empty">Empty !!!</string>
     <string name="setting_screen_title">Setting</string>
+    <string name="privacy_policy">privacy policy</string>
+    <string name="terms_of_use">terms of use</string>
 </resources>
