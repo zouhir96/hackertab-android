@@ -1,12 +1,13 @@
 package com.zrcoding.hackertab.ui.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.ui.MainViewModel
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCampItem
@@ -14,14 +15,17 @@ import com.zrcoding.hackertab.ui.source.hackernews.HackerNewsItem
 import com.zrcoding.hackertab.ui.source.reddit.RedditItem
 import com.zrcoding.hackertab.ui.template.CardTemplate
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(viewModel: MainViewModel) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel
+) {
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { 4 }
 
     HorizontalPager(
-        count = 4,
+        modifier = modifier,
         state = pagerState,
         contentPadding = PaddingValues(start = 16.dp, end = 8.dp)
     ) { page ->

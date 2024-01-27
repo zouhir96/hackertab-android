@@ -8,9 +8,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.zrcoding.hackertab.core.ChipData
 import com.zrcoding.hackertab.core.ChipGroup
 import com.zrcoding.hackertab.domain.Languages
@@ -19,7 +25,7 @@ import com.zrcoding.hackertab.domain.ListOfLanguages.listOfLanguages
 @Composable
 fun SettingScreen(
     modifier: Modifier,
-    viewModel: SettingViewModel
+    viewModel: SettingViewModel = hiltViewModel()
 ) {
     val uiState: SettingUiState by viewModel.uiState.collectAsState()
     SettingContent(

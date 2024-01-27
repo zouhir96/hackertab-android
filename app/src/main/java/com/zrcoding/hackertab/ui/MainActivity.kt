@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.ui.home.HomeScreen
+import com.zrcoding.hackertab.ui.setting.SettingScreen
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -74,7 +74,7 @@ fun Content(viewModel: MainViewModel) {
             }
         },
         content = {
-            HomeScreen(viewModel)
+            SettingScreen(modifier = Modifier.padding(it))
         }
     )
 }
