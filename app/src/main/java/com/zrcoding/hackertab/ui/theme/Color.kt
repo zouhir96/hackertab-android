@@ -8,3 +8,5 @@ val Flamingo = Color(0xFFf6682f)
 val ChestnutRose = Color(0xFFCF6679)
 val HawkesBlue = Color(0xFFEFF6FE)
 
+fun String.hexToColor() = Color(android.graphics.Color.parseColor(this))
+

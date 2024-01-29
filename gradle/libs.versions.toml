@@ -61,7 +61,6 @@ google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "depHilt" }
 
 #data
-adroidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "depDatastore" }
 squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "depRetrofit" }
 squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "depRetrofit" }
 squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "depLoggingInterceptor" }
@@ -69,6 +68,8 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "depRoom" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "depRoom" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "depRoom" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "depDatastore" }
+androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "depDatastore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "depAndroidGradlePlugin" }
@@ -78,4 +79,3 @@ google-services = { id = "com.google.gms.google-services", version.ref = "depGoo
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "depDevtoolsKsp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "depHilt" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "depKotlin" }
-google-protobuf = { id = "com.google.protobuf", version.ref = "depProtobuf" }

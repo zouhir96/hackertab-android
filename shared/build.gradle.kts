@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.devtools.ksp)
-    alias(libs.plugins.google.protobuf)
 }
 
 android {
@@ -35,22 +34,6 @@ android {
     }
 }
 
-protobuf {
-    protoc {
-        // for apple m1, add protoc_platform=osx-x86_64 in $HOME/.gradle/gradle.properties
-        artifact = "com.google.protobuf:protoc:3.9.2:osx-x86_64"
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                val java by registering {
-                    option("lite")
-                }
-            }
-        }
-    }
-}
-
 dependencies {
     // Core
     implementation(libs.androidx.core.ktx)
@@ -71,7 +54,6 @@ dependencies {
     kapt(libs.google.dagger.hilt.android.compiler)
 
     // Datastore
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("androidx.datastore:datastore-core:1.0.0")
-    implementation("com.google.protobuf:protobuf-kotlin:3.17.3")
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
 }
