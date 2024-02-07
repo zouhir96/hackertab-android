@@ -19,6 +19,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,17 +30,21 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.ui.setting.SettingScreen
+import com.zrcoding.hackertab.ui.setting.master.SettingMasterScreen
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             window.statusBarColor = Color.BLACK
         }
+
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition(
             SplashScreen.KeepOnScreenCondition {
@@ -54,6 +59,7 @@ class MainActivity : ComponentActivity() {
             }
         )
         super.onCreate(savedInstanceState)
+
         setContent {
             HackertabTheme {
                 Content(viewModel)
@@ -74,7 +80,8 @@ fun Content(viewModel: MainViewModel) {
             }
         },
         content = {
-            SettingScreen(modifier = Modifier.padding(it))
+            SettingMasterScreen()
+            Text(modifier = Modifier.padding(it), text = "")
         }
     )
 }
