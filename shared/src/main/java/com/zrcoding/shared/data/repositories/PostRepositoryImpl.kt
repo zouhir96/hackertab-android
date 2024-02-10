@@ -10,8 +10,8 @@ import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
 import com.zrcoding.shared.data.remote.HackertabApi
+import com.zrcoding.shared.domain.repositories.PostRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject

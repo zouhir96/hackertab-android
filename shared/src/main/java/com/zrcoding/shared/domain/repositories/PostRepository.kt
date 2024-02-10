@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.repositories
+package com.zrcoding.shared.domain.repositories
 
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
