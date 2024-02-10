@@ -1,7 +1,5 @@
 package com.zrcoding.hackertab.core
 
-import com.zrcoding.hackertab.domain.Languages
-import com.zrcoding.hackertab.domain.ListOfLanguages.listOfLanguages
 import com.zrcoding.hackertab.ui.source.freecodecamp.FreeCodeCamp
 import com.zrcoding.hackertab.ui.source.freecodecamp.Github
 import com.zrcoding.hackertab.ui.source.hackernews.HackerNews
@@ -63,11 +61,5 @@ fun List<GithubEntity>.toGithub(): List<Github> {
             starsInDateRange = it.starsInDateRange,
             forks = it.forks
         )
-    }
-}
-
-fun List<String>?.mapToDomainLanguages(): List<Languages>? {
-    return this?.map { languageName ->
-        listOfLanguages.find { it.name == languageName } ?: Languages.JAVA
     }
 }
