@@ -22,10 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zrcoding.hackertab.ui.theme.HackertabTheme
 import com.zrcoding.hackertab.ui.theme.TextLink
-import com.zrcoding.hackertab.ui.theme.paddingBig
-import com.zrcoding.hackertab.ui.theme.paddingDefault
-import com.zrcoding.hackertab.ui.theme.paddingLarge
-import com.zrcoding.hackertab.ui.theme.paddingMedium
+import com.zrcoding.hackertab.ui.theme.dimenBig
+import com.zrcoding.hackertab.ui.theme.dimenDefault
+import com.zrcoding.hackertab.ui.theme.dimenLarge
+import com.zrcoding.hackertab.ui.theme.dimenMedium
 
 data class ChipData(
     val id: String,
@@ -41,7 +41,7 @@ fun Chip(
     onClick: (ChipData) -> Unit,
 ) {
     Surface(
-        shape = RoundedCornerShape(paddingBig),
+        shape = RoundedCornerShape(dimenBig),
         color = if (isSelected) TextLink else MaterialTheme.colors.secondary
     ) {
         Row(
@@ -51,15 +51,15 @@ fun Chip(
             chipData.image?.let {
                 Image(
                     modifier = Modifier
-                        .padding(start = paddingMedium)
-                        .size(paddingDefault),
+                        .padding(start = dimenMedium)
+                        .size(dimenDefault),
                     painter = painterResource(id = it),
                     contentDescription = null
                 )
             }
 
             Text(
-                modifier = Modifier.padding(horizontal = paddingLarge, vertical = paddingMedium),
+                modifier = Modifier.padding(horizontal = dimenLarge, vertical = dimenMedium),
                 text = chipData.name,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.primary
@@ -77,8 +77,8 @@ fun ChipGroup(
 ) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(paddingMedium),
-        verticalArrangement = Arrangement.spacedBy(paddingMedium),
+        horizontalArrangement = Arrangement.spacedBy(dimenMedium),
+        verticalArrangement = Arrangement.spacedBy(dimenMedium),
     ) {
         chips.forEach { chip ->
             Chip(
