@@ -42,9 +42,9 @@ class SettingTopicsScreenViewModel @Inject constructor(
     fun onChipClicked(topic: ChipData) {
         viewModelScope.launch {
             if (topic.selected) {
-                settingRepository.unsavedTopic(topic.id)
+                settingRepository.removeTopic(topic.id)
             } else {
-                settingRepository.savedTopic(topic.id)
+                settingRepository.saveTopic(topic.id)
             }
         }
     }
