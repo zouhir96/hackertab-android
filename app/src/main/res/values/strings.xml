@@ -26,4 +26,7 @@
 
     <string name="setting_topics_screen_title">Topics</string>
     <string name="setting_topics_screen_description">Your feed will be tailored by following the technologies you are interested in.</string>
+
+    <string name="setting_sources_screen_title">Sources</string>
+    <string name="setting_sources_screen_description">Your feed will be tailored by following the sources you are interested in.</string>
 </resources>
