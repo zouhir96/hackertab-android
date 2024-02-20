@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.ui.theme.HackertabTheme
-import com.zrcoding.hackertab.ui.theme.TextLink
-import com.zrcoding.hackertab.ui.theme.dimenBig
-import com.zrcoding.hackertab.ui.theme.dimenLarge
-import com.zrcoding.hackertab.ui.theme.dimenMedium
+import com.zrcoding.hackertab.theme.HackertabTheme
+import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.hackertab.theme.dimenBig
+import com.zrcoding.hackertab.theme.dimenLarge
+import com.zrcoding.hackertab.theme.dimenMedium
 
 data class ChipData(
     val id: String,
