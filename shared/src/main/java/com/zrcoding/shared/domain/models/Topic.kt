@@ -1,8 +1,8 @@
 package com.zrcoding.shared.domain.models
 
 data class Topic(
+    val id: String,
     val label: String,
-    val value: String,
     val confsValues: List<String>?,
     val devtoValues: List<String>,
     val freecodecampValues: List<String>,

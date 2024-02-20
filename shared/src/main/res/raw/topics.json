@@ -8,7 +8,7 @@
     "stackoverflowValues": ["android"],
     "redditValues": ["androiddev"],
     "mediumValues": ["android"],
-    "value": "android"
+    "id": "android"
   },
   {
     "devtoValues": ["ai"],
@@ -18,7 +18,7 @@
     "stackoverflowValues": ["artificial-intelligence"],
     "redditValues": ["artificial"],
     "mediumValues": ["artificial-intelligence"],
-    "value": "artificial-intelligence"
+    "id": "artificial-intelligence"
   },
   {
     "devtoValues": ["c"],
@@ -29,7 +29,7 @@
     "stackoverflowValues": ["c"],
     "mediumValues": ["c"],
     "redditValues": ["C_Programming"],
-    "value": "c"
+    "id": "c"
   },
   {
     "devtoValues": ["cpp"],
@@ -40,7 +40,7 @@
     "stackoverflowValues": ["c++"],
     "redditValues": ["cpp"],
     "mediumValues": ["cpp"],
-    "value": "c++"
+    "id": "c++"
   },
   {
     "devtoValues": ["csharp"],
@@ -51,7 +51,7 @@
     "stackoverflowValues": ["csharp"],
     "redditValues": ["csharp"],
     "mediumValues": ["csharp"],
-    "value": "csharp"
+    "id": "csharp"
   },
   {
     "devtoValues": ["dart"],
@@ -62,7 +62,7 @@
     "stackoverflowValues": ["dart"],
     "redditValues": ["dartlang"],
     "mediumValues": ["dart"],
-    "value": "dart"
+    "id": "dart"
   },
   {
     "confsValues": ["data"],
@@ -73,7 +73,7 @@
     "stackoverflowValues": ["data-science"],
     "redditValues": ["datascience"],
     "mediumValues": ["data-science"],
-    "value": "data-science"
+    "id": "data-science"
   },
   {
     "confsValues": ["devops"],
@@ -84,7 +84,7 @@
     "stackoverflowValues": ["devops"],
     "redditValues": ["devops"],
     "mediumValues": ["devops"],
-    "value": "devops"
+    "id": "devops"
   },
   {
     "devtoValues": ["elixir"],
@@ -95,7 +95,7 @@
     "stackoverflowValues": ["elixir"],
     "redditValues": ["elixir"],
     "mediumValues": ["elixir"],
-    "value": "elixir"
+    "id": "elixir"
   },
   {
     "devtoValues": ["erlang"],
@@ -106,7 +106,7 @@
     "stackoverflowValues": ["erlang"],
     "redditValues": ["erlang"],
     "mediumValues": ["erlang"],
-    "value": "erlang"
+    "id": "erlang"
   },
   {
     "confsValues": ["go"],
@@ -118,7 +118,7 @@
     "stackoverflowValues": ["go"],
     "redditValues": ["golang"],
     "mediumValues": ["go"],
-    "value": "go"
+    "id": "go"
   },
   {
     "confsValues": ["java"],
@@ -130,7 +130,7 @@
     "stackoverflowValues": ["java"],
     "redditValues": ["java"],
     "mediumValues": ["java"],
-    "value": "java"
+    "id": "java"
   },
   {
     "confsValues": ["javascript"],
@@ -142,7 +142,7 @@
     "stackoverflowValues": ["javascript"],
     "redditValues": ["javascript"],
     "mediumValues": ["javascript"],
-    "value": "javascript"
+    "id": "javascript"
   },
   {
     "devtoValues": ["kotlin"],
@@ -153,7 +153,7 @@
     "stackoverflowValues": ["kotlin"],
     "redditValues": ["kotlin"],
     "mediumValues": ["kotlin"],
-    "value": "kotlin"
+    "id": "kotlin"
   },
   {
     "devtoValues": ["machinelearning"],
@@ -163,7 +163,7 @@
     "stackoverflowValues": ["machine-learning"],
     "redditValues": ["MachineLearning"],
     "mediumValues": ["machine-learning"],
-    "value": "machine-learning"
+    "id": "machine-learning"
   },
   {
     "devtoValues": ["objectivec"],
@@ -174,7 +174,7 @@
     "stackoverflowValues": ["objective-c"],
     "redditValues": ["ObjectiveC"],
     "mediumValues": ["objective-c"],
-    "value": "objective-c"
+    "id": "objective-c"
   },
   {
     "confsValues": ["php"],
@@ -186,7 +186,7 @@
     "stackoverflowValues": ["php"],
     "mediumValues": ["php"],
     "redditValues": ["php"],
-    "value": "php"
+    "id": "php"
   },
   {
     "confsValues": ["python"],
@@ -198,7 +198,7 @@
     "stackoverflowValues": ["python"],
     "redditValues": ["python"],
     "mediumValues": ["python"],
-    "value": "python"
+    "id": "python"
   },
   {
     "devtoValues": ["r"],
@@ -209,7 +209,7 @@
     "stackoverflowValues": ["r"],
     "redditValues": ["Rlanguage"],
     "mediumValues": ["t"],
-    "value": "r"
+    "id": "r"
   },
   {
     "confsValues": ["ruby"],
@@ -221,7 +221,7 @@
     "stackoverflowValues": ["ruby"],
     "mediumValues": ["ruby"],
     "redditValues": ["RubyLang"],
-    "value": "ruby"
+    "id": "ruby"
   },
   {
     "devtoValues": ["rust"],
@@ -232,7 +232,7 @@
     "label": "Rust",
     "stackoverflowValues": ["rust"],
     "redditValues": ["rust"],
-    "value": "rust"
+    "id": "rust"
   },
   {
     "confsValues": ["ios"],
@@ -244,7 +244,7 @@
     "stackoverflowValues": ["swift"],
     "redditValues": ["swift"],
     "mediumValues": ["swift"],
-    "value": "swift"
+    "id": "swift"
   },
   {
     "devtoValues": ["typescript"],
@@ -255,7 +255,7 @@
     "stackoverflowValues": ["typescript"],
     "redditValues": ["typescript"],
     "mediumValues": ["typescript"],
-    "value": "typescript"
+    "id": "typescript"
   },
   {
     "devtoValues": ["bash"],
@@ -263,7 +263,7 @@
     "freecodecampValues": ["bash"],
     "redditValues": ["bash"],
     "mediumValues": ["bash"],
-    "value": "bash",
+    "id": "bash",
     "label": "Bash"
   },
   {
@@ -272,7 +272,7 @@
     "freecodecampValues": ["powershell"],
     "redditValues": ["powershell"],
     "mediumValues": ["powershell"],
-    "value": "powershell",
+    "id": "powershell",
     "label": "Powershell"
   },
   {
@@ -281,7 +281,7 @@
     "freecodecampValues": ["solidity"],
     "redditValues": ["solidity"],
     "mediumValues": ["solidity"],
-    "value": "solidity",
+    "id": "solidity",
     "label": "Solidity"
   }
 ]

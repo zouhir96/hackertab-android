@@ -10,11 +10,14 @@ import com.google.gson.reflect.TypeToken
 import com.zrcoding.shared.R
 import com.zrcoding.shared.core.toJson
 import com.zrcoding.shared.domain.models.Source
+import com.zrcoding.shared.domain.models.SourceName
 import com.zrcoding.shared.domain.models.Topic
 import com.zrcoding.shared.domain.repositories.SettingRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 private val KEY_SAVED_TOPICS = stringPreferencesKey("saved_topics")
@@ -30,7 +33,7 @@ class SettingRepositoryImpl @Inject constructor(
         private val topicsMemoryCache = emptyList<Topic>()
         private val sourcesMemoryCash = listOf(
             Source(
-                value = "github",
+                name = SourceName.GITHUB,
                 label = "Github repositories",
                 icon = R.drawable.ic_github,
                 type = "supported",
@@ -38,7 +41,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "github",
             ),
             Source(
-                value = "hackernews",
+                name = SourceName.HACKER_NEWS,
                 label = "Hackernews",
                 icon = R.drawable.ic_hackernews,
                 type = "supported",
@@ -46,7 +49,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "hackernews",
             ),
             Source(
-                value = "conferences",
+                name = SourceName.CONFERENCES,
                 label = "Upcoming events",
                 icon = R.drawable.ic_conferences,
                 type = "supported",
@@ -54,7 +57,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "events",
             ),
             Source(
-                value = "devto",
+                name = SourceName.DEVTO,
                 label = "DevTo",
                 icon = R.drawable.ic_devto,
                 type = "supported",
@@ -62,7 +65,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "devto",
             ),
             Source(
-                value = "producthunt",
+                name = SourceName.PRODUCTHUNT,
                 label = "Product Hunt",
                 icon = R.drawable.ic_product_hunt,
                 type = "supported",
@@ -70,7 +73,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "producthunt",
             ),
             Source(
-                value = "reddit",
+                name = SourceName.REDDIT,
                 label = "Reddit",
                 icon = R.drawable.ic_reddit,
                 type = "supported",
@@ -78,7 +81,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "reddit",
             ),
             Source(
-                value = "lobsters",
+                name = SourceName.LOBSTERS,
                 label = "Lobsters",
                 icon = R.drawable.ic_lobsters,
                 type = "supported",
@@ -86,7 +89,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "lobsters",
             ),
             Source(
-                value = "hashnode",
+                name = SourceName.HASH_NODE,
                 label = "Hashnode",
                 icon = R.drawable.ic_hashnode,
                 type = "supported",
@@ -94,7 +97,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "hashnode",
             ),
             Source(
-                value = "freecodecamp",
+                name = SourceName.FREE_CODE_CAMP,
                 label = "FreeCodeCamp",
                 icon = R.drawable.ic_freecodecamp,
                 type = "supported",
@@ -102,7 +105,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "freecodecamp",
             ),
             Source(
-                value = "indiehackers",
+                name = SourceName.INDIE_HACKERS,
                 label = "IndieHackers",
                 icon = R.drawable.ic_indie_hackers,
                 type = "supported",
@@ -110,7 +113,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "indiehackers",
             ),
             Source(
-                value = "medium",
+                name = SourceName.MEDIUM,
                 label = "Medium",
                 icon = R.drawable.ic_medium,
                 type = "supported",
@@ -118,7 +121,7 @@ class SettingRepositoryImpl @Inject constructor(
                 analyticsTag = "medium",
             ),
             Source(
-                value = "ai",
+                name = SourceName.AI,
                 label = "Powered by AI",
                 icon = R.drawable.ic_ai,
                 type = "supported",
@@ -148,12 +151,25 @@ class SettingRepositoryImpl @Inject constructor(
         removeId(id, KEY_SAVED_TOPICS)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun observeSelectedTopics(): Flow<List<Topic>> {
+        return getSavedTopicsIds().mapLatest { savedTopicsIds ->
+            getTopics().filter { it.id in savedTopicsIds }
+        }
+    }
+
     override fun getSources(): List<Source> {
         return sourcesMemoryCash
     }
 
-    override fun getSavedSourcesIds(): Flow<List<String>> {
-        return getSavedIds(KEY_SAVED_SOURCES)
+    override fun getSavedSourcesNames(): Flow<List<SourceName>> {
+        return getSavedIds(KEY_SAVED_SOURCES).map { names ->
+            names.mapNotNull { name ->
+                SourceName.entries.firstOrNull {
+                    it.value == name
+                }
+            }
+        }
     }
 
     override suspend fun saveSource(id: String) {
@@ -162,6 +178,13 @@ class SettingRepositoryImpl @Inject constructor(
 
     override suspend fun removeSource(id: String) {
         removeId(id, KEY_SAVED_SOURCES)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun observeSelectedSources(): Flow<List<Source>> {
+        return getSavedSourcesNames().mapLatest { sourceNames ->
+            getSources().filter { it.name in sourceNames }
+        }
     }
 
     private fun getSavedIds(key: Preferences.Key<String>): Flow<List<String>> {
