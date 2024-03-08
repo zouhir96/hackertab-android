@@ -13,32 +13,28 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.core.toDate
-import com.zrcoding.hackertab.features.home.data.toFreeCodeCamp
-import com.zrcoding.hackertab.features.home.data.toGithubItem
-import com.zrcoding.hackertab.features.home.data.toHackerNews
-import com.zrcoding.hackertab.features.home.data.toReddit
+import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
-import com.zrcoding.hackertab.features.home.domain.models.Github
+import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
 import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
 
 @Composable
-fun SourceName.ToCardItem(articleDto: ArticleDto) = when (this) {
-    SourceName.GITHUB -> GithubItem(post = articleDto.toGithubItem())
-    SourceName.HACKER_NEWS -> HackerNewsItem(new = articleDto.toHackerNews())
-    SourceName.REDDIT -> RedditItem(reddit = articleDto.toReddit())
-    SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = articleDto.toFreeCodeCamp())
+fun SourceName.ToCardItem(model: BaseModel) = when (this) {
+    SourceName.GITHUB -> GithubItem(post = model as GithubRepo)
+    SourceName.HACKER_NEWS -> HackerNewsItem(new = model as HackerNews)
+    SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
+    SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
     else -> Unit
 }
 
 @Composable
-fun GithubItem(post: Github) {
+fun GithubItem(post: GithubRepo) {
     SourceItemTemplate(
         title = "${post.owner}/${post.name}",
         description = post.description.trim().ifEmpty { null },

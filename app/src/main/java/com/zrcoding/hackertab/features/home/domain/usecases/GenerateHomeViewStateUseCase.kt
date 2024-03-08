@@ -1,8 +1,12 @@
 package com.zrcoding.hackertab.features.home.domain.usecases
 
+import com.zrcoding.hackertab.features.home.data.toFreeCodeCamp
+import com.zrcoding.hackertab.features.home.data.toGithubRepo
+import com.zrcoding.hackertab.features.home.data.toHackerNews
+import com.zrcoding.hackertab.features.home.data.toReddit
+import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.shared.core.Resource
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
 import com.zrcoding.shared.domain.models.SourceName
 import com.zrcoding.shared.domain.models.Topic
 import com.zrcoding.shared.domain.repositories.ArticleRepository
@@ -32,7 +36,8 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         state = createCardFlow(
                             topics = pair.first,
                             getTags = { githubValues.orEmpty() },
-                            call = { articleRepository.getGithubArticles(it) }
+                            call = { articleRepository.getGithubArticles(it) },
+                            map = { toGithubRepo() }
                         )
                     )
 
@@ -42,7 +47,8 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                             topics = pair.first,
                             supportTags = false,
                             getTags = { emptyList() },
-                            call = { articleRepository.getHackerNewsArticles() }
+                            call = { articleRepository.getHackerNewsArticles() },
+                            map = { toHackerNews() }
                         )
                     )
 
@@ -51,7 +57,8 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         state = createCardFlow(
                             topics = pair.first,
                             getTags = { redditValues },
-                            call = { articleRepository.getRedditArticles(it) }
+                            call = { articleRepository.getRedditArticles(it) },
+                            map = { toReddit() }
                         )
                     )
 
@@ -60,7 +67,8 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         state = createCardFlow(
                             topics = pair.first,
                             getTags = { freecodecampValues },
-                            call = { articleRepository.getFreeCodeCampArticles(it) }
+                            call = { articleRepository.getFreeCodeCampArticles(it) },
+                            map = { toFreeCodeCamp() }
                         )
                     )
 
@@ -70,16 +78,17 @@ class GenerateHomeViewStateUseCase @Inject constructor(
         }
     }
 
-    private inline fun createCardFlow(
+    private inline fun <Dto: Any, Model: BaseModel> createCardFlow(
         topics: List<Topic>,
         supportTags: Boolean = true,
         crossinline getTags: Topic.() -> List<String>,
-        crossinline call: suspend (String) -> Resource<List<ArticleDto>>
+        crossinline call: suspend (String) -> Resource<List<Dto>>,
+        crossinline map: Dto.() -> Model,
     ): Flow<CardViewState.State> = flow {
         emit(CardViewState.State.Loading)
         if (supportTags.not()) {
             when (val articles = call("")) {
-                is Resource.Success -> emit(CardViewState.State.Articles(articles.data))
+                is Resource.Success -> emit(CardViewState.State.Success(articles.data.map { it.map() }))
                 is Resource.Failure -> emit(CardViewState.State.Error)
             }
             return@flow
@@ -90,12 +99,12 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                 emptyList()
             } else {
                 tags.map { call(it) }
-                    .filterIsInstance<Resource.Success<List<ArticleDto>>>()
+                    .filterIsInstance<Resource.Success<List<Dto>>>()
                     .map { it.data }
                     .flatten()
             }
         }.flatten()
 
-        emit(CardViewState.State.Articles(articles))
+        emit(CardViewState.State.Success(articles.map { it.map() }))
     }
 }

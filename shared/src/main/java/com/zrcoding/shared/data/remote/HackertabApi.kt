@@ -1,6 +1,7 @@
 package com.zrcoding.shared.data.remote
 
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.shared.data.remote.dtos.GithubDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -27,5 +28,5 @@ interface HackertabApi {
     suspend fun fetchGithubArticles(
         @Path(PATH_TAG) tag: String,
         @Path(PATH_DATE_RANGE) dateRange: String = "daily",
-    ): List<ArticleDto>
+    ): List<GithubDto>
 }

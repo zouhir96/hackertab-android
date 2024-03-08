@@ -41,10 +41,10 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.core.openUrlInBrowser
+import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimenExtraLarge
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
 import com.zrcoding.shared.domain.models.SourceName
 
 
@@ -52,7 +52,7 @@ import com.zrcoding.shared.domain.models.SourceName
 fun CardTemplate(
     modifier: Modifier = Modifier,
     cardUiState: CardViewState,
-    cardItem: @Composable (SourceName, ArticleDto) -> Unit,
+    cardItem: @Composable (SourceName, BaseModel) -> Unit,
 ) {
     Card(
         elevation = 3.dp,
@@ -73,7 +73,7 @@ fun CardTemplate(
 
                 CardViewState.State.Error -> EmptySource()
 
-                is CardViewState.State.Articles -> {
+                is CardViewState.State.Success -> {
                     LazyColumn(
                         verticalArrangement = Arrangement.spacedBy(10.dp),
                         contentPadding = PaddingValues(bottom = dimenExtraLarge)

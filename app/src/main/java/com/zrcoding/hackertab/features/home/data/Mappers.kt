@@ -2,10 +2,11 @@ package com.zrcoding.hackertab.features.home.data
 
 import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
-import com.zrcoding.hackertab.features.home.domain.models.Github
+import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.shared.data.remote.dtos.GithubDto
 
 fun ArticleDto.toFreeCodeCamp() = FreeCodeCamp(
     id = id,
@@ -16,17 +17,16 @@ fun ArticleDto.toFreeCodeCamp() = FreeCodeCamp(
     categories = tags
 )
 
-fun ArticleDto.toGithubItem() = Github(
+fun GithubDto.toGithubRepo() = GithubRepo(
     id = id,
     name = title,
-    description = description.orEmpty(),
-    owner = owner.orEmpty(),
+    description = description,
+    owner = owner,
     url = url,
-    originalUrl = originalUrl.orEmpty(),
-    programmingLanguage = programmingLanguage.orEmpty(),
-    stars = stars.orEmpty(),
-    starsInDateRange = starsInDateRange.orEmpty(),
-    forks = forks.orEmpty()
+    programmingLanguage = programmingLanguage,
+    stars = stars,
+    starsInDateRange = starsInDateRange,
+    forks = forks
 )
 
 fun ArticleDto.toHackerNews() = HackerNews(

@@ -1,6 +1,6 @@
 package com.zrcoding.hackertab.features.home.presentation
 
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.shared.domain.models.Source
 import kotlinx.coroutines.flow.Flow
 
@@ -15,7 +15,7 @@ data class CardViewState(
 ) {
     sealed interface State {
         data object Loading : State
-        data class Articles(val articles: List<ArticleDto>) : State
+        data class Success(val articles: List<BaseModel>) : State
         data object Error : State
     }
 }

@@ -20,10 +20,4 @@ data class ArticleDto(
     @SerializedName("flair_text") val flairText: String? = null,
     @SerializedName("flair_background_color") val flairBackgroundColor: String? = null,
     @SerializedName("flair_text_color") val flairTextColor: String? = null,
-    @SerializedName("programmingLanguage") val programmingLanguage: String? = null,
-    @SerializedName("stars") val stars: String? = null,
-    @SerializedName("owner") val owner: String? = null,
-    @SerializedName("forks") val forks: String? = null,
-    @SerializedName("starsInDateRange") val starsInDateRange: String? = null,
-    @SerializedName("name") val name: String? = null,
 )

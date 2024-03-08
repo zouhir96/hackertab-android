@@ -162,8 +162,8 @@ fun HomeScreenCardsPager(
         cardViewStates.getOrNull(page)?.let { state ->
             CardTemplate(
                 cardUiState = state,
-                cardItem = { sourceName, articleDto ->
-                    sourceName.ToCardItem(articleDto = articleDto)
+                cardItem = { sourceName, model ->
+                    sourceName.ToCardItem(model = model)
                 }
             )
         }
