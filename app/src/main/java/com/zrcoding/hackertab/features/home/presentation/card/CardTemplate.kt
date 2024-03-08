@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.home.presentation.source
+package com.zrcoding.hackertab.features.home.presentation.card
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

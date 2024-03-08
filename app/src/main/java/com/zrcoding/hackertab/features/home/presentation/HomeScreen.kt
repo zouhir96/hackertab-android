@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.features.home.presentation.source.CardTemplate
-import com.zrcoding.hackertab.features.home.presentation.source.toCardItem
+import com.zrcoding.hackertab.features.home.presentation.card.CardTemplate
+import com.zrcoding.hackertab.features.home.presentation.card.ToCardItem
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimenSmall
 
@@ -163,7 +163,7 @@ fun HomeScreenCardsPager(
             CardTemplate(
                 cardUiState = state,
                 cardItem = { sourceName, articleDto ->
-                    sourceName.toCardItem(articleDto = articleDto)
+                    sourceName.ToCardItem(articleDto = articleDto)
                 }
             )
         }

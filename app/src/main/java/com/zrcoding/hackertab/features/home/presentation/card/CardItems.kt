@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.home.presentation.source
+package com.zrcoding.hackertab.features.home.presentation.card
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -13,6 +13,14 @@ import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.core.toDate
+import com.zrcoding.hackertab.features.home.data.toFreeCodeCamp
+import com.zrcoding.hackertab.features.home.data.toGithubItem
+import com.zrcoding.hackertab.features.home.data.toHackerNews
+import com.zrcoding.hackertab.features.home.data.toReddit
+import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
+import com.zrcoding.hackertab.features.home.domain.models.Github
+import com.zrcoding.hackertab.features.home.domain.models.HackerNews
+import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
@@ -21,70 +29,13 @@ import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
 
 @Composable
-fun SourceName.toCardItem(articleDto: ArticleDto) = when(this) {
+fun SourceName.ToCardItem(articleDto: ArticleDto) = when (this) {
     SourceName.GITHUB -> GithubItem(post = articleDto.toGithubItem())
     SourceName.HACKER_NEWS -> HackerNewsItem(new = articleDto.toHackerNews())
     SourceName.REDDIT -> RedditItem(reddit = articleDto.toReddit())
     SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = articleDto.toFreeCodeCamp())
     else -> Unit
 }
-
-data class FreeCodeCamp(
-    val id: String,
-    val title: String,
-    val creator: String,
-    val link: String,
-    val isoDate: String,
-    val categories: List<String>,
-)
-
-fun ArticleDto.toFreeCodeCamp() = FreeCodeCamp(
-    id = id,
-    title = title,
-    creator = source,
-    link = url,
-    isoDate = publishedAt.toDate(),
-    categories = tags
-)
-
-@Composable
-fun FreeCodeCampItem(post: FreeCodeCamp) {
-    SourceItemTemplate(
-        title = post.title.trim(),
-        description = null,
-        date = post.isoDate.toDate(),
-        url = post.link,
-        tags = post.categories,
-        informationSection = {}
-    )
-}
-
-
-data class Github(
-    val id: String,
-    val name: String,
-    val description: String,
-    val owner: String,
-    val url: String,
-    val originalUrl: String,
-    val programmingLanguage: String,
-    val stars: String,
-    val starsInDateRange: String,
-    val forks: String
-)
-
-fun ArticleDto.toGithubItem() = Github(
-    id = id,
-    name = title,
-    description = description.orEmpty(),
-    owner = owner.orEmpty(),
-    url = url,
-    originalUrl = originalUrl.orEmpty(),
-    programmingLanguage = programmingLanguage.orEmpty(),
-    stars = stars.orEmpty(),
-    starsInDateRange = starsInDateRange.orEmpty(),
-    forks = forks.orEmpty()
-)
 
 @Composable
 fun GithubItem(post: Github) {
@@ -115,40 +66,6 @@ fun GithubItem(post: Github) {
     )
 }
 
-data class HackerNews(
-    val id: String,
-    val title: String,
-    val url: String,
-    val time: Long,
-    val descendants: Long,
-    val score: Long
-)
-
-fun ArticleDto.toHackerNews() = HackerNews(
-    id = id,
-    title = title,
-    url = url,
-    time = publishedAt,
-    descendants = comments,
-    score = reactions,
-)
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    HackertabTheme {
-        HackerNewsItem(new = HackerNews(
-            id = UUID.randomUUID().toString(),
-            "React is the best web framework ever React is the best web framework ever",
-            "url",
-            1234,
-            1234,
-            1234
-        )
-        )
-    }
-}
-
 @Composable
 fun HackerNewsItem(new: HackerNews) {
     SourceItemTemplate(
@@ -175,40 +92,19 @@ fun HackerNewsItem(new: HackerNews) {
     )
 }
 
-data class Reddit(
-    val id: String,
-    val title: String,
-    val subreddit: String,
-    val url: String,
-    val score: Long,
-    val commentsCount: Long,
-    val date: Long
-)
-
-fun ArticleDto.toReddit() = Reddit(
-    id = id,
-    title = title,
-    subreddit = subreddit.orEmpty(),
-    url = url,
-    score = reactions,
-    commentsCount = comments,
-    date = publishedAt
-)
-
-
 @Preview(showBackground = true)
 @Composable
-fun PreviewRedditItem() {
+fun HackerNewsItemPreview() {
     HackertabTheme {
-        RedditItem(reddit = Reddit(
-            id = "",
-            "React is the best web framework ever React is the best web framework ever",
-            "reactDevs",
-            "Url",
-            118,
-            30,
-            1123711
-        )
+        HackerNewsItem(
+            new = HackerNews(
+                id = UUID.randomUUID().toString(),
+                "React is the best web framework ever React is the best web framework ever",
+                "url",
+                1234,
+                1234,
+                1234
+            )
         )
     }
 }
@@ -237,5 +133,35 @@ fun RedditItem(reddit: Reddit) {
             }
         },
         tags = listOf(stringResource(id = R.string.subreddit, reddit.subreddit))
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RedditItemPreview() {
+    HackertabTheme {
+        RedditItem(
+            reddit = Reddit(
+                id = "",
+                "React is the best web framework ever React is the best web framework ever",
+                "reactDevs",
+                "Url",
+                118,
+                30,
+                1123711
+            )
+        )
+    }
+}
+
+@Composable
+fun FreeCodeCampItem(post: FreeCodeCamp) {
+    SourceItemTemplate(
+        title = post.title.trim(),
+        description = null,
+        date = post.isoDate.toDate(),
+        url = post.link,
+        tags = post.categories,
+        informationSection = {}
     )
 }
