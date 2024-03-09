@@ -36,7 +36,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         state = createCardFlow(
                             topics = pair.first,
                             getTags = { githubValues.orEmpty() },
-                            call = { articleRepository.getGithubArticles(it) },
+                            call = { articleRepository.getGithubRepositories(it) },
                             map = { toGithubRepo() }
                         )
                     )

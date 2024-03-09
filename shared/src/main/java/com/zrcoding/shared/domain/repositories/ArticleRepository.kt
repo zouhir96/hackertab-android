@@ -11,5 +11,5 @@ interface ArticleRepository {
 
     suspend fun getFreeCodeCampArticles(tag: String): Resource<List<ArticleDto>>
 
-    suspend fun getGithubArticles(tag: String): Resource<List<GithubDto>>
+    suspend fun getGithubRepositories(tag: String): Resource<List<GithubDto>>
 }

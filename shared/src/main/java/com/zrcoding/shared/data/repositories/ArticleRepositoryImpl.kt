@@ -37,9 +37,9 @@ class ArticleRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getGithubArticles(tag: String): Resource<List<GithubDto>> {
+    override suspend fun getGithubRepositories(tag: String): Resource<List<GithubDto>> {
         return try {
-            val response = hackertabApi.fetchGithubArticles(tag)
+            val response = hackertabApi.fetchGithubRepositories(tag)
             Resource.Success(response)
         } catch (e: Exception) {
             Resource.Failure.Exception(e)

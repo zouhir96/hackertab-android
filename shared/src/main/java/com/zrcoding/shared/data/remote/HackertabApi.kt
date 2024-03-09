@@ -25,7 +25,7 @@ interface HackertabApi {
     ): List<ArticleDto>
 
     @GET("github/{$PATH_TAG}/{$PATH_DATE_RANGE}.json")
-    suspend fun fetchGithubArticles(
+    suspend fun fetchGithubRepositories(
         @Path(PATH_TAG) tag: String,
         @Path(PATH_DATE_RANGE) dateRange: String = "daily",
     ): List<GithubDto>
