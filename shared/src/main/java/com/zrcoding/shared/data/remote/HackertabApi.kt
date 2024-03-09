@@ -1,23 +1,32 @@
 package com.zrcoding.shared.data.remote
 
-import com.zrcoding.shared.data.remote.dtos.FreeCodeCampDto
+import com.zrcoding.shared.data.remote.dtos.ArticleDto
 import com.zrcoding.shared.data.remote.dtos.GithubDto
-import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
-import com.zrcoding.shared.data.remote.dtos.RedditDto
-import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Url
+import retrofit2.http.Path
 
 interface HackertabApi {
-    @GET("data/hackernews.json?dl=1")
-    suspend fun fetchHackerNewsPosts(): Response<List<HackerNewsDto>>
+    companion object {
+        private const val PATH_TAG = "tag"
+        private const val PATH_DATE_RANGE = "date_range"
+    }
 
-    @GET("reddit/javascript/top/.json?t=week")
-    suspend fun fetchRedditPosts(): Response<RedditDto>
+    @GET("hackernews.json?")
+    suspend fun fetchHackerNewsArticles(): List<ArticleDto>
 
-    @GET
-    suspend fun fetchFreeCodeCampPosts(@Url url: String): Response<List<FreeCodeCampDto>>
+    @GET("reddit/{$PATH_TAG}.json")
+    suspend fun fetchRedditArticles(
+        @Path(PATH_TAG) tag: String
+    ): List<ArticleDto>
 
-    @GET
-    suspend fun fetchGithubPosts(@Url url: String): Response<List<GithubDto>>
+    @GET("freecodecamp/{$PATH_TAG}.json")
+    suspend fun fetchFreeCodeCampArticles(
+        @Path(PATH_TAG) tag: String
+    ): List<ArticleDto>
+
+    @GET("github/{$PATH_TAG}/{$PATH_DATE_RANGE}.json")
+    suspend fun fetchGithubRepositories(
+        @Path(PATH_TAG) tag: String,
+        @Path(PATH_DATE_RANGE) dateRange: String = "daily",
+    ): List<GithubDto>
 }

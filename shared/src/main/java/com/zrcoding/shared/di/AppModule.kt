@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
+import com.google.gson.Gson
 import com.zrcoding.shared.core.Constants.BASE_URL
 import com.zrcoding.shared.core.Constants.DATABASE_NAME
 import com.zrcoding.shared.data.local.HackertabDatabase
@@ -77,4 +78,8 @@ class AppModule {
             produceFile = { appContext.preferencesDataStoreFile(USER_PREFERENCES) }
         )
     }
+
+    @Singleton
+    @Provides
+    fun provideGson() = Gson()
 }

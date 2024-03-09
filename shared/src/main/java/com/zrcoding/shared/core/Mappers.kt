@@ -4,8 +4,13 @@ import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
 import com.zrcoding.shared.data.local.entities.GithubEntity
 import com.zrcoding.shared.data.local.entities.HackerNewsEntity
 import com.zrcoding.shared.data.local.entities.RedditEntity
-import com.zrcoding.shared.data.remote.dtos.*
-import java.util.*
+import com.zrcoding.shared.data.remote.dtos.ChildrenData
+import com.zrcoding.shared.data.remote.dtos.FreeCodeCampDto
+import com.zrcoding.shared.data.remote.dtos.GithubDto
+import com.zrcoding.shared.data.remote.dtos.HackerNewsDto
+import com.zrcoding.shared.data.remote.dtos.RedditDto
+import java.util.Calendar
+import java.util.UUID
 
 @JvmName("toHackerNewsEntities")
 fun List<HackerNewsDto>.toEntities(): List<HackerNewsEntity> {
@@ -66,7 +71,6 @@ fun List<GithubDto>.toEntities(): List<GithubEntity> {
             description = it.description,
             owner = it.owner,
             url = it.url,
-            originalUrl = it.originalUrl ?: "",
             programmingLanguage = it.programmingLanguage,
             stars = it.stars,
             starsInDateRange = it.starsInDateRange,

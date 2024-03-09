@@ -15,7 +15,18 @@
     <string name="empty_state_msg">Please turn on your connection to see new updates</string>
     <string name="loading">Loading …</string>
     <string name="empty">Empty !!!</string>
-    <string name="setting_screen_title">Setting</string>
+
     <string name="privacy_policy">privacy policy</string>
     <string name="terms_of_use">terms of use</string>
+
+    <string name="setting_master_screen_title">Setting</string>
+    <string name="setting_master_screen_topics">Topics</string>
+    <string name="setting_master_screen_sources">Sources</string>
+    <string name="setting_master_screen_settings">Settings</string>
+
+    <string name="setting_topics_screen_title">Topics</string>
+    <string name="setting_topics_screen_description">Your feed will be tailored by following the technologies you are interested in.</string>
+
+    <string name="setting_sources_screen_title">Sources</string>
+    <string name="setting_sources_screen_description">Your feed will be tailored by following the sources you are interested in.</string>
 </resources>

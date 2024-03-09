@@ -1,13 +1,17 @@
 package com.zrcoding.shared.data.remote.dtos
 
+import com.google.gson.annotations.SerializedName
+
 data class GithubDto(
-    val description: String,
-    val forks: String,
-    val name: String,
-    val originalUrl: String?,
-    val owner: String,
-    val programmingLanguage: String,
-    val stars: String,
-    val starsInDateRange: String,
-    val url: String
+    @SerializedName("id") val id: String,
+    @SerializedName("url") val url: String,
+    @SerializedName("title") val title: String,
+    @SerializedName("programmingLanguage") val programmingLanguage: String,
+    @SerializedName("stars") val stars: String,
+    @SerializedName("source") val source: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("owner") val owner: String,
+    @SerializedName("forks") val forks: String,
+    @SerializedName("starsInDateRange") val starsInDateRange: String,
+    @SerializedName("name") val name: String,
 )

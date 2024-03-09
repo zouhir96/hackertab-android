@@ -1,12 +1,17 @@
 package com.zrcoding.hackertab.core
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -15,60 +20,50 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.domain.Languages
-import com.zrcoding.hackertab.ui.theme.TextLink
+import com.zrcoding.hackertab.theme.HackertabTheme
+import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.hackertab.theme.dimenBig
+import com.zrcoding.hackertab.theme.dimenLarge
+import com.zrcoding.hackertab.theme.dimenMedium
 
-@Preview
+data class ChipData(
+    val id: String,
+    val name: String,
+    @DrawableRes val image: Int? = null,
+    val selected: Boolean = false
+)
+
 @Composable
 fun Chip(
-    chipModel: ChipData = ChipData("Hello", R.drawable.ic_github),
+    chipData: ChipData,
     isSelected: Boolean = false,
-    onSelectionChanged: (ChipData) -> Unit = {},
+    onClick: (ChipData) -> Unit,
 ) {
     Surface(
-        modifier = Modifier
-            .padding(4.dp)
-            .wrapContentSize(),
-        elevation = 8.dp,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(dimenBig),
         color = if (isSelected) TextLink else MaterialTheme.colors.secondary
     ) {
         Row(
             modifier = Modifier
-                .toggleable(
-                    value = isSelected,
-                    onValueChange = {
-                        onSelectionChanged(chipModel)
-                    }
-                ),
+                .padding(horizontal = dimenLarge)
+                .clickable { onClick(chipData) },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (isSelected) {
-                Text(
+            chipData.image?.let {
+                Icon(
                     modifier = Modifier
-                        .padding(start = 8.dp)
-                        .height(16.dp)
-                        .width(16.dp),
-                    text = "x"
-                )
-            }
-
-            chipModel.image?.let {
-                Image(
-                    modifier = Modifier
-                        .padding(start = 8.dp)
-                        .height(16.dp)
-                        .width(16.dp),
+                        .padding(end = dimenMedium)
+                        .size(dimenBig),
                     painter = painterResource(id = it),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colors.surface
                 )
             }
 
             Text(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
-                text = chipModel.name,
+                modifier = Modifier.padding(vertical = dimenMedium),
+                text = chipData.name,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.primary
             )
@@ -76,40 +71,58 @@ fun Chip(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ChipGroup(
-    chips: List<Languages>?,
-    selectedChip: ChipData? = null,
-    onSelectedChanged: (ChipData) -> Unit = {},
+    modifier: Modifier = Modifier,
+    chips: List<ChipData>,
+    onChipClicked: (ChipData) -> Unit,
 ) {
-
-    LazyRow(
-        modifier = Modifier
-            .padding(16.dp)
-            .wrapContentSize(),
-        horizontalArrangement = Arrangement.Start
+    FlowRow(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(dimenMedium),
+        verticalArrangement = Arrangement.spacedBy(dimenMedium),
     ) {
-
-
-        chips?.let {
-            items(it) { currentChip ->
-                Chip(
-                    chipModel = ChipData(name = currentChip.name),
-                    isSelected = selectedChip?.id == currentChip.name,
-                    onSelectionChanged = {
-                        onSelectedChanged(it)
-                    }
-                )
-            }
-
+        chips.forEach { chip ->
+            Chip(
+                chipData = chip,
+                isSelected = chip.selected,
+                onClick = onChipClicked
+            )
         }
     }
 }
 
-data class ChipData(
-    val name: String,
-    @DrawableRes val image: Int? = null,
-    val id: String = name
+@Preview(
+    showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
+@Composable
+fun ChipGroupPreview() {
+    HackertabTheme {
+        ChipGroup(
+            chips = listOf(
+                ChipData(id = "1", name = "chip 1"),
+                ChipData(id = "2", name = "chip 2"),
+                ChipData(id = "3", name = "chip 3"),
+                ChipData(id = "2", name = "Reddit", R.drawable.ic_reddit),
+                ChipData(id = "4", name = "chip 4"),
+                ChipData(id = "5", name = "chip 4", selected = true),
+                ChipData(id = "6", name = "chip 4"),
+                ChipData(id = "7", name = "chip 4"),
+                ChipData(id = "8", name = "chip 4"),
+                ChipData(id = "1", name = "Github repositories", image = R.drawable.ic_github),
+                ChipData(id = "9", name = "chip 4"),
+                ChipData(id = "42", name = "chip 4"),
+                ChipData(
+                    id = "3",
+                    name = "FreeCodeCamo",
+                    R.drawable.ic_freecodecamp,
+                    selected = true
+                ),
+            ),
+        ) {}
+    }
+}
 
 

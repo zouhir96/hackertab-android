@@ -47,7 +47,6 @@ data class GithubEntity(
     val name: String,
     val description: String,
     val owner: String,
-    val originalUrl: String,
     val programmingLanguage: String,
     val stars: String,
     val starsInDateRange: String,
