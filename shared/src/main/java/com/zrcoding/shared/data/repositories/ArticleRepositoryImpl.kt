@@ -3,6 +3,7 @@ package com.zrcoding.shared.data.repositories
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.remote.HackertabApi
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.shared.data.remote.dtos.ConferenceDto
 import com.zrcoding.shared.data.remote.dtos.GithubDto
 import com.zrcoding.shared.domain.repositories.ArticleRepository
 import javax.inject.Inject
@@ -40,6 +41,15 @@ class ArticleRepositoryImpl @Inject constructor(
     override suspend fun getGithubRepositories(tag: String): Resource<List<GithubDto>> {
         return try {
             val response = hackertabApi.fetchGithubRepositories(tag)
+            Resource.Success(response)
+        } catch (e: Exception) {
+            Resource.Failure.Exception(e)
+        }
+    }
+
+    override suspend fun getConferences(tag: String): Resource<List<ConferenceDto>> {
+        return try {
+            val response = hackertabApi.fetchConferences(tag)
             Resource.Success(response)
         } catch (e: Exception) {
             Resource.Failure.Exception(e)
