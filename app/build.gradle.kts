@@ -85,6 +85,9 @@ dependencies {
     // di: hilt
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
+
+    // Test
+    testImplementation(libs.test.junit)
 }
 
 // Allow references to generated code
