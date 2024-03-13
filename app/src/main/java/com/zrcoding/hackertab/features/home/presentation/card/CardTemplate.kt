@@ -40,11 +40,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
-import com.zrcoding.hackertab.core.openUrlInBrowser
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimenExtraLarge
+import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.domain.models.SourceName
 
 

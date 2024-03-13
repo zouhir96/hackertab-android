@@ -12,15 +12,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
-import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
+import com.zrcoding.hackertab.features.home.domain.models.Conference
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
+import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
 
