@@ -32,6 +32,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.HACKER_NEWS -> HackerNewsItem(new = model as HackerNews)
     SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
     SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
+    SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
     else -> Unit
 }
 
@@ -160,6 +161,24 @@ fun FreeCodeCampItem(post: FreeCodeCamp) {
         date = post.isoDate.toDate(),
         url = post.link,
         tags = post.categories,
+        informationSection = {}
+    )
+}
+
+@Composable
+fun ConferenceItem(conf: Conference) {
+    val date = BuildConferenceDisplayedDateUseCase(conf)
+    SourceItemTemplate(
+        title = conf.title.trim(),
+        description = null,
+        date = date,
+        location = if (conf.online) {
+            "\uD83C\uDF10 Online"
+        } else {
+            "${conf.country} ${conf.city.orEmpty()}"
+        },
+        url = conf.url,
+        tags = listOf(conf.tag),
         informationSection = {}
     )
 }

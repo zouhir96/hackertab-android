@@ -1,5 +1,6 @@
 package com.zrcoding.hackertab.features.home.domain.usecases
 
+import com.zrcoding.hackertab.features.home.data.toConference
 import com.zrcoding.hackertab.features.home.data.toFreeCodeCamp
 import com.zrcoding.hackertab.features.home.data.toGithubRepo
 import com.zrcoding.hackertab.features.home.data.toHackerNews
@@ -69,6 +70,16 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                             getTags = { freecodecampValues },
                             call = { articleRepository.getFreeCodeCampArticles(it) },
                             map = { toFreeCodeCamp() }
+                        )
+                    )
+
+                    SourceName.CONFERENCES -> CardViewState(
+                        source = source,
+                        state = createCardFlow(
+                            topics = pair.first,
+                            getTags = { confsValues.orEmpty() },
+                            call = { articleRepository.getConferences(it) },
+                            map = { toConference() }
                         )
                     )
 
