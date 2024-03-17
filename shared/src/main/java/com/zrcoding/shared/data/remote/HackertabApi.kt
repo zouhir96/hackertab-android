@@ -45,4 +45,7 @@ interface HackertabApi {
     suspend fun fetchHashnodeArticles(
         @Path(PATH_TAG) tag: String
     ): List<ArticleDto>
+
+    @GET("producthunt.json?")
+    suspend fun fetchProductHuntProducts(): List<ArticleDto>
 }
