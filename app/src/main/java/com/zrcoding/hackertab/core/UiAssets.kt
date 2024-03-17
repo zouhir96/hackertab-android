@@ -1,6 +1,11 @@
 package com.zrcoding.hackertab.core
 
+import android.content.Context
+import android.os.Build
 import androidx.compose.ui.graphics.Color
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 
 fun String.getTagColor(): Color {
     for ((tag, color) in tags) {
@@ -18,3 +23,15 @@ val tags = mapOf(
     "scala" to Color.Blue,
     "kotlin" to Color(0xFF7f52ff)
 )
+
+fun createImageLoader(context: Context): ImageLoader {
+    return ImageLoader(context)
+        .newBuilder()
+        .components {
+            if (Build.VERSION.SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }.build()
+}
