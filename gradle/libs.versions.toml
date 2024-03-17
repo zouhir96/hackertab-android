@@ -11,6 +11,7 @@ depDesugarJdkLibs = "2.0.4"
 depCoreKtx = "1.10.1"
 depCoreSplashscreen = "1.0.1"
 depComposeBom = "2024.01.00"
+depCoil = "2.6.0"
 depComposeCompiler = "1.5.4"
 depActivity = "1.8.2"
 depLifecycleRuntimeKtx = "2.7.0"
@@ -41,6 +42,8 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+io-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "depCoil" }
+io-coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "depCoil" }
 
 #activity
 androidx-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "depActivity" }
