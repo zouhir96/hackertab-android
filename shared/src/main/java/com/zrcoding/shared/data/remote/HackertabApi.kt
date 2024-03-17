@@ -36,8 +36,13 @@ interface HackertabApi {
         @Path(PATH_TAG) tag: String,
     ): List<ConferenceDto>
 
-    @GET("/data/v2/devto/{$PATH_TAG}.json")
+    @GET("devto/{$PATH_TAG}.json")
     suspend fun fetchDevtoArticles(
+        @Path(PATH_TAG) tag: String
+    ): List<ArticleDto>
+
+    @GET("hashnode/{$PATH_TAG}.json")
+    suspend fun fetchHashnodeArticles(
         @Path(PATH_TAG) tag: String
     ): List<ArticleDto>
 }
