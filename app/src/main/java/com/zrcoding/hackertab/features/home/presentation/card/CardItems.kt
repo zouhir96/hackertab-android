@@ -14,6 +14,7 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.domain.models.Conference
+import com.zrcoding.hackertab.features.home.domain.models.Devto
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
@@ -33,6 +34,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
     SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
     SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
+    SourceName.DEVTO -> DevtoItem(devto = model as Devto)
     else -> Unit
 }
 
@@ -179,6 +181,36 @@ fun ConferenceItem(conf: Conference) {
         },
         url = conf.url,
         tags = listOf(conf.tag),
-        informationSection = {}
+        informationSection = {
+
+        }
     )
+}
+
+@Composable
+fun DevtoItem(devto: Devto) {
+    with(devto) {
+        SourceItemTemplate(
+            title = title.trim(),
+            description = null,
+            date = date,
+            url = url,
+            tags = tags,
+            informationSection = {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextWithStartIcon(
+                        text = stringResource(id = R.string.comments, commentsCount),
+                        icon = R.drawable.ic_comment,
+                    )
+                    TextWithStartIcon(
+                        text = stringResource(id = R.string.reactions, reactions),
+                        icon = R.drawable.ic_like
+                    )
+                }
+            }
+        )
+    }
 }

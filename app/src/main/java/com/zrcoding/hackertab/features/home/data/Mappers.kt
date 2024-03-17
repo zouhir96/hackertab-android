@@ -1,6 +1,7 @@
 package com.zrcoding.hackertab.features.home.data
 
 import com.zrcoding.hackertab.features.home.domain.models.Conference
+import com.zrcoding.hackertab.features.home.domain.models.Devto
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
@@ -62,4 +63,14 @@ fun ConferenceDto.toConference() = Conference(
     online = online,
     city = city,
     country = country
+)
+
+fun ArticleDto.toDevto() = Devto(
+    id = id,
+    title = title,
+    date = publishedAt.toDate(),
+    commentsCount = comments,
+    reactions = reactions,
+    url = url,
+    tags = tags
 )

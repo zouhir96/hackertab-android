@@ -35,4 +35,9 @@ interface HackertabApi {
     suspend fun fetchConferences(
         @Path(PATH_TAG) tag: String,
     ): List<ConferenceDto>
+
+    @GET("/data/v2/devto/{$PATH_TAG}.json")
+    suspend fun fetchDevtoArticles(
+        @Path(PATH_TAG) tag: String
+    ): List<ArticleDto>
 }
