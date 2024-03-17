@@ -1,15 +1,8 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
@@ -43,27 +36,24 @@ fun GithubItem(post: GithubRepo) {
     SourceItemTemplate(
         title = "${post.owner}/${post.name}",
         description = post.description.trim().ifEmpty { null },
+        primaryInfoSection = {
+            TextWithStartIcon(
+                icon = R.drawable.ic_ellipse,
+                tint = post.programmingLanguage.getTagColor(),
+                text = post.programmingLanguage
+            )
+            TextWithStartIcon(
+                icon = R.drawable.ic_baseline_star,
+                text = stringResource(id = R.string.stars, post.stars)
+            )
+
+            TextWithStartIcon(
+                icon = R.drawable.ic_baseline_fork,
+                text = stringResource(id = R.string.forks, post.forks)
+            )
+        },
         url = post.url,
         titleColor = TextLink,
-        informationSection = {
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                TextWithStartIcon(
-                    icon = R.drawable.ic_ellipse,
-                    tint = post.programmingLanguage.getTagColor(),
-                    text = post.programmingLanguage
-                )
-                TextWithStartIcon(
-                    icon = R.drawable.ic_baseline_star,
-                    text = stringResource(id = R.string.stars, post.stars)
-                )
-
-                TextWithStartIcon(
-                    icon = R.drawable.ic_baseline_fork,
-                    text = stringResource(id = R.string.forks, post.forks)
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-        }
     )
 }
 
@@ -71,25 +61,23 @@ fun GithubItem(post: GithubRepo) {
 fun HackerNewsItem(new: HackerNews) {
     SourceItemTemplate(
         title = new.title,
-        date = new.time.toDate(),
+        primaryInfoSection = {
+            TextWithStartIcon(
+                text = stringResource(id = R.string.score, new.score),
+                textColor = Flamingo,
+                icon = R.drawable.ic_ellipse,
+                tint = Flamingo
+            )
+            TextWithStartIcon(
+                icon = R.drawable.ic_time_24,
+                text = new.time.toDate()
+            )
+            TextWithStartIcon(
+                text = stringResource(id = R.string.comments, new.descendants),
+                icon = R.drawable.ic_comment
+            )
+        },
         url = new.url,
-        informationSection = {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextWithStartIcon(
-                    text = stringResource(id = R.string.score, new.score),
-                    textColor = Flamingo,
-                    icon = R.drawable.ic_ellipse,
-                    tint = Flamingo
-                )
-                TextWithStartIcon(
-                    text = stringResource(id = R.string.comments, new.descendants),
-                    icon = R.drawable.ic_comment
-                )
-            }
-        }
     )
 }
 
@@ -114,25 +102,23 @@ fun HackerNewsItemPreview() {
 fun RedditItem(reddit: Reddit) {
     SourceItemTemplate(
         title = reddit.title,
-        date = reddit.date.toDate(),
-        url = reddit.url,
-        informationSection = {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextWithStartIcon(
-                    text = stringResource(id = R.string.score, reddit.score),
-                    textColor = Flamingo,
-                    icon = R.drawable.ic_ellipse,
-                    tint = Flamingo
-                )
-                TextWithStartIcon(
-                    text = stringResource(id = R.string.comments, reddit.commentsCount),
-                    icon = R.drawable.ic_comment
-                )
-            }
+        primaryInfoSection = {
+            TextWithStartIcon(
+                icon = R.drawable.ic_time_24,
+                text = reddit.date.toDate()
+            )
+            TextWithStartIcon(
+                text = stringResource(id = R.string.score, reddit.score),
+                textColor = Flamingo,
+                icon = R.drawable.ic_ellipse,
+                tint = Flamingo
+            )
+            TextWithStartIcon(
+                text = stringResource(id = R.string.comments, reddit.commentsCount),
+                icon = R.drawable.ic_comment
+            )
         },
+        url = reddit.url,
         tags = listOf(stringResource(id = R.string.subreddit, reddit.subreddit))
     )
 }
@@ -160,30 +146,40 @@ fun FreeCodeCampItem(post: FreeCodeCamp) {
     SourceItemTemplate(
         title = post.title.trim(),
         description = null,
-        date = post.isoDate.toDate(),
+        primaryInfoSection = {
+            TextWithStartIcon(
+                icon = R.drawable.ic_time_24,
+                text = post.isoDate.toDate()
+            )
+        },
         url = post.link,
         tags = post.categories,
-        informationSection = {}
     )
 }
 
 @Composable
 fun ConferenceItem(conf: Conference) {
     val date = BuildConferenceDisplayedDateUseCase(conf)
+    val location = if (conf.online) {
+        "\uD83C\uDF10 Online"
+    } else {
+        "${conf.country} ${conf.city.orEmpty()}"
+    }
     SourceItemTemplate(
         title = conf.title.trim(),
         description = null,
-        date = date,
-        location = if (conf.online) {
-            "\uD83C\uDF10 Online"
-        } else {
-            "${conf.country} ${conf.city.orEmpty()}"
+        primaryInfoSection = {
+            TextWithStartIcon(
+                icon = R.drawable.ic_location,
+                text = location
+            )
+            TextWithStartIcon(
+                icon = R.drawable.ic_time_24,
+                text = date
+            )
         },
         url = conf.url,
         tags = listOf(conf.tag),
-        informationSection = {
-
-        }
     )
 }
 
@@ -193,24 +189,22 @@ fun DevtoItem(devto: Devto) {
         SourceItemTemplate(
             title = title.trim(),
             description = null,
-            date = date,
+            primaryInfoSection = {
+                TextWithStartIcon(
+                    text = date,
+                    icon = R.drawable.ic_comment,
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.comments, commentsCount),
+                    icon = R.drawable.ic_comment,
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.reactions, reactions),
+                    icon = R.drawable.ic_like
+                )
+            },
             url = url,
             tags = tags,
-            informationSection = {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TextWithStartIcon(
-                        text = stringResource(id = R.string.comments, commentsCount),
-                        icon = R.drawable.ic_comment,
-                    )
-                    TextWithStartIcon(
-                        text = stringResource(id = R.string.reactions, reactions),
-                        icon = R.drawable.ic_like
-                    )
-                }
-            }
         )
     }
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -67,7 +68,8 @@ fun CardTemplate(
                 icon = cardUiState.source.icon
             )
             when (
-                val state = cardUiState.state.collectAsState(initial = CardViewState.State.Loading).value
+                val state =
+                    cardUiState.state.collectAsState(initial = CardViewState.State.Loading).value
             ) {
                 CardViewState.State.Loading -> Loading(stringResource(R.string.loading))
 
@@ -101,15 +103,11 @@ fun SourceItemTemplatePreview() {
         SourceItemTemplate(
             title = "HackerNews",
             description = "this is a lorem ipsum test",
-            date = "il y a 1h",
+            primaryInfoSection = {
+                TextWithStartIcon(text = "il y a 1h", icon = R.drawable.ic_time_24)
+            },
             modifier = Modifier,
             tags = listOf("Java", "Kotlin", "JavaScript", "android development"),
-            informationSection = {
-                TextWithStartIcon(
-                    icon = R.drawable.ic_time_24,
-                    text = "this is a custom view"
-                )
-            }
         )
     }
 }
@@ -120,11 +118,9 @@ fun SourceItemTemplate(
     title: String,
     titleColor: Color = MaterialTheme.colors.onBackground,
     description: String? = null,
-    date: String? = null,
-    location: String? = null,
+    primaryInfoSection: @Composable RowScope.() -> Unit,
     url: String? = null,
     tags: List<String>? = null,
-    informationSection: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
     Column(
@@ -156,47 +152,42 @@ fun SourceItemTemplate(
             Spacer(modifier = modifier.height(4.dp))
         }
 
-        date?.let {
-            Row {
-                location?.let { loc ->
-                    TextWithStartIcon(
-                        modifier = Modifier,
-                        icon = R.drawable.ic_location,
-                        text = loc
-                    )
-                    Spacer(modifier = modifier.width(8.dp))
-                }
-                TextWithStartIcon(
-                    icon = R.drawable.ic_time_24,
-                    text = date
-                )
-            }
-            Spacer(modifier = modifier.height(8.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            primaryInfoSection()
         }
-
-        informationSection()
+        Spacer(modifier = modifier.height(4.dp))
 
         tags?.let {
-
-            val isTagsBlank = tags.size == 1 && tags.first().isEmpty()
-            if (isTagsBlank) return@Column
-
-            Row(
-                modifier = modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                it.onEach {
-                    val color = it.getTagColor()
-                    TextWithStartIcon(
-                        text = it,
-                        icon = R.drawable.ic_ellipse,
-                        tint = color
-                    )
-                }
-            }
+            CardItemTags(modifier = Modifier.fillMaxWidth(), tags = it)
         }
     }
 }
+
+@Composable
+private fun CardItemTags(
+    modifier: Modifier = Modifier,
+    tags: List<String>,
+) {
+    val isTagsBlank = tags.isEmpty() || (tags.size == 1 && tags.first().isBlank())
+    if (isTagsBlank) return
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        tags.forEach {
+            val color = it.getTagColor()
+            TextWithStartIcon(
+                text = it,
+                icon = R.drawable.ic_ellipse,
+                tint = color
+            )
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
