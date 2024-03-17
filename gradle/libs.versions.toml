@@ -4,26 +4,25 @@ jvmTarget = "17"
 compileSdk = "34"
 targetSdk = "34"
 minSdk = "23"
-depAndroidGradlePlugin = "8.2.2"
-depGoogleServices = "4.4.0"
 depAndroidGradlePlugin = "8.3.0"
+depGoogleServices = "4.4.1"
 depDevtoolsKsp = "1.9.20-1.0.14"
 depDesugarJdkLibs = "2.0.4"
-depCoreKtx = "1.10.1"
+depCoreKtx = "1.12.0"
 depCoreSplashscreen = "1.0.1"
-depComposeBom = "2024.01.00"
+depComposeBom = "2024.02.02"
 depCoil = "2.6.0"
 depComposeCompiler = "1.5.4"
 depActivity = "1.8.2"
 depLifecycleRuntimeKtx = "2.7.0"
-depLifecycleExt = "2.2.0"
-depNavigationCompose = "2.7.6"
-depHiltNavigationCompose = "1.1.0"
+depLifecycleExt = "2.7.0"
+depNavigationCompose = "2.7.7"
+depHiltNavigationCompose = "1.2.0"
 depJunit = "4.13.2"
-depHilt = "2.48.1"
+depHilt = "2.49"
 depDatastore = '1.0.0'
 depRetrofit = "2.9.0"
-depLoggingInterceptor = "4.8.0"
+depLoggingInterceptor = "4.10.0"
 depRoom = "2.6.1"
 
 [libraries]
@@ -52,7 +51,6 @@ androidx-activity = { group = "androidx.activity", name = "activity-compose", ve
 #lifeCycle
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "depLifecycleRuntimeKtx" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "depLifecycleExt" }
-androidx-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "depLifecycleExt" }
 
 #navigation
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "depNavigationCompose" }
