@@ -6,6 +6,7 @@ import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
+import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.core.toDate
@@ -96,4 +97,14 @@ fun ArticleDto.toProductHunt() = ProductHunt(
     reactions = reactions,
     url = url,
     tags = tags.take(1)
+)
+
+fun ArticleDto.toIndieHackers() = IndieHackers(
+    id = id,
+    title = title,
+    description= description.orEmpty(),
+    date = publishedAt.toDate(),
+    commentsCount = comments,
+    reactions = reactions,
+    url = url,
 )
