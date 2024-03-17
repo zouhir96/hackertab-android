@@ -17,4 +17,6 @@ interface ArticleRepository {
     suspend fun getConferences(tag: String): Resource<List<ConferenceDto>>
 
     suspend fun getDevtoArticles(tag: String): Resource<List<ArticleDto>>
+
+    suspend fun getHashnodeArticles(tag: String): Resource<List<ArticleDto>>
 }

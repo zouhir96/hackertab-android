@@ -5,6 +5,7 @@ import com.zrcoding.hackertab.features.home.domain.models.Devto
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
+import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.core.toZonedLocalDate
@@ -66,6 +67,16 @@ fun ConferenceDto.toConference() = Conference(
 )
 
 fun ArticleDto.toDevto() = Devto(
+    id = id,
+    title = title,
+    date = publishedAt.toDate(),
+    commentsCount = comments,
+    reactions = reactions,
+    url = url,
+    tags = tags
+)
+
+fun ArticleDto.toHashnode() = Hashnode(
     id = id,
     title = title,
     date = publishedAt.toDate(),

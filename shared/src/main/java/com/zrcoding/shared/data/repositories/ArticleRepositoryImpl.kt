@@ -64,4 +64,13 @@ class ArticleRepositoryImpl @Inject constructor(
             Resource.Failure.Exception(e)
         }
     }
+
+    override suspend fun getHashnodeArticles(tag: String): Resource<List<ArticleDto>> {
+        return try {
+            val response = hackertabApi.fetchHashnodeArticles(tag)
+            Resource.Success(response)
+        } catch (e: Exception) {
+            Resource.Failure.Exception(e)
+        }
+    }
 }

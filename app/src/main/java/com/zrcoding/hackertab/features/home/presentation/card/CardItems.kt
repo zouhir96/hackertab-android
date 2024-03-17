@@ -11,6 +11,7 @@ import com.zrcoding.hackertab.features.home.domain.models.Devto
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
+import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
 import com.zrcoding.hackertab.theme.Flamingo
@@ -28,6 +29,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
     SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
     SourceName.DEVTO -> DevtoItem(devto = model as Devto)
+    SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
     else -> Unit
 }
 
@@ -192,7 +194,33 @@ fun DevtoItem(devto: Devto) {
             primaryInfoSection = {
                 TextWithStartIcon(
                     text = date,
+                    icon = R.drawable.ic_time_24,
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.comments, commentsCount),
                     icon = R.drawable.ic_comment,
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.reactions, reactions),
+                    icon = R.drawable.ic_like
+                )
+            },
+            url = url,
+            tags = tags,
+        )
+    }
+}
+
+@Composable
+fun HashnodeItem(hashnode: Hashnode) {
+    with(hashnode) {
+        SourceItemTemplate(
+            title = title.trim(),
+            description = null,
+            primaryInfoSection = {
+                TextWithStartIcon(
+                    text = date,
+                    icon = R.drawable.ic_time_24,
                 )
                 TextWithStartIcon(
                     text = stringResource(id = R.string.comments, commentsCount),
