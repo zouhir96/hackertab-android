@@ -40,11 +40,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
-import com.zrcoding.hackertab.core.openUrlInBrowser
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimenExtraLarge
+import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.domain.models.SourceName
 
 
@@ -121,6 +121,7 @@ fun SourceItemTemplate(
     titleColor: Color = MaterialTheme.colors.onBackground,
     description: String? = null,
     date: String? = null,
+    location: String? = null,
     url: String? = null,
     tags: List<String>? = null,
     informationSection: @Composable () -> Unit,
@@ -156,10 +157,20 @@ fun SourceItemTemplate(
         }
 
         date?.let {
-            TextWithStartIcon(
-                icon = R.drawable.ic_time_24,
-                text = date
-            )
+            Row {
+                location?.let { loc ->
+                    TextWithStartIcon(
+                        modifier = Modifier,
+                        icon = R.drawable.ic_location,
+                        text = loc
+                    )
+                    Spacer(modifier = modifier.width(8.dp))
+                }
+                TextWithStartIcon(
+                    icon = R.drawable.ic_time_24,
+                    text = date
+                )
+            }
             Spacer(modifier = modifier.height(8.dp))
         }
 
@@ -275,6 +286,7 @@ fun EmptySource(title: String = stringResource(R.string.empty)) {
 
 @Composable
 fun TextWithStartIcon(
+    modifier: Modifier = Modifier,
     text: String,
     textColor: Color = Color.Gray,
     textStyle: TextStyle = MaterialTheme.typography.caption,
@@ -282,7 +294,7 @@ fun TextWithStartIcon(
     tint: Color = Color.Gray
 ) {
     Row(
-        modifier = Modifier.padding(end = 8.dp),
+        modifier = modifier.padding(end = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

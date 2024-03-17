@@ -12,15 +12,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.core.getTagColor
-import com.zrcoding.hackertab.core.toDate
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
+import com.zrcoding.hackertab.features.home.domain.models.Conference
 import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
+import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
 
@@ -30,6 +32,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.HACKER_NEWS -> HackerNewsItem(new = model as HackerNews)
     SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
     SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
+    SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
     else -> Unit
 }
 
@@ -158,6 +161,24 @@ fun FreeCodeCampItem(post: FreeCodeCamp) {
         date = post.isoDate.toDate(),
         url = post.link,
         tags = post.categories,
+        informationSection = {}
+    )
+}
+
+@Composable
+fun ConferenceItem(conf: Conference) {
+    val date = BuildConferenceDisplayedDateUseCase(conf)
+    SourceItemTemplate(
+        title = conf.title.trim(),
+        description = null,
+        date = date,
+        location = if (conf.online) {
+            "\uD83C\uDF10 Online"
+        } else {
+            "${conf.country} ${conf.city.orEmpty()}"
+        },
+        url = conf.url,
+        tags = listOf(conf.tag),
         informationSection = {}
     )
 }

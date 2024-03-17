@@ -7,7 +7,7 @@ minSdk = "23"
 depAndroidGradlePlugin = "8.2.2"
 depGoogleServices = "4.4.0"
 depDevtoolsKsp = "1.9.20-1.0.14"
-depProtobuf = "0.9.0"
+depDesugarJdkLibs = "2.0.4"
 depCoreKtx = "1.10.1"
 depCoreSplashscreen = "1.0.1"
 depComposeBom = "2024.01.00"
@@ -25,6 +25,9 @@ depLoggingInterceptor = "4.8.0"
 depRoom = "2.6.1"
 
 [libraries]
+
+#desugar
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "depDesugarJdkLibs" }
 
 #Kotlin gradle plugin
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "depKotlin" }

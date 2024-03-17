@@ -1,6 +1,7 @@
 package com.zrcoding.shared.data.remote
 
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.shared.data.remote.dtos.ConferenceDto
 import com.zrcoding.shared.data.remote.dtos.GithubDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,4 +30,9 @@ interface HackertabApi {
         @Path(PATH_TAG) tag: String,
         @Path(PATH_DATE_RANGE) dateRange: String = "daily",
     ): List<GithubDto>
+
+    @GET("conferences/{$PATH_TAG}.json")
+    suspend fun fetchConferences(
+        @Path(PATH_TAG) tag: String,
+    ): List<ConferenceDto>
 }

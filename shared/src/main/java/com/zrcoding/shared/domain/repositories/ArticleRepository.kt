@@ -2,6 +2,7 @@ package com.zrcoding.shared.domain.repositories
 
 import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
+import com.zrcoding.shared.data.remote.dtos.ConferenceDto
 import com.zrcoding.shared.data.remote.dtos.GithubDto
 
 interface ArticleRepository {
@@ -12,4 +13,6 @@ interface ArticleRepository {
     suspend fun getFreeCodeCampArticles(tag: String): Resource<List<ArticleDto>>
 
     suspend fun getGithubRepositories(tag: String): Resource<List<GithubDto>>
+
+    suspend fun getConferences(tag: String): Resource<List<ConferenceDto>>
 }

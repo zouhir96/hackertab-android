@@ -1,12 +1,18 @@
-package com.zrcoding.hackertab.core
+package com.zrcoding.shared.core
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.text.format.DateUtils
 import androidx.core.content.ContextCompat
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.Locale
 
 private const val ZERO_TIMEZONE_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -22,6 +28,27 @@ fun openUrlInBrowser(context: Context, url: String) {
     )
 }
 
+fun InputStream.toJson(): String {
+    val outputStream = ByteArrayOutputStream()
+    val buf = ByteArray(1024)
+    var len: Int
+    return try {
+        while (read(buf).also { len = it } != -1) {
+            outputStream.write(buf, 0, len)
+        }
+        outputStream.close()
+        close()
+        outputStream.toString()
+    } catch (e: IOException) {
+        "{}"
+    }
+}
+
+fun Long.toZonedLocalDate() : LocalDate = Instant
+    .ofEpochMilli(this)
+    .atZone(ZoneId.systemDefault())
+    .toLocalDate()
+
 fun Long.toDate(): String {
     return if (DateUtils.isToday(this)) {
         DateUtils.getRelativeTimeSpanString(
@@ -30,7 +57,7 @@ fun Long.toDate(): String {
             DateUtils.MINUTE_IN_MILLIS
         ).toString()
     } else {
-        return DateFormat.getDateInstance().format(this)
+        DateFormat.getDateInstance().format(this)
     }
 }
 
