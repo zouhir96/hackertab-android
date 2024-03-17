@@ -55,4 +55,13 @@ class ArticleRepositoryImpl @Inject constructor(
             Resource.Failure.Exception(e)
         }
     }
+
+    override suspend fun getDevtoArticles(tag: String): Resource<List<ArticleDto>> {
+        return try {
+            val response = hackertabApi.fetchDevtoArticles(tag)
+            Resource.Success(response)
+        } catch (e: Exception) {
+            Resource.Failure.Exception(e)
+        }
+    }
 }
