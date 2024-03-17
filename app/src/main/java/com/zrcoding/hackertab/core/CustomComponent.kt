@@ -46,8 +46,8 @@ fun Chip(
     ) {
         Row(
             modifier = Modifier
-                .padding(horizontal = dimenLarge)
-                .clickable { onClick(chipData) },
+                .clickable { onClick(chipData) }
+                .padding(horizontal = dimenLarge),
             verticalAlignment = Alignment.CenterVertically
         ) {
             chipData.image?.let {

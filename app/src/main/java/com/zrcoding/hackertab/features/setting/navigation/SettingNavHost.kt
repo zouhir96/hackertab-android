@@ -101,7 +101,7 @@ fun SettingNavHost(
                     )
                 }
             ) {
-                SettingTopicsRoute(onNavigateBack = { navController.popBackStack() })
+                SettingTopicsRoute()
             }
             composable(
                 SettingScreen.SETTING_SOURCES.route,
@@ -118,7 +118,7 @@ fun SettingNavHost(
                     )
                 }
             ) {
-                SettingSourcesRoute(onNavigateBack = { navController.popBackStack() })
+                SettingSourcesRoute()
             }
         }
     }

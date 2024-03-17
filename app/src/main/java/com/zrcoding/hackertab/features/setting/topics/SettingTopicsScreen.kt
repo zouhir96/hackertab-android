@@ -18,7 +18,6 @@ import com.zrcoding.hackertab.theme.HackertabTheme
 @Composable
 fun SettingTopicsRoute(
     viewModel: SettingTopicsScreenViewModel = hiltViewModel(),
-    onNavigateBack: () -> Unit,
 ) {
     val state = viewModel.viewState.collectAsState().value
     SettingTopicsScreen(state, viewModel::onChipClicked)

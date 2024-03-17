@@ -18,7 +18,6 @@ import com.zrcoding.hackertab.theme.HackertabTheme
 @Composable
 fun SettingSourcesRoute(
     viewModel: SettingSourcesScreenViewModel = hiltViewModel(),
-    onNavigateBack: () -> Unit,
 ) {
     val state = viewModel.viewState.collectAsState().value
     SettingSourcesScreen(state, viewModel::onChipClicked)
