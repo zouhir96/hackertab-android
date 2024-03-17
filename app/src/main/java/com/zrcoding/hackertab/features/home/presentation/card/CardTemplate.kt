@@ -167,7 +167,7 @@ fun SourceItemTemplate(
 }
 
 @Composable
-private fun CardItemTags(
+fun CardItemTags(
     modifier: Modifier = Modifier,
     tags: List<String>,
 ) {

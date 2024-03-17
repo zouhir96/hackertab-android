@@ -1,9 +1,30 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.core.createImageLoader
 import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.domain.models.Conference
@@ -12,11 +33,13 @@ import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
+import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
@@ -30,6 +53,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
     SourceName.DEVTO -> DevtoItem(devto = model as Devto)
     SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
+    SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
     else -> Unit
 }
 
@@ -234,5 +258,71 @@ fun HashnodeItem(hashnode: Hashnode) {
             url = url,
             tags = tags,
         )
+    }
+}
+
+@Composable
+fun ProductHuntItem(product: ProductHunt) {
+    val context = LocalContext.current
+    Row(
+        modifier = Modifier
+            .clickable {
+                openUrlInBrowser(context = context, url = product.url)
+            }
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        with(product) {
+            Image(
+                modifier = Modifier.size(52.dp),
+                painter = rememberAsyncImagePainter(
+                    model = imageUrl,
+                    imageLoader = createImageLoader(context)
+                ),
+                contentDescription = null
+            )
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = title,
+                    color = MaterialTheme.colors.onBackground,
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = 2
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.body2,
+                    maxLines = 2
+                )
+                Row {
+                    TextWithStartIcon(
+                        text = stringResource(id = R.string.comments, commentsCount),
+                        icon = R.drawable.ic_comment,
+                    )
+                    CardItemTags(tags = tags)
+                }
+            }
+            Column(
+                modifier = Modifier
+                    .border(1.dp, MaterialTheme.colors.background, MaterialTheme.shapes.small)
+                    .padding(horizontal = 4.dp, vertical = 8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_arrow_drop_up),
+                    contentDescription = null
+                )
+                Text(
+                    text = "$reactions",
+                    color = Color.Gray,
+                    style = MaterialTheme.typography.subtitle1,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
     }
 }

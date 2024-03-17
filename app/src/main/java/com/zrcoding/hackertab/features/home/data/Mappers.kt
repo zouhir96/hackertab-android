@@ -6,6 +6,7 @@ import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
+import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.core.toZonedLocalDate
@@ -84,4 +85,15 @@ fun ArticleDto.toHashnode() = Hashnode(
     reactions = reactions,
     url = url,
     tags = tags
+)
+
+fun ArticleDto.toProductHunt() = ProductHunt(
+    id = id,
+    title = title,
+    description = description.orEmpty(),
+    imageUrl = imageUrl,
+    commentsCount = comments,
+    reactions = reactions,
+    url = url,
+    tags = tags.take(1)
 )

@@ -73,4 +73,14 @@ class ArticleRepositoryImpl @Inject constructor(
             Resource.Failure.Exception(e)
         }
     }
+
+    override suspend fun getProductHuntProducts(): Resource<List<ArticleDto>> {
+        return try {
+            val response = hackertabApi.fetchProductHuntProducts()
+            Resource.Success(response)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure.Exception(e)
+        }
+    }
 }
