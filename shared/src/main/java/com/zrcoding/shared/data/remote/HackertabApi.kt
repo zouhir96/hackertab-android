@@ -48,4 +48,7 @@ interface HackertabApi {
 
     @GET("producthunt.json?")
     suspend fun fetchProductHuntProducts(): List<ArticleDto>
+
+    @GET("indiehackers.json?")
+    suspend fun fetchIndieHackersArticles(): List<ArticleDto>
 }

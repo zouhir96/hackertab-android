@@ -33,6 +33,7 @@ import com.zrcoding.hackertab.features.home.domain.models.FreeCodeCamp
 import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
+import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
@@ -54,6 +55,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.DEVTO -> DevtoItem(devto = model as Devto)
     SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
     SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
+    SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
     else -> Unit
 }
 
@@ -324,5 +326,32 @@ fun ProductHuntItem(product: ProductHunt) {
                 )
             }
         }
+    }
+}
+
+@Composable
+fun IndieHackersItem(indieHackers: IndieHackers) {
+    with(indieHackers) {
+        SourceItemTemplate(
+            title = title,
+            description = description,
+            url = url,
+            primaryInfoSection = {
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.score, reactions),
+                    textColor = Color(0xFF4799eb),
+                    icon = R.drawable.ic_arrow_drop_up,
+                    tint = Color(0xFF4799eb)
+                )
+                TextWithStartIcon(
+                    text = date,
+                    icon = R.drawable.ic_time_24,
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.comments, commentsCount),
+                    icon = R.drawable.ic_comment,
+                )
+            }
+        )
     }
 }

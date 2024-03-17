@@ -21,4 +21,6 @@ interface ArticleRepository {
     suspend fun getHashnodeArticles(tag: String): Resource<List<ArticleDto>>
 
     suspend fun getProductHuntProducts(): Resource<List<ArticleDto>>
+
+    suspend fun getIndieHackersArticles(): Resource<List<ArticleDto>>
 }
