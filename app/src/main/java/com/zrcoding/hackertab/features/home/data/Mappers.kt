@@ -7,6 +7,7 @@ import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
+import com.zrcoding.hackertab.features.home.domain.models.Lobster
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.core.toDate
@@ -107,4 +108,14 @@ fun ArticleDto.toIndieHackers() = IndieHackers(
     commentsCount = comments,
     reactions = reactions,
     url = url,
+)
+
+fun ArticleDto.toLobster() = Lobster(
+    id = id,
+    title = title,
+    date = publishedAt.toDate(),
+    commentsCount = comments,
+    reactions = reactions,
+    url = url,
+    commentsUrl = commentsUrl.orEmpty()
 )

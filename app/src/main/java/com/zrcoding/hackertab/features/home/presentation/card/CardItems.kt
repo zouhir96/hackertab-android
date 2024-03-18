@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +35,7 @@ import com.zrcoding.hackertab.features.home.domain.models.GithubRepo
 import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
+import com.zrcoding.hackertab.features.home.domain.models.Lobster
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
@@ -56,6 +58,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
     SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
     SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
+    SourceName.LOBSTERS -> LobstersItem(lobster = model as Lobster)
     else -> Unit
 }
 
@@ -350,6 +353,39 @@ fun IndieHackersItem(indieHackers: IndieHackers) {
                 TextWithStartIcon(
                     text = stringResource(id = R.string.comments, commentsCount),
                     icon = R.drawable.ic_comment,
+                )
+            }
+        )
+    }
+}
+
+@Composable
+fun LobstersItem(lobster: Lobster) {
+    with(lobster) {
+        val context = LocalContext.current
+        SourceItemTemplate(
+            title = title,
+            url = url,
+            primaryInfoSection = {
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.score, reactions),
+                    textColor = Flamingo,
+                    icon = R.drawable.ic_arrow_drop_up,
+                    tint = Flamingo
+                )
+                TextWithStartIcon(
+                    text = date,
+                    icon = R.drawable.ic_time_24,
+                )
+                TextWithStartIcon(
+                    modifier = Modifier.clickable {
+                        openUrlInBrowser(context, commentsUrl)
+                    },
+                    text = stringResource(id = R.string.comments, commentsCount),
+                    textColor = Color(0xFF4799eb),
+                    textDecoration = TextDecoration.Underline,
+                    icon = R.drawable.ic_comment,
+                    tint = Color(0xFF4799eb)
                 )
             }
         )
