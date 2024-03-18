@@ -23,4 +23,6 @@ interface ArticleRepository {
     suspend fun getProductHuntProducts(): Resource<List<ArticleDto>>
 
     suspend fun getIndieHackersArticles(): Resource<List<ArticleDto>>
+
+    suspend fun getLobstersArticles(): Resource<List<ArticleDto>>
 }
