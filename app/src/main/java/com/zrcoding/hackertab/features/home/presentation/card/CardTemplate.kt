@@ -143,10 +143,10 @@ fun SourceItemTemplate(
         )
         Spacer(modifier = modifier.height(8.dp))
 
-        description?.let {
+        if (description.isNullOrBlank().not()) {
             Text(
                 modifier = modifier.fillMaxWidth(),
-                text = it,
+                text = description.orEmpty(),
                 style = MaterialTheme.typography.body2,
                 maxLines = 2
             )

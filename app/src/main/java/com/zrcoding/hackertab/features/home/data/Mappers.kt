@@ -11,6 +11,7 @@ import com.zrcoding.hackertab.features.home.domain.models.Lobster
 import com.zrcoding.hackertab.features.home.domain.models.Medium
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
+import com.zrcoding.shared.core.orEmpty
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.core.toZonedLocalDate
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
@@ -44,8 +45,8 @@ fun ArticleDto.toHackerNews() = HackerNews(
     title = title,
     url = url,
     time = publishedAt,
-    descendants = comments,
-    score = reactions,
+    descendants = comments.toLongOrNull().orEmpty(),
+    score = reactions.toLongOrNull().orEmpty(),
 )
 
 fun ArticleDto.toReddit() = Reddit(
@@ -53,8 +54,8 @@ fun ArticleDto.toReddit() = Reddit(
     title = title,
     subreddit = subreddit.orEmpty(),
     url = url,
-    score = reactions,
-    commentsCount = comments,
+    score = reactions.toLongOrNull().orEmpty(),
+    commentsCount = comments.toLongOrNull().orEmpty(),
     date = publishedAt
 )
 
@@ -74,8 +75,8 @@ fun ArticleDto.toDevto() = Devto(
     id = id,
     title = title,
     date = publishedAt.toDate(),
-    commentsCount = comments,
-    reactions = reactions,
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    reactions = reactions.toLongOrNull().orEmpty(),
     url = url,
     tags = tags
 )
@@ -84,8 +85,8 @@ fun ArticleDto.toHashnode() = Hashnode(
     id = id,
     title = title,
     date = publishedAt.toDate(),
-    commentsCount = comments,
-    reactions = reactions,
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    reactions = reactions.toLongOrNull().orEmpty(),
     url = url,
     tags = tags
 )
@@ -94,9 +95,9 @@ fun ArticleDto.toProductHunt() = ProductHunt(
     id = id,
     title = title,
     description = description.orEmpty(),
-    imageUrl = imageUrl,
-    commentsCount = comments,
-    reactions = reactions,
+    imageUrl = imageUrl.orEmpty(),
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    reactions = reactions.toLongOrNull().orEmpty(),
     url = url,
     tags = tags.take(1)
 )
@@ -104,10 +105,10 @@ fun ArticleDto.toProductHunt() = ProductHunt(
 fun ArticleDto.toIndieHackers() = IndieHackers(
     id = id,
     title = title,
-    description= description.orEmpty(),
+    description = description.orEmpty(),
     date = publishedAt.toDate(),
-    commentsCount = comments,
-    reactions = reactions,
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    reactions = reactions.toLongOrNull().orEmpty(),
     url = url,
 )
 
@@ -115,8 +116,8 @@ fun ArticleDto.toLobster() = Lobster(
     id = id,
     title = title,
     date = publishedAt.toDate(),
-    commentsCount = comments,
-    reactions = reactions,
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    reactions = reactions.toLongOrNull().orEmpty(),
     url = url,
     commentsUrl = commentsUrl.orEmpty()
 )
@@ -125,7 +126,7 @@ fun ArticleDto.toMedium() = Medium(
     id = id,
     title = title,
     date = publishedAt.toDate(),
-    commentsCount = comments,
-    claps = reactions,
+    commentsCount = comments.toLongOrNull().orEmpty(),
+    claps = reactions.toLongOrNull().orEmpty(),
     url = url,
 )
