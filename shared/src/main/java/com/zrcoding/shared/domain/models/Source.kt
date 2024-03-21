@@ -24,5 +24,4 @@ enum class SourceName(val value: String) {
     FREE_CODE_CAMP("freecodecamp"),
     INDIE_HACKERS("indiehackers"),
     MEDIUM("medium"),
-    AI("ai"),
 }

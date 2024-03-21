@@ -120,14 +120,6 @@ class SettingRepositoryImpl @Inject constructor(
                 link = "https://medium.com/",
                 analyticsTag = "medium",
             ),
-            Source(
-                name = SourceName.AI,
-                label = "Powered by AI",
-                icon = R.drawable.ic_ai,
-                type = "supported",
-                analyticsTag = "ai",
-                badge = "ALPHA"
-            )
         )
     }
 

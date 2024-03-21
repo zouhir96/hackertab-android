@@ -61,7 +61,6 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
     SourceName.LOBSTERS -> LobstersItem(lobster = model as Lobster)
     SourceName.MEDIUM -> MediumItem(medium = model as Medium)
-    else -> Unit
 }
 
 @Composable

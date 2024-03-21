@@ -36,7 +36,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
             flow2 = settingRepository.observeSelectedSources(),
             transform = ::Pair
         ).mapLatest { pair ->
-            pair.second.mapNotNull { source ->
+            pair.second.map { source ->
                 when (source.name) {
                     SourceName.GITHUB -> CardViewState(
                         source = source,
@@ -151,8 +151,6 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                             map = { toMedium() }
                         )
                     )
-
-                    else -> null
                 }
             }
         }
