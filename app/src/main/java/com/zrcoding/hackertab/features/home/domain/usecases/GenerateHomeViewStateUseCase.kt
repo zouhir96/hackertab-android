@@ -8,6 +8,7 @@ import com.zrcoding.hackertab.features.home.data.toHackerNews
 import com.zrcoding.hackertab.features.home.data.toHashnode
 import com.zrcoding.hackertab.features.home.data.toIndieHackers
 import com.zrcoding.hackertab.features.home.data.toLobster
+import com.zrcoding.hackertab.features.home.data.toMedium
 import com.zrcoding.hackertab.features.home.data.toProductHunt
 import com.zrcoding.hackertab.features.home.data.toReddit
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
@@ -138,6 +139,16 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                             getTags = { emptyList() },
                             call = { articleRepository.getLobstersArticles() },
                             map = { toLobster() }
+                        )
+                    )
+
+                    SourceName.MEDIUM -> CardViewState(
+                        source = source,
+                        state = createCardFlow(
+                            topics = pair.first,
+                            getTags = { mediumValues },
+                            call = { articleRepository.getMediumArticles(it) },
+                            map = { toMedium() }
                         )
                     )
 

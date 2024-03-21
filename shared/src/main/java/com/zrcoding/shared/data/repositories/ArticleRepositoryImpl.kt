@@ -86,7 +86,7 @@ class ArticleRepositoryImpl @Inject constructor(
 
     override suspend fun getIndieHackersArticles(): Resource<List<ArticleDto>> {
         return try {
-            val response = hackertabApi.fetchProductHuntProducts()
+            val response = hackertabApi.fetchIndieHackersArticles()
             Resource.Success(response)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -96,7 +96,17 @@ class ArticleRepositoryImpl @Inject constructor(
 
     override suspend fun getLobstersArticles(): Resource<List<ArticleDto>> {
         return try {
-            val response = hackertabApi.fetchILobstersArticles()
+            val response = hackertabApi.fetchLobstersArticles()
+            Resource.Success(response)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Failure.Exception(e)
+        }
+    }
+
+    override suspend fun getMediumArticles(tag: String): Resource<List<ArticleDto>> {
+        return try {
+            val response = hackertabApi.fetchMediumArticles(tag)
             Resource.Success(response)
         } catch (e: Exception) {
             e.printStackTrace()

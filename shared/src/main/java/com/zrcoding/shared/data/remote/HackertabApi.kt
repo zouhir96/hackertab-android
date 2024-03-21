@@ -52,6 +52,11 @@ interface HackertabApi {
     @GET("indiehackers.json?")
     suspend fun fetchIndieHackersArticles(): List<ArticleDto>
 
-    @GET("lobsters.json?")
-    suspend fun fetchILobstersArticles(): List<ArticleDto>
+    @GET("lobsters.json")
+    suspend fun fetchLobstersArticles(): List<ArticleDto>
+
+    @GET("medium/{$PATH_TAG}.json")
+    suspend fun fetchMediumArticles(
+        @Path(PATH_TAG) tag: String
+    ): List<ArticleDto>
 }

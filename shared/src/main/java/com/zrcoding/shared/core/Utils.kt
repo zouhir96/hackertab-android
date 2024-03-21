@@ -80,3 +80,5 @@ fun String.mCapitalize(locale: Locale = Locale.getDefault()): String{
         ) else it.toString()
     }
 }
+
+fun Long?.orEmpty() = this ?: 0
