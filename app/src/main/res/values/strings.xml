@@ -12,6 +12,7 @@
     <string name="reactions">%d reactions</string>
     <string name="stars">%s stars</string>
     <string name="forks">%s forks</string>
+    <string name="claps">%s claps</string>
     <string name="subreddit">r/ %s</string>
     <string name="empty_state_msg">Please turn on your connection to see new updates</string>
     <string name="loading">Loading …</string>

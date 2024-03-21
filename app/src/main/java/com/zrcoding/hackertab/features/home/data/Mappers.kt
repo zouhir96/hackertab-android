@@ -8,6 +8,7 @@ import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
 import com.zrcoding.hackertab.features.home.domain.models.Lobster
+import com.zrcoding.hackertab.features.home.domain.models.Medium
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.shared.core.toDate
@@ -118,4 +119,13 @@ fun ArticleDto.toLobster() = Lobster(
     reactions = reactions,
     url = url,
     commentsUrl = commentsUrl.orEmpty()
+)
+
+fun ArticleDto.toMedium() = Medium(
+    id = id,
+    title = title,
+    date = publishedAt.toDate(),
+    commentsCount = comments,
+    claps = reactions,
+    url = url,
 )

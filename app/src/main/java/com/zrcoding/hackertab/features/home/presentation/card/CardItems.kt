@@ -36,6 +36,7 @@ import com.zrcoding.hackertab.features.home.domain.models.HackerNews
 import com.zrcoding.hackertab.features.home.domain.models.Hashnode
 import com.zrcoding.hackertab.features.home.domain.models.IndieHackers
 import com.zrcoding.hackertab.features.home.domain.models.Lobster
+import com.zrcoding.hackertab.features.home.domain.models.Medium
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
@@ -59,6 +60,7 @@ fun SourceName.ToCardItem(model: BaseModel) = when (this) {
     SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
     SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
     SourceName.LOBSTERS -> LobstersItem(lobster = model as Lobster)
+    SourceName.MEDIUM -> MediumItem(medium = model as Medium)
     else -> Unit
 }
 
@@ -386,6 +388,31 @@ fun LobstersItem(lobster: Lobster) {
                     textDecoration = TextDecoration.Underline,
                     icon = R.drawable.ic_comment,
                     tint = Color(0xFF4799eb)
+                )
+            }
+        )
+    }
+}
+
+@Composable
+fun MediumItem(medium: Medium) {
+    with(medium) {
+        SourceItemTemplate(
+            title = title,
+            url = url,
+            primaryInfoSection = {
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.claps, claps),
+                    icon = R.drawable.ic_claps,
+                    tint = MaterialTheme.colors.onBackground
+                )
+                TextWithStartIcon(
+                    text = stringResource(id = R.string.comments, commentsCount),
+                    icon = R.drawable.ic_comment,
+                )
+                TextWithStartIcon(
+                    text = date,
+                    icon = R.drawable.ic_time_24,
                 )
             }
         )
