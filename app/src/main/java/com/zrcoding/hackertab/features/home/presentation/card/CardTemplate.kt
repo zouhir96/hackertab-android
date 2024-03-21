@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -281,6 +282,7 @@ fun TextWithStartIcon(
     text: String,
     textColor: Color = Color.Gray,
     textStyle: TextStyle = MaterialTheme.typography.caption,
+    textDecoration: TextDecoration = TextDecoration.None,
     icon: Int,
     tint: Color = Color.Gray
 ) {
@@ -301,7 +303,8 @@ fun TextWithStartIcon(
             color = textColor,
             style = textStyle,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            textDecoration = textDecoration
         )
     }
 }
