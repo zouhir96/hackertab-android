@@ -25,4 +25,6 @@ interface ArticleRepository {
     suspend fun getIndieHackersArticles(): Resource<List<ArticleDto>>
 
     suspend fun getLobstersArticles(): Resource<List<ArticleDto>>
+
+    suspend fun getMediumArticles(tag: String): Resource<List<ArticleDto>>
 }
