@@ -14,12 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimenBig
-import com.zrcoding.hackertab.theme.dimenExtraLarge
-import com.zrcoding.hackertab.theme.screenPaddingHorizontal
+import com.zrcoding.hackertab.theme.dimension
 
 @Composable
 fun SettingScreen(
@@ -31,21 +28,21 @@ fun SettingScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
-            .padding(top = dimenExtraLarge)
-            .padding(horizontal = screenPaddingHorizontal)
+            .padding(top = MaterialTheme.dimension.extraBig)
+            .padding(horizontal = MaterialTheme.dimension.screenPaddingHorizontal)
     ) {
         Text(
             text = stringResource(id = title),
             style = MaterialTheme.typography.h5,
             color = MaterialTheme.colors.onBackground
         )
-        Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(MaterialTheme.dimension.medium))
         Text(
             text = stringResource(id = description),
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onBackground
         )
-        Spacer(modifier = Modifier.height(dimenBig))
+        Spacer(modifier = Modifier.height(MaterialTheme.dimension.big))
         content()
     }
 }

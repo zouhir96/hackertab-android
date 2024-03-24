@@ -45,7 +45,7 @@ import com.zrcoding.hackertab.core.getTagColor
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimenExtraLarge
+import com.zrcoding.hackertab.theme.dimension
 import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.domain.models.SourceName
 
@@ -57,11 +57,17 @@ fun CardTemplate(
     cardItem: @Composable (SourceName, BaseModel) -> Unit,
 ) {
     Card(
-        elevation = 3.dp,
+        elevation = MaterialTheme.dimension.small,
         modifier = modifier
-            .padding(end = 8.dp, top = 16.dp)
+            .padding(
+                end = MaterialTheme.dimension.medium,
+                top = MaterialTheme.dimension.default
+            )
             .fillMaxHeight(),
-        shape = RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp)
+        shape = RoundedCornerShape(
+            topStart = MaterialTheme.dimension.large,
+            topEnd = MaterialTheme.dimension.large
+        )
     ) {
         Column {
             CardHeader(
@@ -78,8 +84,8 @@ fun CardTemplate(
 
                 is CardViewState.State.Success -> {
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(10.dp),
-                        contentPadding = PaddingValues(bottom = dimenExtraLarge)
+                        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large),
+                        contentPadding = PaddingValues(bottom = MaterialTheme.dimension.extraBig)
                     ) {
                         items(
                             items = state.articles,
@@ -88,7 +94,7 @@ fun CardTemplate(
                             }
                         ) { item ->
                             cardItem(cardUiState.source.name, item)
-                            Divider(modifier = Modifier.padding(horizontal = 10.dp))
+                            Divider(modifier = Modifier.padding(horizontal = MaterialTheme.dimension.large))
                         }
                     }
                 }
@@ -132,7 +138,10 @@ fun SourceItemTemplate(
                 }
             }
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(
+                horizontal = MaterialTheme.dimension.default,
+                vertical = MaterialTheme.dimension.medium
+            ),
     ) {
 
         Text(
@@ -141,7 +150,7 @@ fun SourceItemTemplate(
             style = MaterialTheme.typography.subtitle1,
             maxLines = 2
         )
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(MaterialTheme.dimension.medium))
 
         if (description.isNullOrBlank().not()) {
             Text(
@@ -150,16 +159,16 @@ fun SourceItemTemplate(
                 style = MaterialTheme.typography.body2,
                 maxLines = 2
             )
-            Spacer(modifier = modifier.height(4.dp))
+            Spacer(modifier = modifier.height(MaterialTheme.dimension.small))
         }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.medium)
         ) {
             primaryInfoSection()
         }
-        Spacer(modifier = modifier.height(4.dp))
+        Spacer(modifier = modifier.height(MaterialTheme.dimension.small))
 
         tags?.let {
             CardItemTags(modifier = Modifier.fillMaxWidth(), tags = it)
@@ -176,7 +185,7 @@ fun CardItemTags(
     if (isTagsBlank) return
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.medium)
     ) {
         tags.forEach {
             val color = it.getTagColor()
@@ -213,10 +222,10 @@ fun CardHeader(title: String, icon: Int) {
         Image(
             painter = painterResource(id = icon),
             contentDescription = "card header icon",
-            modifier = Modifier.size(22.dp)
+            modifier = Modifier.size(MaterialTheme.dimension.bigger)
         )
         Spacer(
-            modifier = Modifier.width(12.dp)
+            modifier = Modifier.width(MaterialTheme.dimension.large)
         )
         Text(
             text = title,
@@ -242,10 +251,10 @@ fun Loading(title: String = stringResource(R.string.loading)) {
             .fillMaxSize()
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.size(25.dp),
+            modifier = Modifier.size(MaterialTheme.dimension.bigger),
             color = MaterialTheme.colors.onPrimary
         )
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(MaterialTheme.dimension.medium))
         Text(
             text = title,
             style = MaterialTheme.typography.body1
@@ -287,11 +296,13 @@ fun TextWithStartIcon(
     tint: Color = Color.Gray
 ) {
     Row(
-        modifier = modifier.padding(end = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = modifier.padding(end = MaterialTheme.dimension.medium),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.small),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val iconSize = if (icon == R.drawable.ic_ellipse) 8.dp else 14.dp
+        val iconSize = if (icon == R.drawable.ic_ellipse) {
+            MaterialTheme.dimension.medium
+        } else MaterialTheme.dimension.default
         Icon(
             painter = painterResource(id = icon),
             contentDescription = "",

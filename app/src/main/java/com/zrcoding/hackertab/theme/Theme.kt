@@ -52,3 +52,6 @@ fun HackertabTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composa
         content = content
     )
 }
+
+val MaterialTheme.dimension: Dimens
+    get() = Dimens()

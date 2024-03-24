@@ -30,7 +30,7 @@ import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.features.home.presentation.card.CardTemplate
 import com.zrcoding.hackertab.features.home.presentation.card.ToCardItem
 import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimenSmall
+import com.zrcoding.hackertab.theme.dimension
 
 @Composable
 fun HomeRoute(
@@ -57,7 +57,7 @@ fun HomeScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                elevation = 0.dp
+                elevation = MaterialTheme.dimension.none
             ) {
                 HomeScreenTopAppBar(
                     onRefreshBtnClick = onRefreshBtnClick,
@@ -96,7 +96,7 @@ fun HomeScreenTopAppBar(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(start = 12.dp),
+        modifier = Modifier.padding(start = MaterialTheme.dimension.large),
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_hackertab),
@@ -109,7 +109,7 @@ fun HomeScreenTopAppBar(
             onClick = { onRefreshBtnClick() },
             modifier = Modifier.size(50.dp),
             shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
+            contentPadding = PaddingValues(MaterialTheme.dimension.none),
             colors = ButtonDefaults.outlinedButtonColors(
                 contentColor = MaterialTheme.colors.primaryVariant
             )
@@ -120,12 +120,12 @@ fun HomeScreenTopAppBar(
                 tint = colorResource(R.color.icons_tint)
             )
         }
-        Spacer(modifier = Modifier.width(dimenSmall))
+        Spacer(modifier = Modifier.width(MaterialTheme.dimension.small))
         Button(
             onClick = { onSettingBtnClick() },
             modifier = Modifier.size(50.dp),
             shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
+            contentPadding = PaddingValues(MaterialTheme.dimension.none),
             colors = ButtonDefaults.outlinedButtonColors(
                 contentColor = MaterialTheme.colors.primaryVariant
             )
@@ -147,6 +147,8 @@ fun HomeScreenTopAppBarPreview() {
     }
 }
 
+
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreenCardsPager(
@@ -157,7 +159,7 @@ fun HomeScreenCardsPager(
     HorizontalPager(
         modifier = modifier,
         state = pagerState,
-        contentPadding = PaddingValues(start = 16.dp, end = 8.dp)
+        contentPadding = PaddingValues(start = MaterialTheme.dimension.default, end = MaterialTheme.dimension.medium)
     ) { page ->
         cardViewStates.getOrNull(page)?.let { state ->
             CardTemplate(

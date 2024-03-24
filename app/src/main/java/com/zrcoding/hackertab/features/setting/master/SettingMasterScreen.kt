@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.theme.HackertabTheme
+import com.zrcoding.hackertab.theme.dimension
 
 @Composable
 fun SettingMasterScreen(
@@ -32,10 +33,10 @@ fun SettingMasterScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(top = 40.dp)
-            .padding(horizontal = 20.dp)
+            .padding(top = MaterialTheme.dimension.extraBig)
+            .padding(horizontal = MaterialTheme.dimension.big)
             .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large)
     ) {
         SettingItemsContainer {
             SettingItem(R.string.setting_master_screen_topics, onClick = onNavigateToTopics)
@@ -64,7 +65,10 @@ fun SettingItemsContainer(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 10.dp, vertical = 16.dp)
+                .padding(
+                    horizontal = MaterialTheme.dimension.large,
+                    vertical = MaterialTheme.dimension.default
+                )
         ) {
             content()
         }
@@ -92,8 +96,8 @@ fun SettingItem(
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.large)
             .clickable(onClick = onClick)
-            .padding(10.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+            .padding(MaterialTheme.dimension.large),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -105,7 +109,7 @@ fun SettingItem(
                 style = MaterialTheme.typography.subtitle1
             )
             Icon(
-                modifier = Modifier.size(18.dp),
+                modifier = Modifier.size(MaterialTheme.dimension.big),
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_forward),
                 contentDescription = null,
                 tint = MaterialTheme.colors.secondary

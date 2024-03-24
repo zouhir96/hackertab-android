@@ -23,9 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
-import com.zrcoding.hackertab.theme.dimenBig
-import com.zrcoding.hackertab.theme.dimenLarge
-import com.zrcoding.hackertab.theme.dimenMedium
+import com.zrcoding.hackertab.theme.dimension
 
 data class ChipData(
     val id: String,
@@ -41,20 +39,20 @@ fun Chip(
     onClick: (ChipData) -> Unit,
 ) {
     Surface(
-        shape = RoundedCornerShape(dimenBig),
+        shape = RoundedCornerShape(MaterialTheme.dimension.big),
         color = if (isSelected) TextLink else MaterialTheme.colors.secondary
     ) {
         Row(
             modifier = Modifier
                 .clickable { onClick(chipData) }
-                .padding(horizontal = dimenLarge),
+                .padding(horizontal = MaterialTheme.dimension.large),
             verticalAlignment = Alignment.CenterVertically
         ) {
             chipData.image?.let {
                 Icon(
                     modifier = Modifier
-                        .padding(end = dimenMedium)
-                        .size(dimenBig),
+                        .padding(end = MaterialTheme.dimension.medium)
+                        .size(MaterialTheme.dimension.big),
                     painter = painterResource(id = it),
                     contentDescription = null,
                     tint = MaterialTheme.colors.surface
@@ -62,7 +60,7 @@ fun Chip(
             }
 
             Text(
-                modifier = Modifier.padding(vertical = dimenMedium),
+                modifier = Modifier.padding(vertical = MaterialTheme.dimension.medium),
                 text = chipData.name,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.primary
@@ -80,8 +78,8 @@ fun ChipGroup(
 ) {
     FlowRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(dimenMedium),
-        verticalArrangement = Arrangement.spacedBy(dimenMedium),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.medium),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.medium),
     ) {
         chips.forEach { chip ->
             Chip(

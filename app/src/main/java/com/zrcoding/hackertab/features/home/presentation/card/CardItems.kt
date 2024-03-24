@@ -43,6 +43,7 @@ import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDispl
 import com.zrcoding.hackertab.theme.Flamingo
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.TextLink
+import com.zrcoding.hackertab.theme.dimension
 import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.domain.models.SourceName
@@ -276,8 +277,11 @@ fun ProductHuntItem(product: ProductHunt) {
                 openUrlInBrowser(context = context, url = product.url)
             }
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
+            .padding(
+                horizontal = MaterialTheme.dimension.default,
+                vertical = MaterialTheme.dimension.medium
+            ),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.small)
     ) {
         with(product) {
             Image(
@@ -290,7 +294,7 @@ fun ProductHuntItem(product: ProductHunt) {
             )
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.small)
             ) {
                 Text(
                     text = title,
@@ -314,7 +318,10 @@ fun ProductHuntItem(product: ProductHunt) {
             Column(
                 modifier = Modifier
                     .border(1.dp, MaterialTheme.colors.background, MaterialTheme.shapes.small)
-                    .padding(horizontal = 4.dp, vertical = 8.dp),
+                    .padding(
+                        horizontal = MaterialTheme.dimension.small,
+                        vertical = MaterialTheme.dimension.medium
+                    ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Icon(
