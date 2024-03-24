@@ -1,10 +1,10 @@
 package com.zrcoding.shared.data.repositories
 
-import com.zrcoding.shared.core.Resource
 import com.zrcoding.shared.data.remote.HackertabApi
 import com.zrcoding.shared.data.remote.dtos.ArticleDto
 import com.zrcoding.shared.data.remote.dtos.ConferenceDto
 import com.zrcoding.shared.data.remote.dtos.GithubDto
+import com.zrcoding.shared.domain.models.Resource
 import com.zrcoding.shared.domain.repositories.ArticleRepository
 import javax.inject.Inject
 

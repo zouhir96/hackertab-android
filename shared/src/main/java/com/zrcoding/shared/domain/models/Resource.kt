@@ -1,4 +1,4 @@
-package com.zrcoding.shared.core
+package com.zrcoding.shared.domain.models
 
 sealed interface Resource<out T> {
     class Success<out T>(val data: T) : Resource<T>

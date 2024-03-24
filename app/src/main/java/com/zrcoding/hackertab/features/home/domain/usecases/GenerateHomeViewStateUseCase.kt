@@ -13,7 +13,7 @@ import com.zrcoding.hackertab.features.home.data.toProductHunt
 import com.zrcoding.hackertab.features.home.data.toReddit
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
-import com.zrcoding.shared.core.Resource
+import com.zrcoding.shared.domain.models.Resource
 import com.zrcoding.shared.domain.models.SourceName
 import com.zrcoding.shared.domain.models.Topic
 import com.zrcoding.shared.domain.repositories.ArticleRepository
