@@ -1,18 +1,8 @@
 package com.zrcoding.shared.domain.models
 
-sealed interface Resource<out T> {
-    class Success<out T>(val data: T) : Resource<T>
-    sealed interface Failure : Resource<Nothing> {
-        class Error(val code: Int, val message: String) : Failure
-        class Exception(val exception: kotlin.Exception) : Failure
-    }
-}
+typealias RootError = Error
 
-sealed interface LoadableResource<out T> {
-    data object Loading: LoadableResource<Nothing>
-    data class Success<out T>(val data: T): LoadableResource<T>
-    sealed interface Failure : LoadableResource<Nothing> {
-        class Error(val code: Int, val message: String) : Failure
-        class Exception(val exception: kotlin.Exception) : Failure
-    }
+sealed interface Resource<out T, out E : RootError> {
+    data class Success<out T>(val data: T) : Resource<T, Nothing>
+    data class Failure<out E : RootError>(val error: E) : Resource<Nothing, E>
 }
