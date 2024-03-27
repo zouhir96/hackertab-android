@@ -70,7 +70,8 @@ fun HomeScreen(
             HomeScreenViewState.Loading -> Unit
             is HomeScreenViewState.Cards -> HomeScreenCardsPager(
                 modifier = Modifier.padding(it),
-                cardViewStates = viewState.cardViewStates
+                cardViewStates = viewState.cardViewStates,
+                onRefreshBtnClick = onRefreshBtnClick
             )
         }
     }
@@ -153,7 +154,8 @@ fun HomeScreenTopAppBarPreview() {
 @Composable
 fun HomeScreenCardsPager(
     modifier: Modifier = Modifier,
-    cardViewStates: List<CardViewState>
+    cardViewStates: List<CardViewState>,
+    onRefreshBtnClick: () -> Unit
 ) {
     val pagerState = rememberPagerState { cardViewStates.size }
     HorizontalPager(
@@ -166,7 +168,8 @@ fun HomeScreenCardsPager(
                 cardUiState = state,
                 cardItem = { sourceName, model ->
                     sourceName.ToCardItem(model = model)
-                }
+                },
+                onRetryBtnClick = onRefreshBtnClick
             )
         }
     }
