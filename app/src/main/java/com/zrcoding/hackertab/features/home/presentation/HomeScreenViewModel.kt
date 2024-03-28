@@ -25,10 +25,9 @@ class HomeScreenViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            generateHomeViewStateUseCase()
-                .collectLatest { cards ->
-                    _viewState.update { HomeScreenViewState.Cards(cards) }
-                }
+            generateHomeViewStateUseCase().collectLatest { cards ->
+                _viewState.update { HomeScreenViewState.Cards(cards) }
+            }
         }
     }
 }

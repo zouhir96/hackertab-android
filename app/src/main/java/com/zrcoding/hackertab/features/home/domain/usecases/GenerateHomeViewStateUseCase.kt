@@ -13,7 +13,9 @@ import com.zrcoding.hackertab.features.home.data.toProductHunt
 import com.zrcoding.hackertab.features.home.data.toReddit
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
-import com.zrcoding.shared.core.Resource
+import com.zrcoding.shared.domain.models.NetworkErrors
+import com.zrcoding.shared.domain.models.Resource
+import com.zrcoding.shared.domain.models.Source
 import com.zrcoding.shared.domain.models.SourceName
 import com.zrcoding.shared.domain.models.Topic
 import com.zrcoding.shared.domain.repositories.ArticleRepository
@@ -36,119 +38,131 @@ class GenerateHomeViewStateUseCase @Inject constructor(
             flow2 = settingRepository.observeSelectedSources(),
             transform = ::Pair
         ).mapLatest { pair ->
+            val topics = pair.first.ifEmpty { listOf(Topic.global) }
             pair.second.map { source ->
                 when (source.name) {
                     SourceName.GITHUB -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { githubValues.orEmpty() },
-                            call = { articleRepository.getGithubRepositories(it) },
-                            map = { toGithubRepo() }
+                            getArticles = { articleRepository.getGithubRepositories(it) },
+                            toModel = { toGithubRepo() }
                         )
                     )
 
                     SourceName.HACKER_NEWS -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             supportTags = false,
                             getTags = { emptyList() },
-                            call = { articleRepository.getHackerNewsArticles() },
-                            map = { toHackerNews() }
+                            getArticles = { articleRepository.getHackerNewsArticles() },
+                            toModel = { toHackerNews() }
                         )
                     )
 
                     SourceName.REDDIT -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { redditValues },
-                            call = { articleRepository.getRedditArticles(it) },
-                            map = { toReddit() }
+                            getArticles = { articleRepository.getRedditArticles(it) },
+                            toModel = { toReddit() }
                         )
                     )
 
                     SourceName.FREE_CODE_CAMP -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { freecodecampValues },
-                            call = { articleRepository.getFreeCodeCampArticles(it) },
-                            map = { toFreeCodeCamp() }
+                            getArticles = { articleRepository.getFreeCodeCampArticles(it) },
+                            toModel = { toFreeCodeCamp() }
                         )
                     )
 
                     SourceName.CONFERENCES -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { confsValues.orEmpty() },
-                            call = { articleRepository.getConferences(it) },
-                            map = { toConference() }
+                            getArticles = { articleRepository.getConferences(it) },
+                            toModel = { toConference() }
                         )
                     )
 
                     SourceName.DEVTO -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { devtoValues },
-                            call = { articleRepository.getDevtoArticles(it) },
-                            map = { toDevto() }
+                            getArticles = { articleRepository.getDevtoArticles(it) },
+                            toModel = { toDevto() }
                         )
                     )
 
                     SourceName.HASH_NODE -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { hashnodeValues },
-                            call = { articleRepository.getHashnodeArticles(it) },
-                            map = { toHashnode() }
+                            getArticles = { articleRepository.getHashnodeArticles(it) },
+                            toModel = { toHashnode() }
                         )
                     )
 
                     SourceName.PRODUCTHUNT -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             supportTags = false,
                             getTags = { emptyList() },
-                            call = { articleRepository.getProductHuntProducts() },
-                            map = { toProductHunt() }
+                            getArticles = { articleRepository.getProductHuntProducts() },
+                            toModel = { toProductHunt() }
                         )
                     )
 
                     SourceName.INDIE_HACKERS -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             supportTags = false,
                             getTags = { emptyList() },
-                            call = { articleRepository.getIndieHackersArticles() },
-                            map = { toIndieHackers() }
+                            getArticles = { articleRepository.getIndieHackersArticles() },
+                            toModel = { toIndieHackers() }
                         )
                     )
 
                     SourceName.LOBSTERS -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             supportTags = false,
                             getTags = { emptyList() },
-                            call = { articleRepository.getLobstersArticles() },
-                            map = { toLobster() }
+                            getArticles = { articleRepository.getLobstersArticles() },
+                            toModel = { toLobster() }
                         )
                     )
 
                     SourceName.MEDIUM -> CardViewState(
                         source = source,
                         state = createCardFlow(
-                            topics = pair.first,
+                            source = source,
+                            topics = topics,
                             getTags = { mediumValues },
-                            call = { articleRepository.getMediumArticles(it) },
-                            map = { toMedium() }
+                            getArticles = { articleRepository.getMediumArticles(it) },
+                            toModel = { toMedium() }
                         )
                     )
                 }
@@ -156,33 +170,48 @@ class GenerateHomeViewStateUseCase @Inject constructor(
         }
     }
 
-    private inline fun <Dto: Any, Model: BaseModel> createCardFlow(
+    private inline fun <Dto : Any, Model : BaseModel> createCardFlow(
+        source: Source,
         topics: List<Topic>,
         supportTags: Boolean = true,
         crossinline getTags: Topic.() -> List<String>,
-        crossinline call: suspend (String) -> Resource<List<Dto>>,
-        crossinline map: Dto.() -> Model,
+        crossinline getArticles: suspend (String) -> Resource<List<Dto>, NetworkErrors>,
+        crossinline toModel: Dto.() -> Model,
     ): Flow<CardViewState.State> = flow {
         emit(CardViewState.State.Loading)
         if (supportTags.not()) {
-            when (val articles = call("")) {
-                is Resource.Success -> emit(CardViewState.State.Success(articles.data.map { it.map() }))
-                is Resource.Failure -> emit(CardViewState.State.Error)
+            when (val result = getArticles("")) {
+                is Resource.Success -> emit(CardViewState.State.Success(result.data.map { it.toModel() }))
+                is Resource.Failure -> emit(result.error.toStateError(source.name.value))
             }
             return@flow
         }
-        val articles = topics.map { topic ->
-            val tags = topic.getTags()
-            if (tags.isEmpty()) {
-                emptyList()
-            } else {
-                tags.map { call(it) }
-                    .filterIsInstance<Resource.Success<List<Dto>>>()
-                    .map { it.data }
-                    .flatten()
+        val articles = mutableListOf<Dto>()
+        var noInternet = false
+        var failedToLoad = false
+        topics.forEach { topic ->
+            topic.getTags().forEach {
+                when (val result = getArticles(it)) {
+                    is Resource.Success -> articles.addAll(result.data)
+                    is Resource.Failure -> when(result.error){
+                        NetworkErrors.NO_INTERNET,
+                        NetworkErrors.REQUEST_TIMEOUT -> noInternet = true
+                        NetworkErrors.UNKNOWN -> failedToLoad = true
+                    }
+                }
             }
-        }.flatten()
+        }
+        if (articles.isEmpty() && failedToLoad) {
+            emit(CardViewState.State.Error("Failed to load ${source.name.value} articles"))
+        } else if (articles.isEmpty() && noInternet) {
+            emit(CardViewState.State.VerifyConnectionAndRefresh)
+        } else emit(CardViewState.State.Success(articles.map { it.toModel() }))
+    }
 
-        emit(CardViewState.State.Success(articles.map { it.map() }))
+    private fun NetworkErrors.toStateError(sourceName: String): CardViewState.State = when (this) {
+        NetworkErrors.NO_INTERNET,
+        NetworkErrors.REQUEST_TIMEOUT -> CardViewState.State.VerifyConnectionAndRefresh
+
+        NetworkErrors.UNKNOWN -> CardViewState.State.Error("Failed to load $sourceName articles")
     }
 }

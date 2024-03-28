@@ -1,5 +1,6 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
@@ -55,6 +57,7 @@ fun CardTemplate(
     modifier: Modifier = Modifier,
     cardUiState: CardViewState,
     cardItem: @Composable (SourceName, BaseModel) -> Unit,
+    onRetryBtnClick: () -> Unit
 ) {
     Card(
         elevation = MaterialTheme.dimension.small,
@@ -80,10 +83,10 @@ fun CardTemplate(
             ) {
                 CardViewState.State.Loading -> Loading(stringResource(R.string.loading))
 
-                CardViewState.State.Error -> EmptySource()
-
                 is CardViewState.State.Success -> {
-                    LazyColumn(
+                    if (state.articles.isEmpty()) {
+                        CenterMsg(R.string.empty_source_msg, cardUiState.source.name.value)
+                    } else LazyColumn(
                         verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large),
                         contentPadding = PaddingValues(bottom = MaterialTheme.dimension.extraBig)
                     ) {
@@ -98,6 +101,16 @@ fun CardTemplate(
                         }
                     }
                 }
+
+                is CardViewState.State.Error -> CenterMsg(
+                    R.string.failed_to_load_source,
+                    cardUiState.source.name.value
+                )
+
+                CardViewState.State.VerifyConnectionAndRefresh -> ErrorMsgWithRetryBtn(
+                    text = R.string.no_internet_connect,
+                    onRetry = onRetryBtnClick
+                )
             }
         }
     }
@@ -263,25 +276,49 @@ fun Loading(title: String = stringResource(R.string.loading)) {
 }
 
 @Composable
-fun EmptySource(title: String = stringResource(R.string.empty)) {
+fun CenterMsg(@StringRes text: Int, args: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.undraw_connection),
-            "",
-            modifier = Modifier
-                .width(150.dp)
-                .height(200.dp)
-        )
         Text(
-            text = title,
+            text = stringResource(text, args),
             style = MaterialTheme.typography.body1,
             textAlign = TextAlign.Center
         )
+    }
+}
+
+@Composable
+fun ErrorMsgWithRetryBtn(
+    @StringRes text: Int,
+    vararg args: String,
+    onRetry: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = MaterialTheme.dimension.screenPaddingHorizontal)
+    ) {
+        Text(
+            text = stringResource(text, args),
+            style = MaterialTheme.typography.body1,
+            textAlign = TextAlign.Center
+        )
+        Button(
+            modifier = Modifier.padding(horizontal = MaterialTheme.dimension.big),
+            onClick = onRetry
+        ) {
+            Text(
+                text = stringResource(R.string.common_retry),
+                style = MaterialTheme.typography.button,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
