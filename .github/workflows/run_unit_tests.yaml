@@ -8,7 +8,7 @@ jobs:
 
   test:
     name: Unit tests
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
 
     steps:
       - name: Checkout code
