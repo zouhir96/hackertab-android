@@ -3,6 +3,7 @@ package com.zrcoding.hackertab.features.setting.master
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -16,12 +17,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.zrcoding.hackertab.BuildConfig
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimension
@@ -31,20 +34,25 @@ fun SettingMasterScreen(
     onNavigateToTopics: () -> Unit,
     onNavigateToSources: () -> Unit
 ) {
-    Column(
+    Box(
         modifier = Modifier
-            .padding(top = MaterialTheme.dimension.extraBig)
-            .padding(horizontal = MaterialTheme.dimension.big)
+            .padding(
+                top = MaterialTheme.dimension.extraBig,
+                bottom = MaterialTheme.dimension.default
+            )
+            .padding(horizontal = MaterialTheme.dimension.screenPaddingHorizontal)
             .fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large)
     ) {
-        SettingItemsContainer {
-            SettingItem(R.string.setting_master_screen_topics, onClick = onNavigateToTopics)
-            SettingItem(R.string.setting_master_screen_sources, onClick = onNavigateToSources)
+        Column(
+            modifier = Modifier.align(Alignment.TopCenter),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large)
+        ) {
+            SettingItemsContainer {
+                SettingItem(R.string.setting_master_screen_topics, onClick = onNavigateToTopics)
+                SettingItem(R.string.setting_master_screen_sources, onClick = onNavigateToSources)
+            }
         }
-        SettingItemsContainer {
-            SettingItem(R.string.setting_master_screen_settings) {}
-        }
+        AppVersionName(modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
@@ -128,4 +136,15 @@ fun SettingItemPreview() {
     HackertabTheme {
         SettingItem(R.string.setting_master_screen_topics) {}
     }
+}
+
+@Composable
+fun AppVersionName(modifier: Modifier = Modifier) {
+    val versionName = BuildConfig.VERSION_NAME
+    Text(
+        modifier = modifier,
+        text = stringResource(id = R.string.setting_master_screen_version_name, versionName),
+        color = MaterialTheme.colors.secondary,
+        style = MaterialTheme.typography.subtitle1
+    )
 }
