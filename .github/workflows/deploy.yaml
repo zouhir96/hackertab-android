@@ -44,7 +44,7 @@ jobs:
       - name: Version bump
         uses: chkfung/android-version-actions@v1.1
         with:
-          gradlePath: app/build.gradle.kts
+          gradlePath: app/build.gradle
           versionCode: ${{ github.run_number }}
 
       - name: Assemble Release Bundle
@@ -68,6 +68,6 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.zrcoding.hackertab
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
-          track: internal
+          track: qa
           status: 'completed'
           whatsNewDirectory: whatsNewDirectory/
