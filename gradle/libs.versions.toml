@@ -1,0 +1,87 @@
+[versions]
+depKotlin = "1.9.20"
+jvmTarget = "17"
+compileSdk = "34"
+targetSdk = "34"
+minSdk = "23"
+depAndroidGradlePlugin = "8.3.0"
+depGoogleServices = "4.4.1"
+depDevtoolsKsp = "1.9.20-1.0.14"
+depDesugarJdkLibs = "2.0.4"
+depCoreKtx = "1.12.0"
+depCoreSplashscreen = "1.0.1"
+depComposeBom = "2024.02.02"
+depCoil = "2.6.0"
+depComposeCompiler = "1.5.4"
+depActivity = "1.8.2"
+depLifecycleRuntimeKtx = "2.7.0"
+depLifecycleExt = "2.7.0"
+depNavigationCompose = "2.7.7"
+depHiltNavigationCompose = "1.2.0"
+depJunit = "4.13.2"
+depHilt = "2.49"
+depDatastore = '1.0.0'
+depRetrofit = "2.9.0"
+depLoggingInterceptor = "4.10.0"
+depRoom = "2.6.1"
+
+[libraries]
+
+#desugar
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "depDesugarJdkLibs" }
+
+#Kotlin gradle plugin
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "depKotlin" }
+
+#core
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "depCoreKtx" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "depCoreSplashscreen" }
+
+#ui
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "depComposeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-material = { group = "androidx.compose.material", name = "material" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+io-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "depCoil" }
+io-coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "depCoil" }
+
+#activity
+androidx-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "depActivity" }
+
+#lifeCycle
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "depLifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "depLifecycleExt" }
+
+#navigation
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "depNavigationCompose" }
+dagger-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "depHiltNavigationCompose" }
+
+#tools
+test-junit = { group = "junit", name = "junit", version.ref = "depJunit" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+#hilt
+google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "depHilt" }
+google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "depHilt" }
+
+#data
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "depRetrofit" }
+squareup-retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "depRetrofit" }
+squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "depLoggingInterceptor" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "depRoom" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "depRoom" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "depRoom" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "depRoom" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "depDatastore" }
+androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "depDatastore" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "depAndroidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "depAndroidGradlePlugin" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "depKotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "depGoogleServices" }
+google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "depDevtoolsKsp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "depHilt" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "depKotlin" }

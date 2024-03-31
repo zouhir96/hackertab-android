@@ -1,0 +1,73 @@
+name: Publish
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'gradle'
+
+      - name: Grand execute permissions to gradlew
+        run: chmod +x gradlew
+
+      - name: Run unit tests
+        run: ./gradlew testDebug
+
+  distribute:
+    name: Distribute app bundle to Play Store
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'gradle'
+
+      - name: Version bump
+        uses: chkfung/android-version-actions@v1.1
+        with:
+          gradlePath: app/build.gradle
+          versionCode: ${{ github.run_number }}
+
+      - name: Assemble Release Bundle
+        run: ./gradlew bundleRelease
+
+      - name: Sign Release
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.HACKERTAB_KEYSTORE }}
+          alias: ${{ secrets.HACKERTAB_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.HACKERTAB_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.HACKERTAB_KEY_ALIAS_PASSWORD }}
+
+      - name: Setup authorization with Google Play Store
+        run: echo '${{ secrets.GOOGLE_SERVICE_API }}' > service_account.json
+
+      - name: Deploy to internal
+        uses: r0adkll/upload-google-play@v1.0.19
+        with:
+          serviceAccountJson: service_account.json
+          packageName: com.zrcoding.hackertab
+          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          track: internal
+          status: 'completed'
+          whatsNewDirectory: whatsNewDirectory/

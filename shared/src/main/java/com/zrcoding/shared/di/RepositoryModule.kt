@@ -1,7 +1,9 @@
 package com.zrcoding.shared.di
 
-import com.zrcoding.shared.data.repositories.PostRepository
-import com.zrcoding.shared.data.repositories.PostRepositoryImpl
+import com.zrcoding.shared.data.repositories.ArticleRepositoryImpl
+import com.zrcoding.shared.data.repositories.SettingRepositoryImpl
+import com.zrcoding.shared.domain.repositories.ArticleRepository
+import com.zrcoding.shared.domain.repositories.SettingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +16,12 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun providePostRepository(
-        postRepositoryImpl: PostRepositoryImpl
-    ): PostRepository
+        postRepositoryImpl: ArticleRepositoryImpl
+    ): ArticleRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideSettingRepository(
+        settingRepository: SettingRepositoryImpl
+    ): SettingRepository
 }
