@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -89,6 +91,18 @@ dependencies {
 
     // Test
     testImplementation(libs.test.junit)
+}
+
+tasks.withType<Test> {
+    testLogging {
+        // set options for log level LIFECYCLE
+        events = setOf(
+            TestLogEvent.FAILED,
+            TestLogEvent.PASSED,
+            TestLogEvent.SKIPPED,
+            TestLogEvent.STANDARD_OUT
+        )
+    }
 }
 
 // Allow references to generated code
