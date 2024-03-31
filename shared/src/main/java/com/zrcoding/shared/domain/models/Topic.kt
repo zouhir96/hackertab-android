@@ -5,10 +5,10 @@ import java.util.UUID
 data class Topic(
     val id: String,
     val label: String,
-    val confsValues: List<String>?,
+    val confsValues: List<String>? = null,
     val devtoValues: List<String>,
     val freecodecampValues: List<String>,
-    val githubValues: List<String>?,
+    val githubValues: List<String>? = null,
     val hashnodeValues: List<String>,
     val mediumValues: List<String>,
     val redditValues: List<String>,
