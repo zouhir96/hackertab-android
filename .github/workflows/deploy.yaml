@@ -69,5 +69,5 @@ jobs:
           packageName: com.zrcoding.hackertab
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
           track: production
-          status: inProgress
+          status: 'completed'
           whatsNewDirectory: whatsNewDirectory/
