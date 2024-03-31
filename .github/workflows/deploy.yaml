@@ -68,6 +68,6 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: com.zrcoding.hackertab
           releaseFiles: app/build/outputs/bundle/release/app-release.aab
-          track: internal
+          track: production
           status: 'completed'
           whatsNewDirectory: whatsNewDirectory/
