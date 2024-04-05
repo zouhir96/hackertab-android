@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hackertab</string>
+    <string name="app_name">Hackertab.android</string>
     <!--    sources names-->
     <string name="hacker_news">hackernews</string>
     <string name="reddit">reddit</string>

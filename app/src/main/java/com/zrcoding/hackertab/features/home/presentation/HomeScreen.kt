@@ -16,12 +16,14 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -99,11 +101,10 @@ fun HomeScreenTopAppBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.padding(start = MaterialTheme.dimension.large),
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_hackertab),
-            contentDescription = "",
-            modifier = Modifier.width(180.dp),
-            tint = MaterialTheme.colors.onPrimary
+        Text(
+            text = stringResource(id = R.string.app_name),
+            color = MaterialTheme.colors.onBackground,
+            style = MaterialTheme.typography.h5
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
