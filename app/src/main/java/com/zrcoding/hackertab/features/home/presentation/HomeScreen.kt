@@ -30,6 +30,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.features.home.presentation.card.CardTemplate
+import com.zrcoding.hackertab.features.home.presentation.card.ErrorMsgWithBtn
+import com.zrcoding.hackertab.features.home.presentation.card.Loading
 import com.zrcoding.hackertab.features.home.presentation.card.ToCardItem
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimension
@@ -69,22 +71,42 @@ fun HomeScreen(
         },
     ) {
         when (viewState) {
-            HomeScreenViewState.Loading -> Unit
-            is HomeScreenViewState.Cards -> HomeScreenCardsPager(
-                modifier = Modifier.padding(it),
-                cardViewStates = viewState.cardViewStates,
-                onRefreshBtnClick = onRefreshBtnClick
-            )
+            HomeScreenViewState.Loading -> Loading()
+            is HomeScreenViewState.Cards -> if (viewState.cardViewStates.isEmpty()) {
+                ErrorMsgWithBtn(
+                    text = R.string.no_source_selected,
+                    btnText = R.string.common_settings,
+                    onBtnClicked = onSettingBtnClick
+                )
+            } else {
+                HomeScreenCardsPager(
+                    modifier = Modifier.padding(it),
+                    cardViewStates = viewState.cardViewStates,
+                    onRefreshBtnClick = onRefreshBtnClick
+                )
+            }
         }
     }
 }
 
 @Preview
 @Composable
-fun HomeScreenPreview() {
+fun HomeScreenLoadingPreview() {
     HackertabTheme {
         HomeScreen(
             viewState = HomeScreenViewState.Loading,
+            onRefreshBtnClick = {},
+            onSettingBtnClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreenEmptyPreview() {
+    HackertabTheme {
+        HomeScreen(
+            viewState = HomeScreenViewState.Cards(emptyList()),
             onRefreshBtnClick = {},
             onSettingBtnClick = {}
         )
@@ -102,7 +124,7 @@ fun HomeScreenTopAppBar(
         modifier = Modifier.padding(start = MaterialTheme.dimension.large),
     ) {
         Text(
-            text = stringResource(id = R.string.app_name),
+            text = stringResource(id = R.string.app_title),
             color = MaterialTheme.colors.onBackground,
             style = MaterialTheme.typography.h5
         )
@@ -148,8 +170,6 @@ fun HomeScreenTopAppBarPreview() {
         HomeScreenTopAppBar({}, {})
     }
 }
-
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
