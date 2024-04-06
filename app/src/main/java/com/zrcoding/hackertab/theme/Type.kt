@@ -17,12 +17,12 @@ val Nunito = FontFamily(
 
 val Typography = Typography(
     h4 = TextStyle(
-        fontFamily = Nunito,
+        fontFamily = FontFamily(Font(resId = R.font.nunito_bold, weight = FontWeight.W900)),
         fontWeight = FontWeight.W600,
         fontSize = 30.sp
     ),
     h5 = TextStyle(
-        fontFamily = Nunito,
+        fontFamily = FontFamily(Font(resId = R.font.nunito_bold, weight = FontWeight.W900)),
         fontWeight = FontWeight.W600,
         fontSize = 24.sp,
     ),

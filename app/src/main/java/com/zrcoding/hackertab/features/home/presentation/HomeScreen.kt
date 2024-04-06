@@ -16,18 +16,22 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.R
 import com.zrcoding.hackertab.features.home.presentation.card.CardTemplate
+import com.zrcoding.hackertab.features.home.presentation.card.ErrorMsgWithBtn
+import com.zrcoding.hackertab.features.home.presentation.card.Loading
 import com.zrcoding.hackertab.features.home.presentation.card.ToCardItem
 import com.zrcoding.hackertab.theme.HackertabTheme
 import com.zrcoding.hackertab.theme.dimension
@@ -67,22 +71,42 @@ fun HomeScreen(
         },
     ) {
         when (viewState) {
-            HomeScreenViewState.Loading -> Unit
-            is HomeScreenViewState.Cards -> HomeScreenCardsPager(
-                modifier = Modifier.padding(it),
-                cardViewStates = viewState.cardViewStates,
-                onRefreshBtnClick = onRefreshBtnClick
-            )
+            HomeScreenViewState.Loading -> Loading()
+            is HomeScreenViewState.Cards -> if (viewState.cardViewStates.isEmpty()) {
+                ErrorMsgWithBtn(
+                    text = R.string.no_source_selected,
+                    btnText = R.string.common_settings,
+                    onBtnClicked = onSettingBtnClick
+                )
+            } else {
+                HomeScreenCardsPager(
+                    modifier = Modifier.padding(it),
+                    cardViewStates = viewState.cardViewStates,
+                    onRefreshBtnClick = onRefreshBtnClick
+                )
+            }
         }
     }
 }
 
 @Preview
 @Composable
-fun HomeScreenPreview() {
+fun HomeScreenLoadingPreview() {
     HackertabTheme {
         HomeScreen(
             viewState = HomeScreenViewState.Loading,
+            onRefreshBtnClick = {},
+            onSettingBtnClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreenEmptyPreview() {
+    HackertabTheme {
+        HomeScreen(
+            viewState = HomeScreenViewState.Cards(emptyList()),
             onRefreshBtnClick = {},
             onSettingBtnClick = {}
         )
@@ -99,11 +123,10 @@ fun HomeScreenTopAppBar(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.padding(start = MaterialTheme.dimension.large),
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_hackertab),
-            contentDescription = "",
-            modifier = Modifier.width(180.dp),
-            tint = MaterialTheme.colors.onPrimary
+        Text(
+            text = stringResource(id = R.string.app_title),
+            color = MaterialTheme.colors.onBackground,
+            style = MaterialTheme.typography.h5
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
@@ -147,8 +170,6 @@ fun HomeScreenTopAppBarPreview() {
         HomeScreenTopAppBar({}, {})
     }
 }
-
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -1,5 +1,6 @@
 package com.zrcoding.hackertab.features.setting.master
 
+import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -57,6 +58,9 @@ fun SettingMasterScreen(
 }
 
 @Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+)
 @Composable
 fun SettingMasterScreenPreview() {
     HackertabTheme {
@@ -113,18 +117,18 @@ fun SettingItem(
         ) {
             Text(
                 text = stringResource(id = text),
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colors.onBackground,
                 style = MaterialTheme.typography.subtitle1
             )
             Icon(
                 modifier = Modifier.size(MaterialTheme.dimension.big),
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_forward),
                 contentDescription = null,
-                tint = MaterialTheme.colors.secondary
+                tint = MaterialTheme.colors.onBackground
             )
         }
         Divider(
-            color = MaterialTheme.colors.secondary,
+            color = MaterialTheme.colors.onBackground,
             thickness = 1.dp
         )
     }
@@ -144,7 +148,7 @@ fun AppVersionName(modifier: Modifier = Modifier) {
     Text(
         modifier = modifier,
         text = stringResource(id = R.string.setting_master_screen_version_name, versionName),
-        color = MaterialTheme.colors.secondary,
+        color = MaterialTheme.colors.onBackground,
         style = MaterialTheme.typography.subtitle1
     )
 }

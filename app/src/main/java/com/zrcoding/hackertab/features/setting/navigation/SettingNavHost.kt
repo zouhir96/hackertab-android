@@ -49,13 +49,12 @@ fun SettingNavHost(
                     shape = MaterialTheme.shapes.large,
                     contentPadding = PaddingValues(MaterialTheme.dimension.none),
                     colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colors.primaryVariant
+                        contentColor = MaterialTheme.colors.onBackground
                     )
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_baseline_arrow_back),
                         contentDescription = "refresh button",
-                        tint = MaterialTheme.colors.secondary
                     )
                 }
             }

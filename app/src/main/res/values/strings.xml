@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">hackertab</string>
+    <string name="app_name">Hackertab</string>
+    <string name="app_title">Hackertab.android</string>
     <!--    sources names-->
     <string name="hacker_news">hackernews</string>
     <string name="reddit">reddit</string>
@@ -18,7 +19,9 @@
     <string name="empty_source_msg">No articles found for %s !!</string>
     <string name="failed_to_load_source">Failed to load articles found for %s !!</string>
     <string name="no_internet_connect">Please verify you internet connection and !!</string>
+    <string name="no_source_selected">You didn\'t select any source yet!!\n you can enable sources in settings -> sources</string>
     <string name="common_retry">Retry</string>
+    <string name="common_settings">Open Settings</string>
 
     <string name="privacy_policy">privacy policy</string>
     <string name="terms_of_use">terms of use</string>
