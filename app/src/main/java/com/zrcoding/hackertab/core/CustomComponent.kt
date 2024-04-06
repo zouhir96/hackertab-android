@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +38,9 @@ fun Chip(
     isSelected: Boolean = false,
     onClick: (ChipData) -> Unit,
 ) {
-    Surface(
+    Card(
         shape = RoundedCornerShape(MaterialTheme.dimension.big),
-        color = if (isSelected) TextLink else MaterialTheme.colors.secondary
+        backgroundColor = if (isSelected) TextLink else MaterialTheme.colors.surface
     ) {
         Row(
             modifier = Modifier
@@ -55,7 +55,9 @@ fun Chip(
                         .size(MaterialTheme.dimension.big),
                     painter = painterResource(id = it),
                     contentDescription = null,
-                    tint = MaterialTheme.colors.surface
+                    tint = if (isSelected) {
+                        MaterialTheme.colors.surface
+                    } else MaterialTheme.colors.onBackground
                 )
             }
 
@@ -63,7 +65,9 @@ fun Chip(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimension.medium),
                 text = chipData.name,
                 style = MaterialTheme.typography.body2,
-                color = MaterialTheme.colors.primary
+                color = if (isSelected) {
+                    MaterialTheme.colors.surface
+                } else MaterialTheme.colors.onBackground
             )
         }
     }
@@ -93,7 +97,8 @@ fun ChipGroup(
 
 @Preview(
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
+    showBackground = true
 )
 @Composable
 fun ChipGroupPreview() {
