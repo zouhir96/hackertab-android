@@ -1,6 +1,7 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,13 +20,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -107,9 +110,10 @@ fun CardTemplate(
                     cardUiState.source.name.value
                 )
 
-                CardViewState.State.VerifyConnectionAndRefresh -> ErrorMsgWithRetryBtn(
+                CardViewState.State.VerifyConnectionAndRefresh -> ErrorMsgWithBtn(
                     text = R.string.no_internet_connect,
-                    onRetry = onRetryBtnClick
+                    btnText = R.string.common_retry,
+                    onBtnClicked = onRetryBtnClick
                 )
             }
         }
@@ -292,10 +296,11 @@ fun CenterMsg(@StringRes text: Int, args: String) {
 }
 
 @Composable
-fun ErrorMsgWithRetryBtn(
+fun ErrorMsgWithBtn(
     @StringRes text: Int,
     vararg args: String,
-    onRetry: () -> Unit
+    @StringRes btnText: Int,
+    onBtnClicked: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -307,16 +312,22 @@ fun ErrorMsgWithRetryBtn(
         Text(
             text = stringResource(text, args),
             style = MaterialTheme.typography.body1,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.onBackground
         )
-        Button(
+        OutlinedButton(
             modifier = Modifier.padding(horizontal = MaterialTheme.dimension.big),
-            onClick = onRetry
+            onClick = onBtnClicked,
+            shape = CircleShape,
+            border = BorderStroke(1.dp, MaterialTheme.colors.onBackground),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colors.onBackground
+            ),
         ) {
             Text(
-                text = stringResource(R.string.common_retry),
+                text = stringResource(btnText),
                 style = MaterialTheme.typography.button,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
     }
