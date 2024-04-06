@@ -71,3 +71,4 @@ jobs:
           track: production
           status: 'completed'
           whatsNewDirectory: whatsNewDirectory/
+          changesNotSentForReview: true
