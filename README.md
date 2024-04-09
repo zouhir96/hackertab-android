@@ -13,24 +13,29 @@ Hackertab brings the latest news, libraries, tech events, jobs... related to you
 This is the Android version of [hackertab.dev](https://hackertab.dev) extension brought to your phone now so you stay always posted even if you’re not on your pc.
 
 ## ⬇️ Download
-Very soon in Playstore 
+Get it in Playstore 
 
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>](https://play.google.com/store/apps/details?id=com.zrcoding.hackertab)
 
 ## 🔨 Stack
-- Kotlin
+- Kotlin, coroutines
+- Jetpack compose
 - Clean architecture / MVVM
 - Multi-Module architecture
 - Dependency injection - Hilt
-- Kotlin coroutines
-- Jetpack compose
-- REST API with local caching using Room Database
+- REST API / Retrofit2
+- Datastore-preferences
+- Github actions: Run tests, deploy to google play
+- Figma: [Design file](https://www.figma.com/file/IMFz1yU7jLCIQL1ZM0X8t7/Hackertab?type=design&node-id=0-1&mode=design&t=7yYklSUnlheLkOaN-0)
+- Trello: [Project board](https://trello.com/b/OaxWzI96/hackertab)
 
 
 ## 🚧 Todo  
 ### Features
-- [x] Start with 4 sources: Github, Reddit, FreeCodeCamp, and Hackernews
-- [x] Add a settings screen
+- [x] 11 sources of news: Github, Hackernews, Conferences, Devto, Producthunt, Reddit, Lobsters, Hashnode, Freecodecamp, IndieHackers and Medium.
+- [x] 26 Topics to follow: Android, Kotlin, Java, JavaScript, TypeScript ...
+- [x] Possibility to configure which sources to show.
+- [x] Possibility to configure which topics to show.
 
 ### Developement
 - [ ] Test coverage
