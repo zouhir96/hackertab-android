@@ -29,8 +29,6 @@ Get it in Playstore
 - Figma: [Design file](https://www.figma.com/file/IMFz1yU7jLCIQL1ZM0X8t7/Hackertab?type=design&node-id=0-1&mode=design&t=7yYklSUnlheLkOaN-0)
 - Trello: [Project board](https://trello.com/b/OaxWzI96/hackertab)
 
-
-## 🚧 Todo  
 ### Features
 - [x] 11 sources of news: Github, Hackernews, Conferences, Devto, Producthunt, Reddit, Lobsters, Hashnode, Freecodecamp, IndieHackers and Medium.
 - [x] 26 Topics to follow: Android, Kotlin, Java, JavaScript, TypeScript ...
@@ -38,7 +36,8 @@ Get it in Playstore
 - [x] Possibility to configure which topics to show.
 
 ### Developement
-- [ ] Test coverage
+- [ ] Onboarding and app install setup
+- [ ] Migrate to kmp/cmp
 
 ## 🧩 Requirements
 Android Studio 4.2 or newer.
