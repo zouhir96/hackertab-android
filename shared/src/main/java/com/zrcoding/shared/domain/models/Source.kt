@@ -1,11 +1,8 @@
 package com.zrcoding.shared.domain.models
 
-import androidx.annotation.DrawableRes
-
 data class Source(
     val name: SourceName,
     val label: String,
-    @DrawableRes val icon: Int,
     val type: String,
     val link: String?=null,
     val analyticsTag: String,

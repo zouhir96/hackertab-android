@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.BuildConfig
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimension
+import com.zrcoding.hackertab.design.theme.HackertabTheme
+import com.zrcoding.hackertab.design.theme.dimension
 
 @Composable
 fun SettingMasterScreen(

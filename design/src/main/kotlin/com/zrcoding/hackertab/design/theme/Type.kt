@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.theme
+package com.zrcoding.hackertab.design.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.design.R
 
 // Set of Material typography styles to start with
 val Nunito = FontFamily(

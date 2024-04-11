@@ -57,30 +57,20 @@ android {
 }
 
 dependencies {
+    implementation(project(":design"))
     implementation(project(":shared"))
 
     // Core
     implementation(libs.androidx.core.ktx)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    // Activity
     implementation(libs.androidx.core.splashscreen)
-
-    // UI
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.io.coil.compose)
-    implementation(libs.io.coil.gif)
-
-    // Tools
-    debugApi(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.activity)
 
     // Navigation
     implementation(libs.androidx.navigation)
     implementation(libs.dagger.hilt.navigation)
-
-    // Activity
-    implementation(libs.androidx.activity)
 
     // LifeCycle
     implementation(libs.androidx.lifecycle.runtime.ktx)

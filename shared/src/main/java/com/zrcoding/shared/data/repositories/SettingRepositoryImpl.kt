@@ -35,7 +35,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.GITHUB,
                 label = "Github repositories",
-                icon = R.drawable.ic_github,
                 type = "supported",
                 link = "https://github.com/",
                 analyticsTag = "github",
@@ -43,7 +42,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.HACKER_NEWS,
                 label = "Hackernews",
-                icon = R.drawable.ic_hackernews,
                 type = "supported",
                 link = "https://news.ycombinator.com/",
                 analyticsTag = "hackernews",
@@ -51,7 +49,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.CONFERENCES,
                 label = "Upcoming events",
-                icon = R.drawable.ic_conferences,
                 type = "supported",
                 link = "https://confs.tech/",
                 analyticsTag = "events",
@@ -59,7 +56,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.DEVTO,
                 label = "DevTo",
-                icon = R.drawable.ic_devto,
                 type = "supported",
                 link = "https://dev.to/",
                 analyticsTag = "devto",
@@ -67,7 +63,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.PRODUCTHUNT,
                 label = "Product Hunt",
-                icon = R.drawable.ic_product_hunt,
                 type = "supported",
                 link = "https://producthunt.com/",
                 analyticsTag = "producthunt",
@@ -75,7 +70,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.REDDIT,
                 label = "Reddit",
-                icon = R.drawable.ic_reddit,
                 type = "supported",
                 link = "https://reddit.com/",
                 analyticsTag = "reddit",
@@ -83,7 +77,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.LOBSTERS,
                 label = "Lobsters",
-                icon = R.drawable.ic_lobsters,
                 type = "supported",
                 link = "https://lobste.rs/",
                 analyticsTag = "lobsters",
@@ -91,7 +84,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.HASH_NODE,
                 label = "Hashnode",
-                icon = R.drawable.ic_hashnode,
                 type = "supported",
                 link = "https://hashnode.com/",
                 analyticsTag = "hashnode",
@@ -99,7 +91,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.FREE_CODE_CAMP,
                 label = "FreeCodeCamp",
-                icon = R.drawable.ic_freecodecamp,
                 type = "supported",
                 link = "https://freecodecamp.com/news",
                 analyticsTag = "freecodecamp",
@@ -107,7 +98,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.INDIE_HACKERS,
                 label = "IndieHackers",
-                icon = R.drawable.ic_indie_hackers,
                 type = "supported",
                 link = "https://indiehackers.com/",
                 analyticsTag = "indiehackers",
@@ -115,7 +105,6 @@ class SettingRepositoryImpl @Inject constructor(
             Source(
                 name = SourceName.MEDIUM,
                 label = "Medium",
-                icon = R.drawable.ic_medium,
                 type = "supported",
                 link = "https://medium.com/",
                 analyticsTag = "medium",

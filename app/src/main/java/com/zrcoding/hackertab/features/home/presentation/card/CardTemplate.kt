@@ -1,7 +1,5 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
-import androidx.annotation.StringRes
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,15 +17,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,18 +31,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.core.getTagColor
+import com.zrcoding.hackertab.core.icon
+import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
+import com.zrcoding.hackertab.design.components.FullScreenViewWithCenterText
+import com.zrcoding.hackertab.design.components.Loading
+import com.zrcoding.hackertab.design.components.TextWithStartIcon
+import com.zrcoding.hackertab.design.components.getTagColor
+import com.zrcoding.hackertab.design.theme.HackertabTheme
+import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
-import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimension
 import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.domain.models.SourceName
 
@@ -88,7 +81,7 @@ fun CardTemplate(
 
                 is CardViewState.State.Success -> {
                     if (state.articles.isEmpty()) {
-                        CenterMsg(R.string.empty_source_msg, cardUiState.source.name.value)
+                        FullScreenViewWithCenterText(R.string.empty_source_msg, cardUiState.source.name.value)
                     } else LazyColumn(
                         verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.large),
                         contentPadding = PaddingValues(bottom = MaterialTheme.dimension.extraBig)
@@ -105,7 +98,7 @@ fun CardTemplate(
                     }
                 }
 
-                is CardViewState.State.Error -> CenterMsg(
+                is CardViewState.State.Error -> FullScreenViewWithCenterText(
                     R.string.failed_to_load_source,
                     cardUiState.source.name.value
                 )
@@ -251,119 +244,3 @@ fun CardHeader(title: String, icon: Int) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LoadingPreview() {
-    HackertabTheme {
-        Loading(stringResource(R.string.loading))
-    }
-}
-
-@Composable
-fun Loading(title: String = stringResource(R.string.loading)) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.size(MaterialTheme.dimension.bigger),
-            color = MaterialTheme.colors.onPrimary
-        )
-        Spacer(modifier = Modifier.width(MaterialTheme.dimension.medium))
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1
-        )
-    }
-}
-
-@Composable
-fun CenterMsg(@StringRes text: Int, args: String) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Text(
-            text = stringResource(text, args),
-            style = MaterialTheme.typography.body1,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun ErrorMsgWithBtn(
-    @StringRes text: Int,
-    vararg args: String,
-    @StringRes btnText: Int,
-    onBtnClicked: () -> Unit
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = MaterialTheme.dimension.screenPaddingHorizontal)
-    ) {
-        Text(
-            text = stringResource(text, args),
-            style = MaterialTheme.typography.body1,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colors.onBackground
-        )
-        OutlinedButton(
-            modifier = Modifier.padding(horizontal = MaterialTheme.dimension.big),
-            onClick = onBtnClicked,
-            shape = CircleShape,
-            border = BorderStroke(1.dp, MaterialTheme.colors.onBackground),
-            colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colors.onBackground
-            ),
-        ) {
-            Text(
-                text = stringResource(btnText),
-                style = MaterialTheme.typography.button,
-                textAlign = TextAlign.Center,
-            )
-        }
-    }
-}
-
-@Composable
-fun TextWithStartIcon(
-    modifier: Modifier = Modifier,
-    text: String,
-    textColor: Color = Color.Gray,
-    textStyle: TextStyle = MaterialTheme.typography.caption,
-    textDecoration: TextDecoration = TextDecoration.None,
-    icon: Int,
-    tint: Color = Color.Gray
-) {
-    Row(
-        modifier = modifier.padding(end = MaterialTheme.dimension.medium),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimension.small),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        val iconSize = if (icon == R.drawable.ic_ellipse) {
-            MaterialTheme.dimension.medium
-        } else MaterialTheme.dimension.default
-        Icon(
-            painter = painterResource(id = icon),
-            contentDescription = "",
-            tint = tint,
-            modifier = Modifier.size(iconSize)
-        )
-        Text(
-            text = text,
-            color = textColor,
-            style = textStyle,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            textDecoration = textDecoration
-        )
-    }
-}

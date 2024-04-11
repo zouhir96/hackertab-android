@@ -1,5 +1,7 @@
 package com.zrcoding.hackertab.features.home.presentation.card
 
+import android.content.Context
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -23,10 +25,17 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.core.createImageLoader
-import com.zrcoding.hackertab.core.getTagColor
+import com.zrcoding.hackertab.design.components.TextWithStartIcon
+import com.zrcoding.hackertab.design.components.getTagColor
+import com.zrcoding.hackertab.design.theme.Flamingo
+import com.zrcoding.hackertab.design.theme.HackertabTheme
+import com.zrcoding.hackertab.design.theme.TextLink
+import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.domain.models.Conference
 import com.zrcoding.hackertab.features.home.domain.models.Devto
@@ -40,10 +49,6 @@ import com.zrcoding.hackertab.features.home.domain.models.Medium
 import com.zrcoding.hackertab.features.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
-import com.zrcoding.hackertab.theme.Flamingo
-import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.TextLink
-import com.zrcoding.hackertab.theme.dimension
 import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.domain.models.SourceName
@@ -338,6 +343,18 @@ fun ProductHuntItem(product: ProductHunt) {
             }
         }
     }
+}
+
+fun createImageLoader(context: Context): ImageLoader {
+    return ImageLoader(context)
+        .newBuilder()
+        .components {
+            if (Build.VERSION.SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }.build()
 }
 
 @Composable
