@@ -16,9 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            window.statusBarColor = Color.BLACK
-        }
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
