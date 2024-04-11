@@ -1,6 +1,11 @@
 # hackertab-android
-<p align="center">
-<img src="./imgs/splash-home-screen.jpg" width="270" /> <img src="./imgs/home-screen.jpg" width="270"/> <img src="./imgs/settings-home-screen.jpg" width="270"/></p>
+<table align="center">
+<tr>
+<td>
+<img src="./imgs/preview.png" alt="Preview image" /> 
+</td>
+</tr>
+</table>
 
 ## 📝 About 
 Hackertab brings the latest news, libraries, tech events, jobs... related to your profile (back-end, mobile, full stack, data scientist...) and visualize them in a proper way so you don't have to waste time jumping between different data sources.
@@ -8,27 +13,30 @@ Hackertab brings the latest news, libraries, tech events, jobs... related to you
 This is the Android version of [hackertab.dev](https://hackertab.dev) extension brought to your phone now so you stay always posted even if you’re not on your pc.
 
 ## ⬇️ Download
-Very soon in Playstore 
-
+Soon in Playstore
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>
 
 ## 🔨 Stack
-- Kotlin
+- Kotlin, coroutines
+- Jetpack compose
 - Clean architecture / MVVM
 - Multi-Module architecture
 - Dependency injection - Hilt
-- Kotlin coroutines
-- Jetpack compose
-- REST API with local caching using Room Database
+- REST API / Retrofit2
+- Datastore-preferences
+- Github actions: Run tests, deploy to google play
+- Figma: [Design file](https://www.figma.com/file/IMFz1yU7jLCIQL1ZM0X8t7/Hackertab?type=design&node-id=0-1&mode=design&t=7yYklSUnlheLkOaN-0)
+- Trello: [Project board](https://trello.com/b/OaxWzI96/hackertab)
 
-
-## 🚧 Todo  
 ### Features
-- [x] Start with 4 sources: Github, Reddit, FreeCodeCamp, and Hackernews
-- [ ] Add a settings screen
-- [ ] Bookmarks
+- [x] 11 sources of news: Github, Hackernews, Conferences, Devto, Producthunt, Reddit, Lobsters, Hashnode, Freecodecamp, IndieHackers and Medium.
+- [x] 26 Topics to follow: Android, Kotlin, Java, JavaScript, TypeScript ...
+- [x] Possibility to configure which sources to show.
+- [x] Possibility to configure which topics to show.
+
 ### Developement
-- [ ] Test coverage
+- [ ] Onboarding and app install setup
+- [ ] Migrate to kmp/cmp
 
 ## 🧩 Requirements
 Android Studio 4.2 or newer.
