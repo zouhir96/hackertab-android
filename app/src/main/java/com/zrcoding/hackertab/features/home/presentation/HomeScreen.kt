@@ -61,6 +61,7 @@ fun HomeScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
+                backgroundColor = MaterialTheme.colors.primary,
                 elevation = MaterialTheme.dimension.none
             ) {
                 HomeScreenTopAppBar(
