@@ -13,9 +13,8 @@ Hackertab brings the latest news, libraries, tech events, jobs... related to you
 This is the Android version of [hackertab.dev](https://hackertab.dev) extension brought to your phone now so you stay always posted even if you’re not on your pc.
 
 ## ⬇️ Download
-Get it in Playstore 
-
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>](https://play.google.com/store/apps/details?id=com.zrcoding.hackertab)
+Soon in Playstore
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>
 
 ## 🔨 Stack
 - Kotlin, coroutines
