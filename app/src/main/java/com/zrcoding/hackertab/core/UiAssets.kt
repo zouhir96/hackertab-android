@@ -1,37 +1,20 @@
 package com.zrcoding.hackertab.core
 
-import android.content.Context
-import android.os.Build
-import androidx.compose.ui.graphics.Color
-import coil.ImageLoader
-import coil.decode.GifDecoder
-import coil.decode.ImageDecoderDecoder
+import com.zrcoding.hackertab.R
+import com.zrcoding.shared.domain.models.Source
+import com.zrcoding.shared.domain.models.SourceName
 
-fun String.getTagColor(): Color {
-    for ((tag, color) in tags) {
-        if (this.equals(other = tag, ignoreCase = true)) return color
+val Source.icon
+    get() = when(name) {
+        SourceName.GITHUB -> R.drawable.ic_github
+        SourceName.HACKER_NEWS -> R.drawable.ic_hackernews
+        SourceName.CONFERENCES -> R.drawable.ic_conferences
+        SourceName.DEVTO -> R.drawable.ic_devto
+        SourceName.PRODUCTHUNT -> R.drawable.ic_product_hunt
+        SourceName.REDDIT -> R.drawable.ic_reddit
+        SourceName.LOBSTERS -> R.drawable.ic_lobsters
+        SourceName.HASH_NODE -> R.drawable.ic_hashnode
+        SourceName.FREE_CODE_CAMP -> R.drawable.ic_freecodecamp
+        SourceName.INDIE_HACKERS -> R.drawable.ic_indie_hackers
+        SourceName.MEDIUM -> R.drawable.ic_medium
     }
-
-    return Color.DarkGray
-}
-
-val tags = mapOf(
-    "java" to Color.Blue,
-    "android" to Color(0xFF30D880),
-    "node" to Color(0xFF5B9853),
-    "javascript" to Color.Yellow,
-    "scala" to Color.Blue,
-    "kotlin" to Color(0xFF7f52ff)
-)
-
-fun createImageLoader(context: Context): ImageLoader {
-    return ImageLoader(context)
-        .newBuilder()
-        .components {
-            if (Build.VERSION.SDK_INT >= 28) {
-                add(ImageDecoderDecoder.Factory())
-            } else {
-                add(GifDecoder.Factory())
-            }
-        }.build()
-}

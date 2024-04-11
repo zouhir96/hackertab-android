@@ -18,11 +18,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.features.navigation.TRANSITION_DURATION
 import com.zrcoding.hackertab.features.setting.master.SettingMasterScreen
 import com.zrcoding.hackertab.features.setting.sources.SettingSourcesRoute
 import com.zrcoding.hackertab.features.setting.topics.SettingTopicsRoute
-import com.zrcoding.hackertab.theme.dimension
 
 @Composable
 fun SettingNavHost(

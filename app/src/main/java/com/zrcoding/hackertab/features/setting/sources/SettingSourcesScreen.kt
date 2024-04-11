@@ -10,10 +10,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.core.ChipData
-import com.zrcoding.hackertab.core.ChipGroup
+import com.zrcoding.hackertab.design.components.ChipData
+import com.zrcoding.hackertab.design.components.ChipGroup
+import com.zrcoding.hackertab.design.theme.HackertabTheme
 import com.zrcoding.hackertab.features.setting.common.SettingScreen
-import com.zrcoding.hackertab.theme.HackertabTheme
 
 @Composable
 fun SettingSourcesRoute(

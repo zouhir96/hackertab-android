@@ -2,7 +2,8 @@ package com.zrcoding.hackertab.features.setting.sources
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zrcoding.hackertab.core.ChipData
+import com.zrcoding.hackertab.core.icon
+import com.zrcoding.hackertab.design.components.ChipData
 import com.zrcoding.shared.domain.repositories.SettingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.theme
+package com.zrcoding.hackertab.design.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

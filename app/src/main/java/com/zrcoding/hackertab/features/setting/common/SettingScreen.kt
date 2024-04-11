@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimension
+import com.zrcoding.hackertab.design.theme.HackertabTheme
+import com.zrcoding.hackertab.design.theme.dimension
 
 @Composable
 fun SettingScreen(

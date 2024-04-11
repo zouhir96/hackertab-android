@@ -29,12 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.R
+import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
+import com.zrcoding.hackertab.design.components.Loading
+import com.zrcoding.hackertab.design.theme.HackertabTheme
+import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.features.home.presentation.card.CardTemplate
-import com.zrcoding.hackertab.features.home.presentation.card.ErrorMsgWithBtn
-import com.zrcoding.hackertab.features.home.presentation.card.Loading
 import com.zrcoding.hackertab.features.home.presentation.card.ToCardItem
-import com.zrcoding.hackertab.theme.HackertabTheme
-import com.zrcoding.hackertab.theme.dimension
 
 @Composable
 fun HomeRoute(
