@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.activities
+package com.zrcoding.hackertab
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.zrcoding.hackertab.design.theme.HackertabTheme
-import com.zrcoding.hackertab.features.navigation.MainNavHost
+import com.zrcoding.hackertab.navigation.MainNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

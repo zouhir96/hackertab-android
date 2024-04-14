@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.navigation
+package com.zrcoding.hackertab.navigation
 
 enum class Screen(val route: String) {
     HOME("home"),

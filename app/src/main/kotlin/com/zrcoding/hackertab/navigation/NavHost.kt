@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.navigation
+package com.zrcoding.hackertab.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
