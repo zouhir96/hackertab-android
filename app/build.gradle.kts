@@ -59,10 +59,10 @@ android {
 dependencies {
     implementation(project(":design"))
     implementation(project(":shared"))
+    implementation(project(":home"))
     implementation(project(":settings"))
 
     // Core
-    implementation(libs.androidx.core.ktx)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     // Activity
@@ -72,9 +72,6 @@ dependencies {
     // di: hilt
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
-
-    // Test
-    testImplementation(libs.test.junit)
 }
 
 tasks.withType<Test> {
