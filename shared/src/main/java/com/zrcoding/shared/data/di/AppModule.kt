@@ -1,4 +1,4 @@
-package com.zrcoding.shared.di
+package com.zrcoding.shared.data.di
 
 import android.content.Context
 import androidx.room.Room
