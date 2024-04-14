@@ -1,9 +1,8 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -11,10 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
 rootProject.name = "hackertab"
-include ':app'
-include ':shared'
-include ':design'
+include(":app")
+include(":shared")
+include(":design")
