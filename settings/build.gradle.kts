@@ -13,6 +13,8 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     }
 
     buildTypes {
@@ -31,9 +33,17 @@ android {
     kotlinOptions {
         libs.versions.jvmTarget.get()
     }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.depComposeCompiler.get()
+    }
 }
 
 dependencies {
+    implementation(project(":design"))
 
     // di: hilt
     implementation(libs.google.dagger.hilt.android)

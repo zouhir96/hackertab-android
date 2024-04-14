@@ -46,6 +46,14 @@ dependencies {
     api(libs.io.coil.compose)
     api(libs.io.coil.gif)
 
+    // Navigation
+    api(libs.androidx.navigation)
+    api(libs.dagger.hilt.navigation)
+
+    // LifeCycle
+    api(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.lifecycle.runtime.compose)
+
     // Tools
     debugApi(libs.androidx.compose.ui.tooling)
 }

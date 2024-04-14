@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.zrcoding.hackertab.design.theme.HackertabTheme
 import com.zrcoding.hackertab.features.home.presentation.HomeRoute
-import com.zrcoding.hackertab.features.setting.navigation.SettingNavHost
 
 const val TRANSITION_DURATION = 400
 

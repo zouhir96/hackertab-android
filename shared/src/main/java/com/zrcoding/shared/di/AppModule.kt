@@ -1,14 +1,7 @@
 package com.zrcoding.shared.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
-import com.google.gson.Gson
 import com.zrcoding.shared.core.Constants.BASE_URL
 import com.zrcoding.shared.core.Constants.DATABASE_NAME
 import com.zrcoding.shared.data.local.HackertabDatabase
@@ -23,8 +16,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
-private const val USER_PREFERENCES = "user_preferences"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -65,21 +56,4 @@ class AppModule {
             HackertabDatabase::class.java,
             DATABASE_NAME
         ).build()
-
-    @Singleton
-    @Provides
-    fun providePreferencesDataStore(
-        @ApplicationContext appContext: Context
-    ): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            corruptionHandler = ReplaceFileCorruptionHandler(
-                produceNewData = { emptyPreferences() }
-            ),
-            produceFile = { appContext.preferencesDataStoreFile(USER_PREFERENCES) }
-        )
-    }
-
-    @Singleton
-    @Provides
-    fun provideGson() = Gson()
 }

@@ -5,9 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.text.format.DateUtils
 import androidx.core.content.ContextCompat
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -26,22 +23,6 @@ fun openUrlInBrowser(context: Context, url: String) {
         intent,
         null
     )
-}
-
-fun InputStream.toJson(): String {
-    val outputStream = ByteArrayOutputStream()
-    val buf = ByteArray(1024)
-    var len: Int
-    return try {
-        while (read(buf).also { len = it } != -1) {
-            outputStream.write(buf, 0, len)
-        }
-        outputStream.close()
-        close()
-        outputStream.toString()
-    } catch (e: IOException) {
-        "{}"
-    }
 }
 
 fun Long.toZonedLocalDate() : LocalDate = Instant

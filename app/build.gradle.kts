@@ -17,7 +17,7 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 3
-        versionName = "1.0.0"
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -59,6 +59,7 @@ android {
 dependencies {
     implementation(project(":design"))
     implementation(project(":shared"))
+    implementation(project(":settings"))
 
     // Core
     implementation(libs.androidx.core.ktx)
@@ -67,14 +68,6 @@ dependencies {
     // Activity
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity)
-
-    // Navigation
-    implementation(libs.androidx.navigation)
-    implementation(libs.dagger.hilt.navigation)
-
-    // LifeCycle
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
 
     // di: hilt
     implementation(libs.google.dagger.hilt.android)

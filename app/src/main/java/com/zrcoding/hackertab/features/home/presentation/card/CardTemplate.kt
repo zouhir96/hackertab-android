@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.core.icon
 import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
 import com.zrcoding.hackertab.design.components.FullScreenViewWithCenterText
 import com.zrcoding.hackertab.design.components.Loading
@@ -44,15 +43,15 @@ import com.zrcoding.hackertab.design.theme.HackertabTheme
 import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
+import com.zrcoding.hackertab.settings.presentation.common.icon
 import com.zrcoding.shared.core.openUrlInBrowser
-import com.zrcoding.shared.domain.models.SourceName
 
 
 @Composable
 fun CardTemplate(
     modifier: Modifier = Modifier,
     cardUiState: CardViewState,
-    cardItem: @Composable (SourceName, BaseModel) -> Unit,
+    cardItem: @Composable (com.zrcoding.hackertab.settings.domain.models.SourceName, BaseModel) -> Unit,
     onRetryBtnClick: () -> Unit
 ) {
     Card(
