@@ -1,4 +1,4 @@
-package com.zrcoding.shared.domain.models
+package com.zrcoding.hackertab.settings.domain.models
 
 data class Source(
     val name: SourceName,

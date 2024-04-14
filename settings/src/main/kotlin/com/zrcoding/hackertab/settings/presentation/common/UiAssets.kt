@@ -1,8 +1,8 @@
-package com.zrcoding.hackertab.core
+package com.zrcoding.hackertab.settings.presentation.common
 
-import com.zrcoding.hackertab.R
-import com.zrcoding.shared.domain.models.Source
-import com.zrcoding.shared.domain.models.SourceName
+import com.zrcoding.hackertab.settings.R
+import com.zrcoding.hackertab.settings.domain.models.Source
+import com.zrcoding.hackertab.settings.domain.models.SourceName
 
 val Source.icon
     get() = when(name) {

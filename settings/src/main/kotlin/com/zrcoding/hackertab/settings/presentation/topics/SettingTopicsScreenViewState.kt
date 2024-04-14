@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.setting.topics
+package com.zrcoding.hackertab.settings.presentation.topics
 
 import com.zrcoding.hackertab.design.components.ChipData
 

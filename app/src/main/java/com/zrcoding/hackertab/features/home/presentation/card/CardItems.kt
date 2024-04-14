@@ -51,22 +51,21 @@ import com.zrcoding.hackertab.features.home.domain.models.Reddit
 import com.zrcoding.hackertab.features.home.domain.usecases.BuildConferenceDisplayedDateUseCase
 import com.zrcoding.shared.core.openUrlInBrowser
 import com.zrcoding.shared.core.toDate
-import com.zrcoding.shared.domain.models.SourceName
 import java.util.UUID
 
 @Composable
-fun SourceName.ToCardItem(model: BaseModel) = when (this) {
-    SourceName.GITHUB -> GithubItem(post = model as GithubRepo)
-    SourceName.HACKER_NEWS -> HackerNewsItem(new = model as HackerNews)
-    SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
-    SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
-    SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
-    SourceName.DEVTO -> DevtoItem(devto = model as Devto)
-    SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
-    SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
-    SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
-    SourceName.LOBSTERS -> LobstersItem(lobster = model as Lobster)
-    SourceName.MEDIUM -> MediumItem(medium = model as Medium)
+fun com.zrcoding.hackertab.settings.domain.models.SourceName.ToCardItem(model: BaseModel) = when (this) {
+    com.zrcoding.hackertab.settings.domain.models.SourceName.GITHUB -> GithubItem(post = model as GithubRepo)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.HACKER_NEWS -> HackerNewsItem(new = model as HackerNews)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.REDDIT -> RedditItem(reddit = model as Reddit)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.FREE_CODE_CAMP -> FreeCodeCampItem(post = model as FreeCodeCamp)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.CONFERENCES -> ConferenceItem(conf = model as Conference)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.DEVTO -> DevtoItem(devto = model as Devto)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.HASH_NODE -> HashnodeItem(hashnode = model as Hashnode)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.PRODUCTHUNT -> ProductHuntItem(product = model as ProductHunt)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.INDIE_HACKERS -> IndieHackersItem(indieHackers = model as IndieHackers)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.LOBSTERS -> LobstersItem(lobster = model as Lobster)
+    com.zrcoding.hackertab.settings.domain.models.SourceName.MEDIUM -> MediumItem(medium = model as Medium)
 }
 
 @Composable

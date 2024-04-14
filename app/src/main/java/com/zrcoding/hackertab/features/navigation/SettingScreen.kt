@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.features.setting.navigation
+package com.zrcoding.hackertab.features.navigation
 
 enum class SettingScreen(val route: String) {
     SETTING_MASTER("setting_master"),

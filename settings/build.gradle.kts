@@ -1,16 +1,20 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
-    namespace = "com.zrcoding.hackertab.design"
+    namespace = "com.zrcoding.hackertab.settings"
 
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     }
 
     buildTypes {
@@ -31,6 +35,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.depComposeCompiler.get()
@@ -38,22 +43,15 @@ android {
 }
 
 dependencies {
-    // UI
-    api(platform(libs.androidx.compose.bom))
-    api(libs.androidx.compose.ui)
-    api(libs.androidx.compose.ui.tooling.preview)
-    api(libs.androidx.compose.material)
-    api(libs.io.coil.compose)
-    api(libs.io.coil.gif)
+    implementation(project(":design"))
 
-    // Navigation
-    api(libs.androidx.navigation)
-    api(libs.dagger.hilt.navigation)
+    // di: hilt
+    implementation(libs.google.dagger.hilt.android)
+    kapt(libs.google.dagger.hilt.android.compiler)
 
-    // LifeCycle
-    api(libs.androidx.lifecycle.runtime.ktx)
-    api(libs.androidx.lifecycle.runtime.compose)
+    // Datastore
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
 
-    // Tools
-    debugApi(libs.androidx.compose.ui.tooling)
+    implementation(libs.gson)
 }

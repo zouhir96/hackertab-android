@@ -1,28 +1,18 @@
-package com.zrcoding.hackertab.features.setting.navigation
+package com.zrcoding.hackertab.features.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.zrcoding.hackertab.R
-import com.zrcoding.hackertab.design.theme.dimension
-import com.zrcoding.hackertab.features.navigation.TRANSITION_DURATION
-import com.zrcoding.hackertab.features.setting.master.SettingMasterScreen
-import com.zrcoding.hackertab.features.setting.sources.SettingSourcesRoute
-import com.zrcoding.hackertab.features.setting.topics.SettingTopicsRoute
+import com.zrcoding.hackertab.settings.presentation.master.SettingMasterScreen
+import com.zrcoding.hackertab.settings.presentation.master.SettingsTopBar
+import com.zrcoding.hackertab.settings.presentation.sources.SettingSourcesRoute
+import com.zrcoding.hackertab.settings.presentation.topics.SettingTopicsRoute
 
 @Composable
 fun SettingNavHost(
@@ -31,31 +21,13 @@ fun SettingNavHost(
     val navController = rememberNavController()
     Scaffold(
         topBar = {
-            TopAppBar(
-                backgroundColor = MaterialTheme.colors.background,
-                elevation = MaterialTheme.dimension.none
-            ) {
-                Button(
-                    onClick = {
-                        navController.currentDestination?.route?.let {
-                            if (it == SettingScreen.SETTING_MASTER.route) {
-                                onNavigateBack()
-                            } else {
-                                navController.popBackStack()
-                            }
-                        }
-                    },
-                    modifier = Modifier.size(MaterialTheme.dimension.extraBig),
-                    shape = MaterialTheme.shapes.large,
-                    contentPadding = PaddingValues(MaterialTheme.dimension.none),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colors.onBackground
-                    )
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_baseline_arrow_back),
-                        contentDescription = "refresh button",
-                    )
+            SettingsTopBar {
+                navController.currentDestination?.route?.let {
+                    if (it == SettingScreen.SETTING_MASTER.route) {
+                        onNavigateBack()
+                    } else {
+                        navController.popBackStack()
+                    }
                 }
             }
         }

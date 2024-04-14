@@ -15,11 +15,7 @@ import com.zrcoding.hackertab.features.home.domain.models.BaseModel
 import com.zrcoding.hackertab.features.home.presentation.CardViewState
 import com.zrcoding.shared.domain.models.NetworkErrors
 import com.zrcoding.shared.domain.models.Resource
-import com.zrcoding.shared.domain.models.Source
-import com.zrcoding.shared.domain.models.SourceName
-import com.zrcoding.shared.domain.models.Topic
 import com.zrcoding.shared.domain.repositories.ArticleRepository
-import com.zrcoding.shared.domain.repositories.SettingRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -28,7 +24,7 @@ import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 class GenerateHomeViewStateUseCase @Inject constructor(
-    private val settingRepository: SettingRepository,
+    private val settingRepository: com.zrcoding.hackertab.settings.domain.repositories.SettingRepository,
     private val articleRepository: ArticleRepository
 ) {
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -38,10 +34,10 @@ class GenerateHomeViewStateUseCase @Inject constructor(
             flow2 = settingRepository.observeSelectedSources(),
             transform = ::Pair
         ).mapLatest { pair ->
-            val topics = pair.first.ifEmpty { listOf(Topic.global) }
+            val topics = pair.first.ifEmpty { listOf(com.zrcoding.hackertab.settings.domain.models.Topic.global) }
             pair.second.map { source ->
                 when (source.name) {
-                    SourceName.GITHUB -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.GITHUB -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -52,7 +48,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.HACKER_NEWS -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.HACKER_NEWS -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -64,7 +60,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.REDDIT -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.REDDIT -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -75,7 +71,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.FREE_CODE_CAMP -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.FREE_CODE_CAMP -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -86,7 +82,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.CONFERENCES -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.CONFERENCES -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -97,7 +93,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.DEVTO -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.DEVTO -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -108,7 +104,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.HASH_NODE -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.HASH_NODE -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -119,7 +115,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.PRODUCTHUNT -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.PRODUCTHUNT -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -131,7 +127,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.INDIE_HACKERS -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.INDIE_HACKERS -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -143,7 +139,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.LOBSTERS -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.LOBSTERS -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -155,7 +151,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
                         )
                     )
 
-                    SourceName.MEDIUM -> CardViewState(
+                    com.zrcoding.hackertab.settings.domain.models.SourceName.MEDIUM -> CardViewState(
                         source = source,
                         state = createCardFlow(
                             source = source,
@@ -171,10 +167,10 @@ class GenerateHomeViewStateUseCase @Inject constructor(
     }
 
     private inline fun <Dto : Any, Model : BaseModel> createCardFlow(
-        source: Source,
-        topics: List<Topic>,
+        source: com.zrcoding.hackertab.settings.domain.models.Source,
+        topics: List<com.zrcoding.hackertab.settings.domain.models.Topic>,
         supportTags: Boolean = true,
-        crossinline getTags: Topic.() -> List<String>,
+        crossinline getTags: com.zrcoding.hackertab.settings.domain.models.Topic.() -> List<String>,
         crossinline getArticles: suspend (String) -> Resource<List<Dto>, NetworkErrors>,
         crossinline toModel: Dto.() -> Model,
     ): Flow<CardViewState.State> = flow {
