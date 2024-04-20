@@ -182,7 +182,7 @@ class GenerateHomeViewStateUseCase @Inject constructor(
             emit(CardViewState.State.Error("Failed to load ${source.name.value} articles"))
         } else if (articles.isEmpty() && noInternet) {
             emit(CardViewState.State.VerifyConnectionAndRefresh)
-        } else emit(CardViewState.State.Success(articles))
+        } else emit(CardViewState.State.Success(articles.distinctBy { it.id }))
     }
 
     private fun NetworkErrors.toStateError(sourceName: String): CardViewState.State = when (this) {
