@@ -14,7 +14,8 @@ This is the Android version of [hackertab.dev](https://hackertab.dev) extension 
 
 ## ⬇️ Download
 Soon in Playstore
-<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/> 
+Meanwhile you can download the latest apk from [releases](https://github.com/zouhir96/hackertab-android/releases/latest)
 
 ## 🔨 Stack
 - Kotlin, coroutines
@@ -34,7 +35,7 @@ Soon in Playstore
 - [x] Possibility to configure which sources to show.
 - [x] Possibility to configure which topics to show.
 
-### Developement
+### Development
 - [ ] Onboarding and app install setup
 - [ ] Migrate to kmp/cmp
 
