@@ -36,7 +36,9 @@ Meanwhile you can download the latest apk from [releases](https://github.com/zou
 - [x] Possibility to configure which topics to show.
 
 ### Development
-- [ ] Onboarding and app install setup
+- [ ] Add offline first support
+- [ ] Add onboarding and app install setup
+- [ ] Migrate to convention plugins
 - [ ] Migrate to kmp/cmp
 
 ## 🧩 Requirements
