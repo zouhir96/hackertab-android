@@ -38,6 +38,7 @@ Meanwhile you can download the latest apk from [releases](https://github.com/zou
 ### Development
 - [ ] Add offline first support
 - [ ] Add onboarding and app install setup
+- [ ] Store/fetch config(topics and sources) from firebase remote config
 - [ ] Migrate to convention plugins
 - [ ] Migrate to kmp/cmp
 

@@ -22,6 +22,7 @@ class SettingTopicsScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            // todo extract a use case
             val topics = settingRepository.getTopics()
             settingRepository.getSavedTopicsIds().collectLatest { savedTopicsIds ->
                 _viewState.update {
