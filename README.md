@@ -23,6 +23,7 @@ Meanwhile you can download the latest apk from [releases](https://github.com/zou
 - Clean architecture / MVVM
 - Multi-Module architecture
 - Dependency injection - Hilt
+- Version catalog & Convention plugins
 - REST API / Retrofit2
 - Datastore-preferences
 - Github actions: Run tests, deploy to google play
@@ -38,7 +39,6 @@ Meanwhile you can download the latest apk from [releases](https://github.com/zou
 ### Development
 - [ ] Add offline first support
 - [ ] Add onboarding and app install setup
-- [ ] Migrate to convention plugins
 - [ ] Migrate to kmp/cmp
 
 ## 🧩 Requirements
