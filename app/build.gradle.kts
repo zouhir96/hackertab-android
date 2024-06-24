@@ -1,53 +1,22 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.android.kotlin)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.kapt)
+    id("hackertab.android.application")
+    id("hackertab.android.application.compose")
+    id("hackertab.android.hilt")
 }
 
 android {
     namespace = "com.zrcoding.hackertab"
 
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
     defaultConfig {
         applicationId = "com.zrcoding.hackertab"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 3
         versionName = libs.versions.versionName.get()
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        libs.versions.jvmTarget.get()
-    }
     buildFeatures {
-        compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.depComposeCompiler.get()
     }
     packaging {
         resources {
@@ -62,16 +31,10 @@ dependencies {
     implementation(project(":home"))
     implementation(project(":settings"))
 
-    // Core
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
-
     // Activity
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity)
-
-    // di: hilt
-    implementation(libs.google.dagger.hilt.android)
-    kapt(libs.google.dagger.hilt.android.compiler)
+    implementation(libs.androidx.navigation)
 }
 
 tasks.withType<Test> {
@@ -84,9 +47,4 @@ tasks.withType<Test> {
             TestLogEvent.STANDARD_OUT
         )
     }
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
 }
