@@ -34,6 +34,8 @@ dependencies {
     // Activity
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity)
+
+    implementation(libs.androidx.compose.materialWindow)
     implementation(libs.androidx.navigation)
 }
 
