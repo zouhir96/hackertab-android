@@ -132,6 +132,7 @@ fun OnePanNavHost(modifier: Modifier = Modifier, navController: NavHostControlle
             }
         ) {
             SettingMasterScreen(
+                showSelectedItem = false,
                 onNavigateToTopics = { navController.navigate(SettingScreen.SETTING_TOPICS.route) },
                 onNavigateToSources = { navController.navigate(SettingScreen.SETTING_SOURCES.route) }
             )
@@ -200,6 +201,7 @@ fun TwoPanNavHost(modifier: Modifier = Modifier, navController: NavHostControlle
     ) {
         SettingMasterScreen(
             modifier = Modifier.width(400.dp),
+            showSelectedItem = true,
             onNavigateToTopics = {
                 navigateWithPopUpToTopics(SettingScreen.SETTING_TOPICS.route)
             },
