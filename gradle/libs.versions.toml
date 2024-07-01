@@ -3,7 +3,7 @@ depKotlin = "1.9.20"
 jvmTarget = "17"
 compileSdk = "34"
 targetSdk = "34"
-minSdk = "23"
+minSdk = "21"
 versionName = "1.0.0"
 depAndroidGradlePlugin = "8.3.0"
 depGoogleServices = "4.4.1"
@@ -41,6 +41,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }
 io-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "depCoil" }
 io-coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "depCoil" }
 

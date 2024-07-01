@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
@@ -39,11 +40,13 @@ import com.zrcoding.hackertab.home.presentation.card.ToCardItem
 @Composable
 fun HomeRoute(
     viewModel: HomeScreenViewModel = hiltViewModel(),
+    isExpandedScree: Boolean,
     onNavigateToSettings: () -> Unit
 ) {
     val viewState = viewModel.viewState.collectAsStateWithLifecycle().value
     HomeScreen(
         modifier = Modifier,
+        isExpandedScree = isExpandedScree,
         viewState = viewState,
         onRefreshBtnClick = viewModel::loadData,
         onSettingBtnClick = onNavigateToSettings
@@ -53,6 +56,7 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    isExpandedScree: Boolean,
     viewState: HomeScreenViewState,
     onRefreshBtnClick: () -> Unit,
     onSettingBtnClick: () -> Unit,
@@ -82,6 +86,7 @@ fun HomeScreen(
             } else {
                 HomeScreenCardsPager(
                     modifier = Modifier.padding(it),
+                    isExpandedScree = isExpandedScree,
                     cardViewStates = viewState.cardViewStates,
                     onRefreshBtnClick = onRefreshBtnClick
                 )
@@ -95,6 +100,7 @@ fun HomeScreen(
 fun HomeScreenLoadingPreview() {
     HackertabTheme {
         HomeScreen(
+            isExpandedScree = false,
             viewState = HomeScreenViewState.Loading,
             onRefreshBtnClick = {},
             onSettingBtnClick = {}
@@ -107,6 +113,7 @@ fun HomeScreenLoadingPreview() {
 fun HomeScreenEmptyPreview() {
     HackertabTheme {
         HomeScreen(
+            isExpandedScree = false,
             viewState = HomeScreenViewState.Cards(emptyList()),
             onRefreshBtnClick = {},
             onSettingBtnClick = {}
@@ -176,6 +183,7 @@ fun HomeScreenTopAppBarPreview() {
 @Composable
 fun HomeScreenCardsPager(
     modifier: Modifier = Modifier,
+    isExpandedScree: Boolean,
     cardViewStates: List<CardViewState>,
     onRefreshBtnClick: () -> Unit
 ) {
@@ -183,7 +191,11 @@ fun HomeScreenCardsPager(
     HorizontalPager(
         modifier = modifier,
         state = pagerState,
-        contentPadding = PaddingValues(start = MaterialTheme.dimension.default, end = MaterialTheme.dimension.medium)
+        contentPadding = PaddingValues(
+            start = MaterialTheme.dimension.default,
+            end = MaterialTheme.dimension.medium
+        ),
+        pageSize = if (isExpandedScree) PageSize.Fixed(400.dp) else PageSize.Fill
     ) { page ->
         cardViewStates.getOrNull(page)?.let { state ->
             CardTemplate(
