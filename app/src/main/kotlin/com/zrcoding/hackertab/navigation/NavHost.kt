@@ -19,7 +19,8 @@ const val TRANSITION_DURATION = 400
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String = Screen.HOME.route
+    startDestination: String = Screen.HOME.route,
+    isExpandedScree: Boolean
 ) {
     NavHost(
         modifier = modifier,
@@ -30,6 +31,7 @@ fun MainNavHost(
             route = Screen.HOME.route,
         ) {
             HomeRoute(
+                isExpandedScree = isExpandedScree,
                 onNavigateToSettings = { navController.navigate(Screen.SETTINGS.route) }
             )
         }
@@ -49,6 +51,7 @@ fun MainNavHost(
             }
         ) {
             SettingNavHost(
+                isExpandedScreen = isExpandedScree,
                 onNavigateBack = { navController.popBackStack() }
             )
         }
@@ -62,7 +65,8 @@ fun MainNavHostPreview() {
         Surface {
             MainNavHost(
                 navController = rememberNavController(),
-                startDestination = Screen.SETTINGS.route
+                startDestination = Screen.SETTINGS.route,
+                isExpandedScree = false
             )
         }
     }
