@@ -28,8 +28,8 @@ android {
 dependencies {
     implementation(project(":design"))
     implementation(project(":shared"))
-    implementation(project(":home"))
-    implementation(project(":settings"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:settings"))
 
     // Activity
     implementation(libs.androidx.core.splashscreen)

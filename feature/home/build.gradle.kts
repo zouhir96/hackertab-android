@@ -9,7 +9,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":settings"))
+    implementation(project(":feature:settings"))
 
     // Test
     testImplementation(libs.test.junit)
