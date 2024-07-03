@@ -15,7 +15,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "hackertab"
 include(":app")
-include(":shared")
-include(":design")
+include(":core:shared")
+include(":core:design")
 include(":feature:settings")
 include(":feature:home")

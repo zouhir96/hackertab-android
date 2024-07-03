@@ -26,8 +26,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":design"))
-    implementation(project(":shared"))
     implementation(project(":feature:home"))
     implementation(project(":feature:settings"))
 
