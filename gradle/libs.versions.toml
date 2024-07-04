@@ -3,7 +3,8 @@ depKotlin = "1.9.20"
 jvmTarget = "17"
 compileSdk = "34"
 targetSdk = "34"
-minSdk = "23"
+minSdk = "21"
+versionName = "1.0.0"
 depAndroidGradlePlugin = "8.3.0"
 depGoogleServices = "4.4.1"
 depDevtoolsKsp = "1.9.20-1.0.14"
@@ -12,7 +13,7 @@ depCoreKtx = "1.12.0"
 depCoreSplashscreen = "1.0.1"
 depComposeBom = "2024.02.02"
 depCoil = "2.6.0"
-depComposeCompiler = "1.5.4"
+androidxComposeCompiler = "1.5.4"
 depActivity = "1.8.2"
 depLifecycleRuntimeKtx = "2.7.0"
 depLifecycleExt = "2.7.0"
@@ -24,14 +25,12 @@ depDatastore = '1.0.0'
 depRetrofit = "2.9.0"
 depLoggingInterceptor = "4.10.0"
 depRoom = "2.6.1"
+gson = "2.10.1"
 
 [libraries]
 
 #desugar
-desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "depDesugarJdkLibs" }
-
-#Kotlin gradle plugin
-kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "depKotlin" }
+android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "depDesugarJdkLibs" }
 
 #core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "depCoreKtx" }
@@ -42,6 +41,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }
 io-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "depCoil" }
 io-coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "depCoil" }
 
@@ -54,7 +54,7 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 
 #navigation
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "depNavigationCompose" }
-dagger-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "depHiltNavigationCompose" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "depHiltNavigationCompose" }
 
 #tools
 test-junit = { group = "junit", name = "junit", version.ref = "depJunit" }
@@ -63,8 +63,8 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 #hilt
-google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "depHilt" }
-google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "depHilt" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "depHilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "depHilt" }
 
 #data
 squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "depRetrofit" }
@@ -76,6 +76,11 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "depRoom" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "depDatastore" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "depDatastore" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+# Dependencies of the included build-logic
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "depAndroidGradlePlugin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "depKotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "depAndroidGradlePlugin" }
