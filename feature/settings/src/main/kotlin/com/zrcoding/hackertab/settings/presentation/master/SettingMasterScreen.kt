@@ -1,6 +1,12 @@
 package com.zrcoding.hackertab.settings.presentation.master
 
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
+import android.os.Build
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,6 +50,7 @@ fun SettingMasterScreen(
     onNavigateToTopics: () -> Unit,
     onNavigateToSources: () -> Unit
 ) {
+    val context = LocalContext.current
     Box(
         modifier = modifier
             .padding(
@@ -68,7 +76,7 @@ fun SettingMasterScreen(
                     text = R.string.setting_master_screen_topics,
                     selected = selectedItem == 0,
                     onClick = {
-                        if(showSelectedItem) {
+                        if (showSelectedItem) {
                             selectedItem = 0
                         }
                         onNavigateToTopics()
@@ -83,6 +91,13 @@ fun SettingMasterScreen(
                         }
                         onNavigateToSources()
                     }
+                )
+            }
+            SettingItemsContainer {
+                SettingItem(
+                    text = R.string.setting_master_screen_contact_us,
+                    selected = false,
+                    onClick = { contactSupport(context) }
                 )
             }
         }
@@ -195,4 +210,40 @@ fun AppVersionName(modifier: Modifier = Modifier) {
         color = MaterialTheme.colors.onBackground,
         style = MaterialTheme.typography.subtitle1
     )
+}
+
+private fun contactSupport(context: Context) {
+    try {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("mailto:" + context.getString(R.string.support_email))
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.support_email_subject))
+        intent.putExtra(Intent.EXTRA_TEXT, menuContactMessageTemplate(context))
+        context.startActivity(intent)
+    } catch (e: ActivityNotFoundException) {
+        AlertDialog.Builder(context)
+        .setTitle(R.string.support_no_apps_title)
+        .setMessage(R.string.support_no_apps_description)
+        .setNeutralButton(R.string.common_ok) { dialog, _ -> dialog.dismiss() }
+        .show()
+    }
+}
+
+private fun menuContactMessageTemplate(context: Context): String {
+    return buildString {
+        append(("\n\n\n\n"))
+        append("----------------------\n")
+        append("----------------------\n")
+        append(context.getString(R.string.support_support_footer_message))
+        append("\n")
+        append(context.getString(R.string.support_device_os_version))
+        append(Build.VERSION.RELEASE)
+        append("\n")
+        append(context.getString(R.string.support_device_model))
+        append(Build.MANUFACTURER)
+        append(" ").append(Build.DEVICE)
+        append(" ").append(Build.MODEL)
+        append("\n")
+        append(context.getString(R.string.support_application_version))
+        append(BuildConfig.VERSION_NAME)
+    }
 }
