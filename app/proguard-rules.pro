@@ -46,9 +46,7 @@
 ## Rules for Retrofit2
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
-
 }
-
 -dontwarn okio.**
 -dontwarn okhttp3.**
 -dontwarn retrofit2.**
@@ -61,17 +59,17 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
+-keep class * extends com.google.protobuf.GeneratedMessageLite { *; }
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+
 ## Rules for Gson
 # For using GSON @Expose annotation
+-keepattributes Signature
 -keepattributes *Annotation*
 # Gson specific classes
 -keep class com.google.gson.stream.** { *; }
-
-# Prevent proguard from stripping interface information from TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
 
 -keep class com.zrcoding.shared.data.local.entities.** {*;}
 -keep class com.zrcoding.shared.data.remote.dtos.** {*;}
