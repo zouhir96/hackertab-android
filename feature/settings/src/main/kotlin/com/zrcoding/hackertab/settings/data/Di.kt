@@ -39,7 +39,7 @@ object DatastoreModule {
 
     @Singleton
     @Provides
-    fun provideGson() = Gson()
+    fun provideGson(): Gson = Gson()
 }
 
 @Module
