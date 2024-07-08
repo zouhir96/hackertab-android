@@ -8,6 +8,8 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.zrcoding.hackertab.settings.R
+import com.zrcoding.hackertab.settings.data.dtos.SourceDto
+import com.zrcoding.hackertab.settings.data.utils.JsonUtils
 import com.zrcoding.hackertab.settings.domain.models.Source
 import com.zrcoding.hackertab.settings.domain.models.SourceName
 import com.zrcoding.hackertab.settings.domain.models.Topic
@@ -17,9 +19,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.InputStream
 import javax.inject.Inject
 
 private val KEY_SAVED_TOPICS = stringPreferencesKey("saved_topics")
@@ -35,8 +34,13 @@ class SettingRepositoryImpl @Inject constructor(
         if (topicsMemoryCache.isNotEmpty()) return topicsMemoryCache
 
         val topicsInputStream = context.resources.openRawResource(R.raw.topics)
-        val topicsJson = topicsInputStream.toJson()
-        return gson.fromJson(topicsJson, object : TypeToken<List<Topic>>() {}.type)
+        val topicsJson = JsonUtils.toJson(topicsInputStream)
+        val topics: List<Topic> = gson.fromJson(
+            topicsJson,
+            object : TypeToken<List<Topic>>() {}.type
+        )
+        topicsMemoryCache = topics
+        return topics
     }
 
     override fun getSavedTopicsIds(): Flow<List<String>> {
@@ -59,7 +63,16 @@ class SettingRepositoryImpl @Inject constructor(
     }
 
     override fun getSources(): List<Source> {
-        return sourcesMemoryCash
+        if (sourcesMemoryCash.isNotEmpty()) return sourcesMemoryCash
+
+        val sourcesInputStream = context.resources.openRawResource(R.raw.sources)
+        val sourcesJson = JsonUtils.toJson(sourcesInputStream)
+        val sources: List<Source> = gson.fromJson<List<SourceDto>?>(
+            sourcesJson,
+            object : TypeToken<List<SourceDto>>() {}.type
+        ).map { it.toSource() }
+        sourcesMemoryCash = sources
+        return sources
     }
 
     override fun getSavedSourcesNames(): Flow<List<SourceName>> {
@@ -108,102 +121,8 @@ class SettingRepositoryImpl @Inject constructor(
         return gson.fromJson(topicsIdsPref, object : TypeToken<List<String>>() {}.type)
     }
 
-    private fun InputStream.toJson(): String {
-        val outputStream = ByteArrayOutputStream()
-        val buf = ByteArray(1024)
-        var len: Int
-        return try {
-            while (read(buf).also { len = it } != -1) {
-                outputStream.write(buf, 0, len)
-            }
-            outputStream.close()
-            close()
-            outputStream.toString()
-        } catch (e: IOException) {
-            "{}"
-        }
-    }
-
     companion object {
-        private val topicsMemoryCache = emptyList<Topic>()
-        private val sourcesMemoryCash = listOf(
-            Source(
-                name = SourceName.GITHUB,
-                label = "Github repositories",
-                type = "supported",
-                link = "https://github.com/",
-                analyticsTag = "github",
-            ),
-            Source(
-                name = SourceName.HACKER_NEWS,
-                label = "Hackernews",
-                type = "supported",
-                link = "https://news.ycombinator.com/",
-                analyticsTag = "hackernews",
-            ),
-            Source(
-                name = SourceName.CONFERENCES,
-                label = "Upcoming events",
-                type = "supported",
-                link = "https://confs.tech/",
-                analyticsTag = "events",
-            ),
-            Source(
-                name = SourceName.DEVTO,
-                label = "DevTo",
-                type = "supported",
-                link = "https://dev.to/",
-                analyticsTag = "devto",
-            ),
-            Source(
-                name = SourceName.PRODUCTHUNT,
-                label = "Product Hunt",
-                type = "supported",
-                link = "https://producthunt.com/",
-                analyticsTag = "producthunt",
-            ),
-            Source(
-                name = SourceName.REDDIT,
-                label = "Reddit",
-                type = "supported",
-                link = "https://reddit.com/",
-                analyticsTag = "reddit",
-            ),
-            Source(
-                name = SourceName.LOBSTERS,
-                label = "Lobsters",
-                type = "supported",
-                link = "https://lobste.rs/",
-                analyticsTag = "lobsters",
-            ),
-            Source(
-                name = SourceName.HASH_NODE,
-                label = "Hashnode",
-                type = "supported",
-                link = "https://hashnode.com/",
-                analyticsTag = "hashnode",
-            ),
-            Source(
-                name = SourceName.FREE_CODE_CAMP,
-                label = "FreeCodeCamp",
-                type = "supported",
-                link = "https://freecodecamp.com/news",
-                analyticsTag = "freecodecamp",
-            ),
-            Source(
-                name = SourceName.INDIE_HACKERS,
-                label = "IndieHackers",
-                type = "supported",
-                link = "https://indiehackers.com/",
-                analyticsTag = "indiehackers",
-            ),
-            Source(
-                name = SourceName.MEDIUM,
-                label = "Medium",
-                type = "supported",
-                link = "https://medium.com/",
-                analyticsTag = "medium",
-            ),
-        )
+        private var topicsMemoryCache = emptyList<Topic>()
+        private var sourcesMemoryCash = emptyList<Source>()
     }
 }

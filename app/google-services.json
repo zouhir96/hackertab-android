@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "249160525821",
+    "project_id": "hackertab-418813",
+    "storage_bucket": "hackertab-418813.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249160525821:android:c3b3d66c5e8efc1a42db94",
+        "android_client_info": {
+          "package_name": "com.zrcoding.hackertab"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPyndiwOCpTcfo9ErZTWxyKVQoe3eJ58E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

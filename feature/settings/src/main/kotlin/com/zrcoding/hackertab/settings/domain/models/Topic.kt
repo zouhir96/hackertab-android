@@ -1,7 +1,9 @@
 package com.zrcoding.hackertab.settings.domain.models
 
+import androidx.annotation.Keep
 import java.util.UUID
 
+@Keep
 data class Topic(
     val id: String,
     val label: String,

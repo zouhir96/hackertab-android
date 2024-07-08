@@ -35,6 +35,10 @@ dependencies {
 
     implementation(libs.androidx.compose.materialWindow)
     implementation(libs.androidx.navigation)
+
+    implementation(platform(libs.com.google.firebase.bom))
+    implementation(libs.com.google.firebase.analytics)
+    implementation(libs.com.google.firebase.crashlytics)
 }
 
 tasks.withType<Test> {
