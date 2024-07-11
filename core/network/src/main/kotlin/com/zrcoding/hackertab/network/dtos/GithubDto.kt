@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.remote.dtos
+package com.zrcoding.hackertab.network.dtos
 
 import com.google.gson.annotations.SerializedName
 
