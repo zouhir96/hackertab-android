@@ -2,9 +2,11 @@ package com.zrcoding.hackertab.home.presentation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,8 +22,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,11 +35,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
 import com.zrcoding.hackertab.design.components.Loading
+import com.zrcoding.hackertab.design.components.RoundedIconButton
 import com.zrcoding.hackertab.design.theme.HackertabTheme
 import com.zrcoding.hackertab.design.theme.dimension
 import com.zrcoding.hackertab.home.R
 import com.zrcoding.hackertab.home.presentation.card.CardTemplate
 import com.zrcoding.hackertab.home.presentation.card.ToCardItem
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeRoute(
@@ -187,25 +193,56 @@ fun HomeScreenCardsPager(
     cardViewStates: List<CardViewState>,
     onRefreshBtnClick: () -> Unit
 ) {
+    val scope = rememberCoroutineScope()
     val pagerState = rememberPagerState { cardViewStates.size }
-    HorizontalPager(
-        modifier = modifier,
-        state = pagerState,
-        contentPadding = PaddingValues(
-            start = MaterialTheme.dimension.default,
-            end = MaterialTheme.dimension.medium
-        ),
-        pageSize = if (isExpandedScree) PageSize.Fixed(400.dp) else PageSize.Fill
-    ) { page ->
-        cardViewStates.getOrNull(page)?.let { state ->
-            CardTemplate(
-                cardUiState = state,
-                cardItem = { sourceName, model ->
-                    sourceName.ToCardItem(model = model)
-                },
-                onRetryBtnClick = onRefreshBtnClick
-            )
+    Box(
+        modifier = modifier.fillMaxSize(),
+    ) {
+        HorizontalPager(
+            modifier = Modifier.fillMaxSize(),
+            state = pagerState,
+            contentPadding = PaddingValues(
+                start = MaterialTheme.dimension.default,
+                end = MaterialTheme.dimension.medium
+            ),
+            pageSize = if (isExpandedScree) PageSize.Fixed(400.dp) else PageSize.Fill
+        ) { page ->
+            cardViewStates.getOrNull(page)?.let { state ->
+                CardTemplate(
+                    cardUiState = state,
+                    cardItem = { sourceName, model ->
+                        sourceName.ToCardItem(model = model)
+                    },
+                    onRetryBtnClick = onRefreshBtnClick
+                )
+            }
+        }
+        RoundedIconButton(
+            modifier = Modifier
+                .alpha(0.6f)
+                .padding(end = MaterialTheme.dimension.default)
+                .align(Alignment.CenterStart),
+            size = if (isExpandedScree) 80.dp else 48.dp,
+            icon = R.drawable.ic_baseline_arrow_back_ios
+        ) {
+            scope.launch {
+                pagerState.animateScrollToPage(pagerState.currentPage - 1)
+            }
+        }
+        RoundedIconButton(
+            modifier = Modifier
+                .alpha(0.6f)
+                .padding(end = MaterialTheme.dimension.default)
+                .align(Alignment.CenterEnd),
+            size = if (isExpandedScree) 80.dp else 48.dp,
+            icon = R.drawable.ic_baseline_arrow_forward
+        ) {
+            scope.launch {
+                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+            }
         }
     }
 }
+
+
 
