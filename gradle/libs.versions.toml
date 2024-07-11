@@ -4,12 +4,11 @@ compileSdk = "34"
 targetSdk = "34"
 minSdk = "21"
 versionName = "1.0.0"
-androidxComposeCompiler = "1.5.4"
 
-kotlin = "1.9.20"
-agp = "8.3.0"
+kotlin = "2.0.0"
+agp = "8.3.2"
 googleServices = "4.4.2"
-ksp = "1.9.20-1.0.14"
+ksp = "2.0.0-1.0.21"
 
 desugarJdkLibs = "2.0.4"
 coreKtx = "1.13.1"
@@ -95,6 +94,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
