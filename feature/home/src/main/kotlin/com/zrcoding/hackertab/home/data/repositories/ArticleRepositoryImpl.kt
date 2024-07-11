@@ -23,7 +23,7 @@ import com.zrcoding.hackertab.home.domain.models.Medium
 import com.zrcoding.hackertab.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.home.domain.models.Reddit
 import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
-import com.zrcoding.shared.data.remote.HackertabApi
+import com.zrcoding.hackertab.network.api.HackertabApi
 import com.zrcoding.shared.domain.models.NetworkErrors
 import com.zrcoding.shared.domain.models.Resource
 import java.io.IOException

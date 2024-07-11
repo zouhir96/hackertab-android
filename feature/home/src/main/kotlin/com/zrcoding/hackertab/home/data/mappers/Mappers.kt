@@ -1,11 +1,11 @@
 package com.zrcoding.hackertab.home.data.mappers
 
+import com.zrcoding.hackertab.network.dtos.ArticleDto
+import com.zrcoding.hackertab.network.dtos.ConferenceDto
+import com.zrcoding.hackertab.network.dtos.GithubDto
 import com.zrcoding.shared.core.orEmpty
 import com.zrcoding.shared.core.toDate
 import com.zrcoding.shared.core.toZonedLocalDate
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
-import com.zrcoding.shared.data.remote.dtos.ConferenceDto
-import com.zrcoding.shared.data.remote.dtos.GithubDto
 
 
 fun ArticleDto.toFreeCodeCamp() = com.zrcoding.hackertab.home.domain.models.FreeCodeCamp(

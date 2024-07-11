@@ -1,8 +1,8 @@
-package com.zrcoding.shared.data.remote
+package com.zrcoding.hackertab.network.api
 
-import com.zrcoding.shared.data.remote.dtos.ArticleDto
-import com.zrcoding.shared.data.remote.dtos.ConferenceDto
-import com.zrcoding.shared.data.remote.dtos.GithubDto
+import com.zrcoding.hackertab.network.dtos.ArticleDto
+import com.zrcoding.hackertab.network.dtos.ConferenceDto
+import com.zrcoding.hackertab.network.dtos.GithubDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
