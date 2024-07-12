@@ -1,5 +1,7 @@
 package com.zrcoding.hackertab.home.domain.usecases
 
+import com.zrcoding.hackertab.database.domain.models.NetworkErrors
+import com.zrcoding.hackertab.database.domain.models.Resource
 import com.zrcoding.hackertab.home.domain.models.BaseModel
 import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
 import com.zrcoding.hackertab.home.presentation.CardViewState
@@ -7,8 +9,6 @@ import com.zrcoding.hackertab.settings.domain.models.Source
 import com.zrcoding.hackertab.settings.domain.models.SourceName
 import com.zrcoding.hackertab.settings.domain.models.Topic
 import com.zrcoding.hackertab.settings.domain.repositories.SettingRepository
-import com.zrcoding.shared.domain.models.NetworkErrors
-import com.zrcoding.shared.domain.models.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

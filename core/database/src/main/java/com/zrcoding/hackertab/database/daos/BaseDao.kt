@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.local.daos
+package com.zrcoding.hackertab.database.daos
 
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

@@ -1,5 +1,7 @@
 package com.zrcoding.hackertab.home.data.repositories
 
+import com.zrcoding.hackertab.database.domain.models.NetworkErrors
+import com.zrcoding.hackertab.database.domain.models.Resource
 import com.zrcoding.hackertab.home.data.mappers.toConference
 import com.zrcoding.hackertab.home.data.mappers.toDevto
 import com.zrcoding.hackertab.home.data.mappers.toFreeCodeCamp
@@ -24,8 +26,6 @@ import com.zrcoding.hackertab.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.home.domain.models.Reddit
 import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
 import com.zrcoding.hackertab.network.api.HackertabApi
-import com.zrcoding.shared.domain.models.NetworkErrors
-import com.zrcoding.shared.domain.models.Resource
 import java.io.IOException
 import java.net.SocketTimeoutException
 import javax.inject.Inject

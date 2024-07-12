@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.di
+package com.zrcoding.hackertab.database.di
 
 import javax.inject.Qualifier
 

@@ -1,8 +1,8 @@
-package com.zrcoding.shared.data.local.daos
+package com.zrcoding.hackertab.database.daos
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.zrcoding.shared.data.local.entities.RedditEntity
+import com.zrcoding.hackertab.database.entities.RedditEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
