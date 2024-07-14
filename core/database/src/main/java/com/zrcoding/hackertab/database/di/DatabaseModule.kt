@@ -1,9 +1,8 @@
-package com.zrcoding.shared.data.di
+package com.zrcoding.hackertab.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.zrcoding.shared.core.Constants.DATABASE_NAME
-import com.zrcoding.shared.data.local.HackertabDatabase
+import com.zrcoding.hackertab.database.HackertabDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +12,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
+class DatabaseModule {
+
+    companion object {
+        private const val DATABASE_NAME = "hackertab-db"
+    }
 
     @Provides
     @Singleton

@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.local.converters
+package com.zrcoding.hackertab.database.converters
 
 import androidx.room.TypeConverter
 

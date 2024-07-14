@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.zrcoding.shared"
+    namespace = "com.zrcoding.hackertab.database"
 }
 
 dependencies {

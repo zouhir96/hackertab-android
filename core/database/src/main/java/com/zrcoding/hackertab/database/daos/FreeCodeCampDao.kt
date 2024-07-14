@@ -1,12 +1,12 @@
-package com.zrcoding.shared.data.local.daos
+package com.zrcoding.hackertab.database.daos
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.zrcoding.shared.data.local.entities.FreeCodeCampEntity
+import com.zrcoding.hackertab.database.entities.FreeCodeCampEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FreeCodeCampDao : BaseDao<FreeCodeCampEntity>{
+interface FreeCodeCampDao : BaseDao<FreeCodeCampEntity> {
     @Query("SELECT * FROM freecodecamp")
     fun getAll(): Flow<List<FreeCodeCampEntity>>
 

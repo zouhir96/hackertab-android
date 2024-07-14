@@ -1,4 +1,4 @@
-package com.zrcoding.shared.domain.models
+package com.zrcoding.hackertab.database.domain.models
 
 typealias RootError = Error
 

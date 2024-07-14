@@ -1,10 +1,6 @@
-package com.zrcoding.shared.core
+package com.zrcoding.hackertab.home.domain.utils
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.text.format.DateUtils
-import androidx.core.content.ContextCompat
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -14,19 +10,7 @@ import java.util.Locale
 
 private const val ZERO_TIMEZONE_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 
-fun openUrlInBrowser(context: Context, url: String) {
-    val intent = Intent()
-    intent.action = Intent.ACTION_VIEW
-    intent.data = Uri.parse(url)
-    ContextCompat.startActivity(
-        context,
-        intent,
-        null
-    )
-}
-
-fun Long.toZonedLocalDate() : LocalDate = Instant
-    .ofEpochMilli(this)
+fun Long.toZonedLocalDate() : LocalDate = Instant.ofEpochMilli(this)
     .atZone(ZoneId.systemDefault())
     .toLocalDate()
 
@@ -51,14 +35,6 @@ fun String.toDate(
         date.time.toDate()
     } catch (ex: Exception) {
         this
-    }
-}
-
-fun String.mCapitalize(locale: Locale = Locale.getDefault()): String{
-    return this.replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(
-            locale = locale
-        ) else it.toString()
     }
 }
 

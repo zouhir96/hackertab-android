@@ -1,4 +1,4 @@
-package com.zrcoding.shared.data.local.entities
+package com.zrcoding.hackertab.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

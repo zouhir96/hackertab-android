@@ -49,9 +49,8 @@ import com.zrcoding.hackertab.home.domain.models.Medium
 import com.zrcoding.hackertab.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.home.domain.models.Reddit
 import com.zrcoding.hackertab.home.domain.usecases.BuildConferenceDisplayedDateUseCase
+import com.zrcoding.hackertab.home.domain.utils.toDate
 import com.zrcoding.hackertab.settings.domain.models.SourceName
-import com.zrcoding.shared.core.openUrlInBrowser
-import com.zrcoding.shared.core.toDate
 import java.util.UUID
 
 @Composable
