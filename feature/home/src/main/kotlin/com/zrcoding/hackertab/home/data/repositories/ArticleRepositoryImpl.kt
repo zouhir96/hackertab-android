@@ -1,7 +1,7 @@
 package com.zrcoding.hackertab.home.data.repositories
 
-import com.zrcoding.hackertab.database.domain.models.NetworkErrors
-import com.zrcoding.hackertab.database.domain.models.Resource
+import com.zrcoding.hackertab.domain.models.NetworkErrors
+import com.zrcoding.hackertab.domain.models.Resource
 import com.zrcoding.hackertab.home.data.mappers.toConference
 import com.zrcoding.hackertab.home.data.mappers.toDevto
 import com.zrcoding.hackertab.home.data.mappers.toFreeCodeCamp
