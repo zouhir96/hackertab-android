@@ -1,4 +1,4 @@
-package com.zrcoding.hackertab.database.domain.models
+package com.zrcoding.hackertab.domain.models
 
 sealed interface Error
 

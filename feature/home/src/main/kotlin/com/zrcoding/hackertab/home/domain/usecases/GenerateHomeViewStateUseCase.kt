@@ -1,7 +1,7 @@
 package com.zrcoding.hackertab.home.domain.usecases
 
-import com.zrcoding.hackertab.database.domain.models.NetworkErrors
-import com.zrcoding.hackertab.database.domain.models.Resource
+import com.zrcoding.hackertab.domain.models.NetworkErrors
+import com.zrcoding.hackertab.domain.models.Resource
 import com.zrcoding.hackertab.home.domain.models.BaseModel
 import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
 import com.zrcoding.hackertab.home.presentation.CardViewState

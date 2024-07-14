@@ -1,5 +1,16 @@
 package com.zrcoding.hackertab.home.data.mappers
 
+import com.zrcoding.hackertab.home.domain.models.Conference
+import com.zrcoding.hackertab.home.domain.models.Devto
+import com.zrcoding.hackertab.home.domain.models.FreeCodeCamp
+import com.zrcoding.hackertab.home.domain.models.GithubRepo
+import com.zrcoding.hackertab.home.domain.models.HackerNews
+import com.zrcoding.hackertab.home.domain.models.Hashnode
+import com.zrcoding.hackertab.home.domain.models.IndieHackers
+import com.zrcoding.hackertab.home.domain.models.Lobster
+import com.zrcoding.hackertab.home.domain.models.Medium
+import com.zrcoding.hackertab.home.domain.models.ProductHunt
+import com.zrcoding.hackertab.home.domain.models.Reddit
 import com.zrcoding.hackertab.home.domain.utils.orEmpty
 import com.zrcoding.hackertab.home.domain.utils.toDate
 import com.zrcoding.hackertab.home.domain.utils.toZonedLocalDate
@@ -7,7 +18,7 @@ import com.zrcoding.hackertab.network.dtos.ArticleDto
 import com.zrcoding.hackertab.network.dtos.ConferenceDto
 import com.zrcoding.hackertab.network.dtos.GithubDto
 
-fun ArticleDto.toFreeCodeCamp() = com.zrcoding.hackertab.home.domain.models.FreeCodeCamp(
+fun ArticleDto.toFreeCodeCamp() = FreeCodeCamp(
     id = id,
     title = title,
     creator = source,
@@ -16,7 +27,7 @@ fun ArticleDto.toFreeCodeCamp() = com.zrcoding.hackertab.home.domain.models.Free
     categories = tags
 )
 
-fun GithubDto.toGithubRepo() = com.zrcoding.hackertab.home.domain.models.GithubRepo(
+fun GithubDto.toGithubRepo() = GithubRepo(
     id = id,
     name = title,
     description = description,
@@ -28,7 +39,7 @@ fun GithubDto.toGithubRepo() = com.zrcoding.hackertab.home.domain.models.GithubR
     forks = forks
 )
 
-fun ArticleDto.toHackerNews() = com.zrcoding.hackertab.home.domain.models.HackerNews(
+fun ArticleDto.toHackerNews() = HackerNews(
     id = id,
     title = title,
     url = url,
@@ -37,7 +48,7 @@ fun ArticleDto.toHackerNews() = com.zrcoding.hackertab.home.domain.models.Hacker
     score = reactions?.toLongOrNull().orEmpty(),
 )
 
-fun ArticleDto.toReddit() = com.zrcoding.hackertab.home.domain.models.Reddit(
+fun ArticleDto.toReddit() = Reddit(
     id = id,
     title = title,
     subreddit = subreddit.orEmpty(),
@@ -47,7 +58,7 @@ fun ArticleDto.toReddit() = com.zrcoding.hackertab.home.domain.models.Reddit(
     date = publishedAt
 )
 
-fun ConferenceDto.toConference() = com.zrcoding.hackertab.home.domain.models.Conference(
+fun ConferenceDto.toConference() = Conference(
     id = id,
     url = url,
     title = title,
@@ -59,7 +70,7 @@ fun ConferenceDto.toConference() = com.zrcoding.hackertab.home.domain.models.Con
     country = country
 )
 
-fun ArticleDto.toDevto() = com.zrcoding.hackertab.home.domain.models.Devto(
+fun ArticleDto.toDevto() = Devto(
     id = id,
     title = title,
     date = publishedAt.toDate(),
@@ -69,7 +80,7 @@ fun ArticleDto.toDevto() = com.zrcoding.hackertab.home.domain.models.Devto(
     tags = tags
 )
 
-fun ArticleDto.toHashnode() = com.zrcoding.hackertab.home.domain.models.Hashnode(
+fun ArticleDto.toHashnode() = Hashnode(
     id = id,
     title = title,
     date = publishedAt.toDate(),
@@ -79,7 +90,7 @@ fun ArticleDto.toHashnode() = com.zrcoding.hackertab.home.domain.models.Hashnode
     tags = tags
 )
 
-fun ArticleDto.toProductHunt() = com.zrcoding.hackertab.home.domain.models.ProductHunt(
+fun ArticleDto.toProductHunt() = ProductHunt(
     id = id,
     title = title,
     description = description.orEmpty(),
@@ -90,7 +101,7 @@ fun ArticleDto.toProductHunt() = com.zrcoding.hackertab.home.domain.models.Produ
     tags = tags.take(1)
 )
 
-fun ArticleDto.toIndieHackers() = com.zrcoding.hackertab.home.domain.models.IndieHackers(
+fun ArticleDto.toIndieHackers() = IndieHackers(
     id = id,
     title = title,
     description = description.orEmpty(),
@@ -100,7 +111,7 @@ fun ArticleDto.toIndieHackers() = com.zrcoding.hackertab.home.domain.models.Indi
     url = url,
 )
 
-fun ArticleDto.toLobster() = com.zrcoding.hackertab.home.domain.models.Lobster(
+fun ArticleDto.toLobster() = Lobster(
     id = id,
     title = title,
     date = publishedAt.toDate(),
@@ -110,7 +121,7 @@ fun ArticleDto.toLobster() = com.zrcoding.hackertab.home.domain.models.Lobster(
     commentsUrl = commentsUrl.orEmpty()
 )
 
-fun ArticleDto.toMedium() = com.zrcoding.hackertab.home.domain.models.Medium(
+fun ArticleDto.toMedium() = Medium(
     id = id,
     title = title,
     date = publishedAt.toDate(),
