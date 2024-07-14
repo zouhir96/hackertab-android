@@ -47,5 +47,9 @@ gradlePlugin {
             id = "hackertab.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("jvmLibrary") {
+            id = "hackertab.android.jvmLibrary"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }
