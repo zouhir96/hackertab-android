@@ -5,16 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.zrcoding.hackertab.design.components.ChipData
 import com.zrcoding.hackertab.settings.domain.repositories.SettingRepository
 import com.zrcoding.hackertab.settings.presentation.common.icon
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SettingSourcesScreenViewModel @Inject constructor(
+class SettingSourcesScreenViewModel(
     private val settingRepository: SettingRepository
 ) : ViewModel() {
 

@@ -14,18 +14,16 @@ import com.zrcoding.hackertab.settings.domain.models.Source
 import com.zrcoding.hackertab.settings.domain.models.SourceName
 import com.zrcoding.hackertab.settings.domain.models.Topic
 import com.zrcoding.hackertab.settings.domain.repositories.SettingRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
-import javax.inject.Inject
 
 private val KEY_SAVED_TOPICS = stringPreferencesKey("saved_topics")
 private val KEY_SAVED_SOURCES = stringPreferencesKey("saved_sources")
 
-class SettingRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+class SettingRepositoryImpl(
+    private val context: Context,
     private val dataStore: DataStore<Preferences>,
     private val gson: Gson
 ) : SettingRepository {
