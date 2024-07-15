@@ -71,5 +71,5 @@
 -keep class com.google.gson.reflect.TypeToken { *; }
 -keep class * extends com.google.gson.reflect.TypeToken
 
--keep class com.zrcoding.database.data.local.entities.** {*;}
--keep class com.zrcoding.database.data.remote.dtos.** {*;}
+-keep class com.zrcoding.hackertab.database.entities.** {*;}
+-keep class com.zrcoding.hackertab.network.dtos.** {*;}
