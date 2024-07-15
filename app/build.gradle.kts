@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 plugins {
     id("hackertab.android.application")
     id("hackertab.android.application.compose")
-    id("hackertab.android.hilt")
+    id("hackertab.android.koin")
 }
 
 android {
@@ -29,6 +29,7 @@ android {
 dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:settings"))
+    implementation(project(":core:network"))
 
     // Activity
     implementation(libs.androidx.core.splashscreen)
