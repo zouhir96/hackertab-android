@@ -1,0 +1,9 @@
+V1.0.0: This is the first version of our Hackertab application.
+Features:
+- 11 sources of news: Github, Hackernews, Conferences, Devto, Producthunt, Reddit, Lobsters, Hashnode, Freecodecamp, IndieHackers and Medium.
+- 26 Topics to follow: Android, Kotlin, Java, JavaScript, TypeScript ...
+- Possibility to configure which sources to show.
+- Possibility to configure which topics to show.
+- Contact support by email.
+- Support large screens.
+- System light/dark mode support.
