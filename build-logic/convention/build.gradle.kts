@@ -39,9 +39,9 @@ gradlePlugin {
             id = "hackertab.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
-        register("androidHilt") {
-            id = "hackertab.android.hilt"
-            implementationClass = "AndroidHiltConventionPlugin"
+        register("androidKoin") {
+            id = "hackertab.android.koin"
+            implementationClass = "AndroidKoinConventionPlugin"
         }
         register("androidFeature") {
             id = "hackertab.android.feature"
