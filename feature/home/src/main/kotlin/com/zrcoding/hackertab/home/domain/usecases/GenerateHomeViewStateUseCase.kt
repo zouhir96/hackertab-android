@@ -14,9 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.mapLatest
-import javax.inject.Inject
 
-class GenerateHomeViewStateUseCase @Inject constructor(
+class GenerateHomeViewStateUseCase(
     private val settingRepository: SettingRepository,
     private val articleRepository: ArticleRepository
 ) {
