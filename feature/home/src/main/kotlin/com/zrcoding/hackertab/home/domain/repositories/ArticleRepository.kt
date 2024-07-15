@@ -1,5 +1,7 @@
 package com.zrcoding.hackertab.home.domain.repositories
 
+import com.zrcoding.hackertab.domain.models.NetworkErrors
+import com.zrcoding.hackertab.domain.models.Resource
 import com.zrcoding.hackertab.home.domain.models.Conference
 import com.zrcoding.hackertab.home.domain.models.Devto
 import com.zrcoding.hackertab.home.domain.models.FreeCodeCamp
@@ -11,8 +13,6 @@ import com.zrcoding.hackertab.home.domain.models.Lobster
 import com.zrcoding.hackertab.home.domain.models.Medium
 import com.zrcoding.hackertab.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.home.domain.models.Reddit
-import com.zrcoding.shared.domain.models.NetworkErrors
-import com.zrcoding.shared.domain.models.Resource
 
 interface ArticleRepository {
     suspend fun getHackerNewsArticles(): Resource<List<HackerNews>, NetworkErrors>

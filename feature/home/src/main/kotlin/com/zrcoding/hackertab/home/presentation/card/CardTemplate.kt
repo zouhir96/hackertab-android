@@ -1,5 +1,8 @@
 package com.zrcoding.hackertab.home.presentation.card
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
 import com.zrcoding.hackertab.design.components.FullScreenViewWithCenterText
 import com.zrcoding.hackertab.design.components.Loading
@@ -45,7 +49,6 @@ import com.zrcoding.hackertab.home.domain.models.BaseModel
 import com.zrcoding.hackertab.home.presentation.CardViewState
 import com.zrcoding.hackertab.settings.domain.models.SourceName
 import com.zrcoding.hackertab.settings.presentation.common.icon
-import com.zrcoding.shared.core.openUrlInBrowser
 
 
 @Composable
@@ -242,5 +245,16 @@ fun CardHeader(title: String, icon: Int) {
             style = MaterialTheme.typography.h5,
         )
     }
+}
+
+fun openUrlInBrowser(context: Context, url: String) {
+    val intent = Intent()
+    intent.action = Intent.ACTION_VIEW
+    intent.data = Uri.parse(url)
+    ContextCompat.startActivity(
+        context,
+        intent,
+        null
+    )
 }
 

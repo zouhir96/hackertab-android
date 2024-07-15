@@ -1,6 +1,1 @@
-This is the first version of our Hackertab application.
-Features:
-- 11 sources of news: Github, Hackernews, Conferences, Devto, Producthunt, Reddit, Lobsters, Hashnode, Freecodecamp, IndieHackers and Medium.
-- 26 Topics to follow: Android, Kotlin, Java, JavaScript, TypeScript ...
-- Possibility to configure which sources to show.
-- Possibility to configure which topics to show.
+The main change in this upgrading to kotlin 2.0.0
