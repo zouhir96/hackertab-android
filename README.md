@@ -18,17 +18,8 @@ This is the Android version of [hackertab.dev](https://hackertab.dev) extension 
 phone now so you stay always posted even if you’re not on your pc.
 
 ## ⬇️ Download
-<table align="center">
-<tr>
-<td>
-Playstore
-</td>
-<td>
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>](https://play.google.com/store/apps/details?id=com.zrcoding.hackertab)<br>
-</td>
-</tr>
-</table>
 
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/>](https://play.google.com/store/apps/details?id=com.zrcoding.hackertab)<br>
 You can check the [releases](https://github.com/zouhir96/hackertab-android/releases/latest) page for details.
 
 ## 🔨 Stack
