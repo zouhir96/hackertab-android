@@ -31,7 +31,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zrcoding.hackertab.design.components.ErrorMsgWithBtn
 import com.zrcoding.hackertab.design.components.Loading
@@ -42,10 +41,11 @@ import com.zrcoding.hackertab.home.R
 import com.zrcoding.hackertab.home.presentation.card.CardTemplate
 import com.zrcoding.hackertab.home.presentation.card.ToCardItem
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 @Composable
 fun HomeRoute(
-    viewModel: HomeScreenViewModel = hiltViewModel(),
+    viewModel: HomeScreenViewModel = koinInject(),
     isExpandedScree: Boolean,
     onNavigateToSettings: () -> Unit
 ) {

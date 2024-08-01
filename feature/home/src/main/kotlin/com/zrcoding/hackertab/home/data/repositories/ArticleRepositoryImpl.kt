@@ -28,9 +28,8 @@ import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
 import com.zrcoding.hackertab.network.api.HackertabApi
 import java.io.IOException
 import java.net.SocketTimeoutException
-import javax.inject.Inject
 
-class ArticleRepositoryImpl @Inject constructor(
+class ArticleRepositoryImpl(
     private val hackertabApi: HackertabApi,
 ) : ArticleRepository {
     override suspend fun getHackerNewsArticles(): Resource<List<HackerNews>, NetworkErrors> {

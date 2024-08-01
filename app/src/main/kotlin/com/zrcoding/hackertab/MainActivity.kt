@@ -12,9 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.zrcoding.hackertab.design.theme.HackertabTheme
 import com.zrcoding.hackertab.navigation.MainNavHost
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)

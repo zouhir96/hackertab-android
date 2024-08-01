@@ -12,7 +12,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply {
                 apply("hackertab.android.library")
-                apply("hackertab.android.hilt")
+                apply("hackertab.android.koin")
             }
             extensions.configure<LibraryExtension> {
                 defaultConfig {
@@ -30,9 +30,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("testImplementation", kotlin("test"))
                 add("androidTestImplementation", kotlin("test"))
 
-                add("implementation", versionCatalog().findLibrary("androidx.hilt.navigation.compose").get())
                 add("implementation", versionCatalog().findLibrary("androidx.lifecycle.runtime.ktx").get())
                 add("implementation", versionCatalog().findLibrary("androidx.lifecycle.runtime.compose").get())
+
+                add("implementation", versionCatalog().findLibrary("koin.compose").get())
             }
         }
     }
