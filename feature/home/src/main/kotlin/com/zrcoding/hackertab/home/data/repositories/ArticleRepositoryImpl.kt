@@ -25,23 +25,23 @@ import com.zrcoding.hackertab.home.domain.models.Medium
 import com.zrcoding.hackertab.home.domain.models.ProductHunt
 import com.zrcoding.hackertab.home.domain.models.Reddit
 import com.zrcoding.hackertab.home.domain.repositories.ArticleRepository
-import com.zrcoding.hackertab.network.api.HackertabApi
+import com.zrcoding.hackertab.network.api.ArticlesNetworkDataSource
 import java.io.IOException
 import java.net.SocketTimeoutException
 
 class ArticleRepositoryImpl(
-    private val hackertabApi: HackertabApi,
+    private val articlesNetworkDataSource: ArticlesNetworkDataSource,
 ) : ArticleRepository {
     override suspend fun getHackerNewsArticles(): Resource<List<HackerNews>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchHackerNewsArticles() },
+            call = { articlesNetworkDataSource.fetchHackerNewsArticles() },
             toDomainModel = { it.toHackerNews() }
         )
     }
 
     override suspend fun getRedditArticles(tag: String): Resource<List<Reddit>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchRedditArticles(tag) },
+            call = { articlesNetworkDataSource.fetchRedditArticles(tag) },
             toDomainModel = { it.toReddit() }
         )
     }
@@ -50,7 +50,7 @@ class ArticleRepositoryImpl(
         tag: String
     ): Resource<List<FreeCodeCamp>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchFreeCodeCampArticles(tag) },
+            call = { articlesNetworkDataSource.fetchFreeCodeCampArticles(tag) },
             toDomainModel = { it.toFreeCodeCamp() }
         )
     }
@@ -59,7 +59,7 @@ class ArticleRepositoryImpl(
         tag: String
     ): Resource<List<GithubRepo>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchGithubRepositories(tag) },
+            call = { articlesNetworkDataSource.fetchGithubRepositories(tag) },
             toDomainModel = { it.toGithubRepo() }
         )
     }
@@ -68,7 +68,7 @@ class ArticleRepositoryImpl(
         tag: String
     ): Resource<List<Conference>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchConferences(tag) },
+            call = { articlesNetworkDataSource.fetchConferences(tag) },
             toDomainModel = { it.toConference() }
         )
     }
@@ -77,7 +77,7 @@ class ArticleRepositoryImpl(
         tag: String
     ): Resource<List<Devto>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchDevtoArticles(tag) },
+            call = { articlesNetworkDataSource.fetchDevtoArticles(tag) },
             toDomainModel = { it.toDevto() }
         )
     }
@@ -86,35 +86,35 @@ class ArticleRepositoryImpl(
         tag: String
     ): Resource<List<Hashnode>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchHashnodeArticles(tag) },
+            call = { articlesNetworkDataSource.fetchHashnodeArticles(tag) },
             toDomainModel = { it.toHashnode() }
         )
     }
 
     override suspend fun getProductHuntProducts(): Resource<List<ProductHunt>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchProductHuntProducts() },
+            call = { articlesNetworkDataSource.fetchProductHuntProducts() },
             toDomainModel = { it.toProductHunt() }
         )
     }
 
     override suspend fun getIndieHackersArticles(): Resource<List<IndieHackers>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchIndieHackersArticles() },
+            call = { articlesNetworkDataSource.fetchIndieHackersArticles() },
             toDomainModel = { it.toIndieHackers() }
         )
     }
 
     override suspend fun getLobstersArticles(): Resource<List<Lobster>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchLobstersArticles() },
+            call = { articlesNetworkDataSource.fetchLobstersArticles() },
             toDomainModel = { it.toLobster() }
         )
     }
 
     override suspend fun getMediumArticles(tag: String): Resource<List<Medium>, NetworkErrors> {
         return execute(
-            call = { hackertabApi.fetchMediumArticles(tag) },
+            call = { articlesNetworkDataSource.fetchMediumArticles(tag) },
             toDomainModel = { it.toMedium() }
         )
     }
@@ -127,10 +127,13 @@ class ArticleRepositoryImpl(
             val response = call()
             Resource.Success(response.map(toDomainModel))
         } catch (e: IOException) {
+            e.printStackTrace()
             Resource.Failure(NetworkErrors.NO_INTERNET)
         } catch (e: SocketTimeoutException) {
+            e.printStackTrace()
             Resource.Failure(NetworkErrors.REQUEST_TIMEOUT)
         } catch (e: Exception) {
+            e.printStackTrace()
             Resource.Failure(NetworkErrors.UNKNOWN)
         }
     }

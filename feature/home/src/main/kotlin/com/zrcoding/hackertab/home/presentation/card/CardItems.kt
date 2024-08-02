@@ -361,7 +361,6 @@ fun IndieHackersItem(indieHackers: IndieHackers) {
     with(indieHackers) {
         SourceItemTemplate(
             title = title,
-            description = description,
             url = url,
             primaryInfoSection = {
                 TextWithStartIcon(
