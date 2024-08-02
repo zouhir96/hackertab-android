@@ -24,6 +24,7 @@ koin-bom = "3.5.6"
 datastore = '1.1.1'
 retrofit = "2.9.0"
 loggingInterceptor = "4.12.0"
+ktor = "2.0.1"
 room = "2.6.1"
 gson = "2.10.1"
 firebaseBom = "33.1.1"
@@ -80,6 +81,11 @@ androidx-room-paging = { group = "androidx.room", name = "room-paging", version.
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 androidx-datastore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "datastore" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-loggingInterceptor = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 
 #firebase
 com-google-firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
