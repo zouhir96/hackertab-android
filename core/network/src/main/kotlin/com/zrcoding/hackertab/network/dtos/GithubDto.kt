@@ -1,17 +1,19 @@
 package com.zrcoding.hackertab.network.dtos
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class GithubDto(
-    @SerializedName("id") val id: String,
-    @SerializedName("url") val url: String,
-    @SerializedName("title") val title: String,
-    @SerializedName("programmingLanguage") val programmingLanguage: String,
-    @SerializedName("stars") val stars: String,
-    @SerializedName("source") val source: String,
-    @SerializedName("description") val description: String,
-    @SerializedName("owner") val owner: String,
-    @SerializedName("forks") val forks: String,
-    @SerializedName("starsInDateRange") val starsInDateRange: String,
-    @SerializedName("name") val name: String,
+    @SerialName("id") val id: String,
+    @SerialName("url") val url: String,
+    @SerialName("title") val title: String,
+    @SerialName("programmingLanguage") val programmingLanguage: String,
+    @SerialName("stars") val stars: String,
+    @SerialName("source") val source: String,
+    @SerialName("description") val description: String,
+    @SerialName("owner") val owner: String,
+    @SerialName("forks") val forks: String,
+    @SerialName("starsInDateRange") val starsInDateRange: String,
+    @SerialName("name") val name: String,
 )

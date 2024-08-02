@@ -1,6 +1,7 @@
 plugins {
     id("hackertab.android.library")
     id("hackertab.android.koin")
+    alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
 android {
@@ -8,8 +9,10 @@ android {
 }
 
 dependencies {
-    // Retrofit
-    implementation(libs.squareup.retrofit)
-    implementation(libs.squareup.retrofit.converter)
-    implementation(libs.squareup.okhttp3)
+    // Ktor
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.contentNegotiation)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.loggingInterceptor)
 }

@@ -1,38 +1,42 @@
 package com.zrcoding.hackertab.network
 
-import com.zrcoding.hackertab.network.api.HackertabApi
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import com.zrcoding.hackertab.network.api.ArticlesNetworkDataSource
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import org.koin.dsl.module
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.hackertab.dev/data/v2/"
 
 val networkModule = module {
-    single<HttpLoggingInterceptor> {
-        HttpLoggingInterceptor(
-            HttpLoggingInterceptor.Logger.DEFAULT
-        ).apply {
-            level = HttpLoggingInterceptor.Level.BODY
+    factory<HttpClient> {
+        HttpClient(OkHttp) {
+            defaultRequest {
+                url(BASE_URL)
+            }
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                        prettyPrint = true
+                        isLenient = true
+                    }
+                )
+            }
+            install(Logging){
+                logger = Logger.SIMPLE
+                level = LogLevel.BODY
+            }
         }
     }
-    single<OkHttpClient> {
-        val logger: HttpLoggingInterceptor = get()
-        OkHttpClient.Builder()
-            .addInterceptor(logger)
-            .build()
-    }
-    single<Retrofit> {
-        val okHttpClient: OkHttpClient = get()
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-    single<HackertabApi> {
-        val retrofit: Retrofit = get()
-        retrofit.create(HackertabApi::class.java)
+    factory<ArticlesNetworkDataSource> {
+        ArticlesNetworkDataSource(get())
     }
 }
