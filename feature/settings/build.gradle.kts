@@ -2,6 +2,7 @@ plugins {
     id("hackertab.android.library")
     id("hackertab.android.library.compose")
     id("hackertab.android.feature")
+    alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
 android {
@@ -21,5 +22,5 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.datastore.preferences.core)
 
-    implementation(libs.gson)
+    implementation(libs.kotlinx.serialization.json)
 }

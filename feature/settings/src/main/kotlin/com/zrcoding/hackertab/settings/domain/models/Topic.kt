@@ -1,9 +1,11 @@
 package com.zrcoding.hackertab.settings.domain.models
 
 import androidx.annotation.Keep
+import kotlinx.serialization.Serializable
 import java.util.UUID
 
 @Keep
+@Serializable
 data class Topic(
     val id: String,
     val label: String,

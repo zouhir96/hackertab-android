@@ -5,7 +5,6 @@ import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.google.gson.Gson
 import com.zrcoding.hackertab.settings.data.repositories.SettingRepositoryImpl
 import com.zrcoding.hackertab.settings.domain.repositories.SettingRepository
 import com.zrcoding.hackertab.settings.presentation.sources.SettingSourcesScreenViewModel
@@ -27,7 +26,6 @@ val settingsModule = module {
             produceFile = { appContext.preferencesDataStoreFile(USER_PREFERENCES) }
         )
     }
-    singleOf(::Gson)
     singleOf(::SettingRepositoryImpl) bind SettingRepository::class
     viewModel { SettingSourcesScreenViewModel(get()) }
     viewModel { SettingTopicsScreenViewModel(get()) }

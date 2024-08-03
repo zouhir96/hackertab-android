@@ -5,8 +5,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.zrcoding.hackertab.settings.R
 import com.zrcoding.hackertab.settings.data.dtos.SourceDto
 import com.zrcoding.hackertab.settings.data.utils.JsonUtils
@@ -18,6 +16,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 private val KEY_SAVED_TOPICS = stringPreferencesKey("saved_topics")
 private val KEY_SAVED_SOURCES = stringPreferencesKey("saved_sources")
@@ -25,7 +25,6 @@ private val KEY_SAVED_SOURCES = stringPreferencesKey("saved_sources")
 class SettingRepositoryImpl(
     private val context: Context,
     private val dataStore: DataStore<Preferences>,
-    private val gson: Gson
 ) : SettingRepository {
 
     override suspend fun getTopics(): List<Topic> {
@@ -33,10 +32,7 @@ class SettingRepositoryImpl(
 
         val topicsInputStream = context.resources.openRawResource(R.raw.topics)
         val topicsJson = JsonUtils.toJson(topicsInputStream)
-        val topics: List<Topic> = gson.fromJson(
-            topicsJson,
-            object : TypeToken<List<Topic>>() {}.type
-        )
+        val topics: List<Topic> = Json.decodeFromString<List<Topic>>(topicsJson)
         topicsMemoryCache = topics
         return topics
     }
@@ -65,9 +61,8 @@ class SettingRepositoryImpl(
 
         val sourcesInputStream = context.resources.openRawResource(R.raw.sources)
         val sourcesJson = JsonUtils.toJson(sourcesInputStream)
-        val sources: List<Source> = gson.fromJson<List<SourceDto>?>(
-            sourcesJson,
-            object : TypeToken<List<SourceDto>>() {}.type
+        val sources: List<Source> = Json.decodeFromString<List<SourceDto>>(
+            sourcesJson
         ).map { it.toSource() }
         sourcesMemoryCash = sources
         return sources
@@ -104,19 +99,21 @@ class SettingRepositoryImpl(
 
     private suspend fun saveId(id: String, key: Preferences.Key<String>) {
         dataStore.edit {
-            it[key] = gson.toJson(it.fromSavedJsonToList(key) + id)
+            val newList = it.fromSavedJsonToList(key) + id
+            it[key] = Json.encodeToString(newList)
         }
     }
 
     private suspend fun removeId(id: String, key: Preferences.Key<String>) {
         dataStore.edit {
-            it[key] = gson.toJson(it.fromSavedJsonToList(key) - id)
+            val newList = it.fromSavedJsonToList(key) - id
+            it[key] = Json.encodeToString(newList)
         }
     }
 
     private fun Preferences.fromSavedJsonToList(key: Preferences.Key<String>): List<String> {
-        val topicsIdsPref = get(key) ?: gson.toJson(emptyList<String>())
-        return gson.fromJson(topicsIdsPref, object : TypeToken<List<String>>() {}.type)
+        val topicsIdsPref = get(key) ?: Json.encodeToString(emptyList<String>())
+        return Json.decodeFromString<List<String>>(topicsIdsPref)
     }
 
     companion object {
