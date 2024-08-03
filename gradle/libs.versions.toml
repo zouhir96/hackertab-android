@@ -10,7 +10,6 @@ agp = "8.3.2"
 googleServices = "4.4.2"
 ksp = "2.0.0-1.0.21"
 
-desugarJdkLibs = "2.0.4"
 coreKtx = "1.13.1"
 
 activity = "1.9.0"
@@ -31,9 +30,6 @@ firebaseBom = "33.1.1"
 junit = "4.13.2"
 
 [libraries]
-
-#desugar
-android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
 
 #core
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
